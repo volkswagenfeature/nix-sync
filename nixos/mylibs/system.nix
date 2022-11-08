@@ -33,15 +33,14 @@ with lib;
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
       firefox
-    #  thunderbird
+      super-slicer
     ];
   };
 
   # Homemanager configs
-  # users.users.nixos.isNormalUser = true;
-  # home-manager.users.nixos = {pkgs, ...}:{
-  #  programs.fish.enable = true;
-  # };
+   home-manager.users.tristan = {pkgs, ...}:{
+    programs.fish.enable = true;
+   };
 
 
 
