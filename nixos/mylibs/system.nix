@@ -12,11 +12,11 @@ with lib;
 
 
   # Homemanager configs
-  users.users.nixos.isNormalUser = true;
-  home-manager.users.nixos = {pkgs, ...}:{
-    programs.fish.enable = true;
+  # users.users.nixos.isNormalUser = true;
+  # home-manager.users.nixos = {pkgs, ...}:{
+  #  programs.fish.enable = true;
 
-  };
+  # };
 
 
 
