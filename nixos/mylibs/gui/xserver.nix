@@ -14,8 +14,12 @@ with lib;
     xkbVariant = "";
   };
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
+  # Touchpad Configs
+  services.xserver.libinput = {
+    enable = true;
+    naturalScrolling = true;
+    
+  };
 
 
 
