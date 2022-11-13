@@ -7,7 +7,6 @@ with lib;
     git
     
     # man pages packages
-    manpages
     man-db
     man-pages
     man-pages-posix
