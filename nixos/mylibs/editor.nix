@@ -1,11 +1,10 @@
 {lib, pkgs, config, ...}:
 with lib;
 {
-    environment.systemPackages = with pkgs; [ vim_configurable ];
-    programs.vim.defaultEditor = true;
-    vim_configurable.customize {
-      	
-       vimrcConfig {
+    environment.systemPackages = with pkgs; [ 
+    ((vim_configurable.override { }).customize {
+       name = 'vim';	
+       vimrcConfig = {
 
        beforePlugins = ''
            set nocompatible
@@ -28,21 +27,31 @@ with lib;
 	   set background=dark
 	   set hlsearch
 	   set smartindent
+	   syntax enable
 
        '';
        };
 
-       vimrcConfig.packages.customize = with pkgs.vimPlugins {
+       vimrcConfig.packages.customize = with pkgs.vimPlugins; {
+	   start = [
 	   #Completion
-           start = [rainbow vim-repeat vim-surround lexima ];
+           rainbow 
+	   vim-repeat 
+           vim-surround 
+           lexima-vim
+
 	   #Navigation
-	   start = [vim-signature ctrlp nerdtree];
+	   vim-signature 
+           ctrlp 
+           nerdtree
            #Syncronization
+           ];
            
 
 	   
 
-       } 
-
-    }
+       }; 
+    })
+  ];
+  programs.vim.defaultEditor = true;
 }
