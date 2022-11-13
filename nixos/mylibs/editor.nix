@@ -3,7 +3,7 @@ with lib;
 {
     environment.systemPackages = with pkgs; [ 
     ((vim_configurable.override { }).customize {
-       name = 'vim';	
+       name = "vim";	
        vimrcConfig = {
 
        beforePlugins = ''
