@@ -36,6 +36,9 @@ with lib;
       super-slicer
       discord
     ];
+    openssh.authorizedKeys.keyFiles = [
+      /home/tristan/.ssh/github_ed25519
+    ];
   };
 
   # Homemanager configs
