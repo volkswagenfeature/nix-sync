@@ -34,6 +34,7 @@ with lib;
     packages = with pkgs; [
       firefox
       super-slicer
+      discord
     ];
   };
 
