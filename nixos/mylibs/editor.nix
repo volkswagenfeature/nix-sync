@@ -34,8 +34,11 @@ with lib;
 
         vimrcConfig.packages.customize = with pkgs.vimPlugins; {
           start = [
-            #Completion
+            #Language highlighting
             rainbow 
+            vim-nix
+
+            #Completion
             vim-repeat 
             vim-surround 
             lexima-vim
