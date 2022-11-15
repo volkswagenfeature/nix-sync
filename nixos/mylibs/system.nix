@@ -39,13 +39,16 @@ with lib;
   };
 
   # Homemanager configs
-   home-manager.users.tristan = {pkgs, ...}:{
+  home-manager.users.tristan = {pkgs, ...}:{
     programs.fish.enable = true;
-   };
+  };
 
-
-
-
-
+  #Alternate test user
+  users.users.test = {
+    isNormalUser = true;
+    description = "testUser";
+    password = "";
+    extraGroups = [];
+  };
 
 }
