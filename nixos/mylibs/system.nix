@@ -3,6 +3,7 @@ with lib;
 {
   environment.systemPackages = with pkgs; [
     home-manager
+    toybox
 
   ];
 
@@ -35,6 +36,8 @@ with lib;
       firefox
       super-slicer
       discord
+      graphviz
+      imagemagick
     ];
     openssh.authorizedKeys.keyFiles = [
       /home/tristan/.ssh/github_ed25519
@@ -42,9 +45,9 @@ with lib;
   };
 
   # Homemanager configs
-  #home-manager.users.tristan = {pkgs, ...}:{
-  #  programs.fish.enable = true;
-  #};
+  home-manager.users.tristan = {pkgs, ...}:{
+    programs.fish.enable = true;
+  };
 
   #Alternate test user
   users.users.test = {
