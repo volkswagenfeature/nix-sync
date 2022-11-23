@@ -43,9 +43,10 @@ with lib;
       # I should be the only user to mess with hardware...
       minicom
       usbutils
+
     ];
     openssh.authorizedKeys.keyFiles = [
-      /home/tristan/.ssh/github_ed25519
+      "/home/tristan/.ssh/github_ed25519"
     ];
   };
 
