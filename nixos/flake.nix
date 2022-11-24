@@ -37,7 +37,6 @@
             home-manager.useGlobalPkg = true;
             home-manager.useUserPackages = true;
           }
-          #./nixos/configuration.nix
         ];
         specialArgs = {inherit inputs;};
     };
