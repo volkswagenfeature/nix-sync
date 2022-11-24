@@ -1,18 +1,17 @@
 {
   inputs = {  
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-20.03";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.05";
 
-    homemanager = {
-      url = "github:nix-community/home-manager";
+    home-manager = {
+      url = "github:nix-community/home-manager/release-22.05";
       follows = "nixpkgs";
     };
   };
-  outputs = { self,  ... } @ inputs: 
+  outputs = { self, nixpkgs, home-manager, ... } @ inputs: 
   with inputs;
   let system = "x86_64-linux";
   in 
   {
-
     nixosConfigurations.BetaBlue-NixOS-2022= nixpkgs.lib.nixosSystem {
       inherit system;
       modules =
@@ -26,13 +25,18 @@
             #networking.useDHCP = false;
             #networking.firewall.allowedTCPPorts = [ 80 ];
 
-            # Enable a web server.
-            #services.httpd = {
-            #  enable = true;
-            #  adminAddr = "morty@example.org";
-            #};
+            nixpkgs.overlays = [
+              (_: _: {
+                home-manager = inputs.home-manager;
+              })
+            ];
           })
           ./configuration.nix 
+          inputs.home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkg = true;
+            home-manager.useUserPackages = true;
+          }
           #./nixos/configuration.nix
         ];
         specialArgs = {inherit inputs;};
