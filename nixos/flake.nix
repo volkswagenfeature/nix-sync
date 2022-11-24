@@ -17,7 +17,6 @@
       inherit system;
       modules =
         [ ({ pkgs, ... }: {
-            boot.isContainer = true;
 
             # Let 'nixos-version --json' know about the Git revision
             # of this flake.
