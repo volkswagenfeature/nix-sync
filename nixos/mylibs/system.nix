@@ -1,8 +1,7 @@
-{lib, pkgs, config, homemanager, ... }:
+{lib, pkgs, config, inputs, ... }:
 with lib;
 {
   environment.systemPackages = with pkgs; [
-    #home-manager
     toybox
 
   ];
@@ -51,7 +50,7 @@ with lib;
   };
 
   # Homemanager configs
-  homemanager.users.tristan = {pkgs, ...}:{
+  home-manager.users.tristan = {pkgs, ...}:{
     programs.fish.enable = true;
   };
 
