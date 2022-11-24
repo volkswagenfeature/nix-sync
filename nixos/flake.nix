@@ -25,11 +25,11 @@
             #networking.useDHCP = false;
             #networking.firewall.allowedTCPPorts = [ 80 ];
 
-            nixpkgs.overlays = [
-              (_: _: {
-                home-manager = inputs.home-manager;
-              })
-            ];
+            #nixpkgs.overlays = [
+            #  (_: _: {
+            #    home-manager = inputs.home-manager;
+            #  })
+            #];
           })
           ./configuration.nix 
           inputs.home-manager.nixosModules.home-manager
