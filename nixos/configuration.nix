@@ -8,7 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./imports/HomeManager.nix
+      #./imports/HomeManager.nix
       ./mylibs/editor.nix
       ./mylibs/terminal.nix
       ./mylibs/system.nix
