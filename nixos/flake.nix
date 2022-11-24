@@ -4,7 +4,8 @@
 
     home-manager = {
       url = "github:nix-community/home-manager/release-22.05";
-      follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
+
     };
   };
   outputs = { self, nixpkgs, home-manager, ... } @ inputs: 
@@ -34,7 +35,7 @@
           ./configuration.nix 
           inputs.home-manager.nixosModules.home-manager
           {
-            home-manager.useGlobalPkg = true;
+            home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
           }
         ];
