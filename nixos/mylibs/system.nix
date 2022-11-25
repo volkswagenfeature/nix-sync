@@ -3,6 +3,9 @@ with lib;
 {
   environment.systemPackages = with pkgs; [
     toybox
+    python39Full
+    htop
+    neofetch
 
   ];
 
