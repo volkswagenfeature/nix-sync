@@ -28,6 +28,12 @@ with lib;
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.utf8";
 
+  # Setup home-manager global options
+  home-manager = {  
+    useGlobalPkgs = true;
+    useUserPackages = true;
+  };
+
   ### User configs ###
 
   users.users.tristan = {
