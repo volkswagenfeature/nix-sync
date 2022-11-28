@@ -5,7 +5,12 @@
     home-manager = {
       url = "github:nix-community/home-manager/release-22.05";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
 
+    nixvim = {
+      url = "github:pta2002/nixvim";
+      # This isn't the problem...
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
   outputs = { self, nixpkgs, home-manager, ... } @ inputs: 
@@ -13,18 +18,13 @@
   let system = "x86_64-linux";
   in 
   {
-    nixosConfigurations.BetaBlue-NixOS-2022= nixpkgs.lib.nixosSystem {
+    nixosConfigurations.BetaBlue-NixOS-2022 = nixpkgs.lib.nixosSystem {
       inherit system;
       modules =
         [ ({ pkgs, ... }: {
-
             # Let 'nixos-version --json' know about the Git revision
             # of this flake.
             system.configurationRevision = nixpkgs.lib.mkIf (self ? rev) self.rev;
-
-            # Network configuration.
-            #networking.useDHCP = false;
-            #networking.firewall.allowedTCPPorts = [ 80 ];
 
             #nixpkgs.overlays = [
             #  (_: _: {
@@ -33,10 +33,16 @@
             #];
           })
           ./configuration.nix 
+
           inputs.home-manager.nixosModules.home-manager
+          #{
+          #  home-manager.useGlobalPkgs = true;
+          #  home-manager.useUserPackages = true;
+          #} 
+          inputs.nixvim.nixosModules.nixvim
           {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
+
+
           }
         ];
         specialArgs = {inherit inputs;};
