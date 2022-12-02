@@ -1,4 +1,4 @@
-{lib, pkgs, config, ...}:
+{lib, pkgs, config, inputs, ...}:
 with lib;
 {
   environment.systemPackages = with pkgs; [ 
@@ -52,6 +52,34 @@ with lib;
         ];
       }; 
     })
+
+    #( inputs.nixvim.build pkgs { })
   ];
   programs.vim.defaultEditor = true;
+  programs.nixvim={
+    enable = true;
+    #vimAlias = false;
+    #viAlias = false;
+    options = {
+        nocompatible = true;
+
+        # Default indenting
+        smartindent = true;
+        tabstop = 4;
+        shiftwidth = 4;
+        expandtab = true;
+        softtabstop = 4;
+
+        number = true;
+        ruler  = true;
+        hlsearch = true;
+        syntax = true;
+        
+        background = "dark";
+        colorcolumn = 80;
+
+
+
+      };
+  };
 }
