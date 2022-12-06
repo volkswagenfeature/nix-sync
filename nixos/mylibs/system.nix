@@ -63,6 +63,8 @@ with lib;
   # Homemanager configs
   home-manager.users.tristan = {pkgs, ...}:{
     programs.fish.enable = true;
+    home.stateVersion = "22.11";
+
   };
 
   #Alternate test user

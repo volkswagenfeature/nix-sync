@@ -66,7 +66,6 @@ with lib;
     #vimAlias = false;
     #viAlias = false;
     options = {
-        nocompatible = true;
         # Default indenting
         smartindent = true;
         tabstop = 4;
@@ -74,10 +73,13 @@ with lib;
         expandtab = true;
         softtabstop = 4;
         number = true;
-        ruler  = true;
-        hlsearch = true;
-        syntax = true;
-        
+
+        # Disabled in neovim, on by default
+        #ruler  = true;
+        #hlsearch = true;
+        #syntax = true;
+        # nocompatible = true;
+
         background = "dark";
         colorcolumn = 80;
     };
