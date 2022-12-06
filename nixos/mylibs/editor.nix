@@ -56,20 +56,23 @@ with lib;
     #( inputs.nixvim.build pkgs { })
   ];
   programs.vim.defaultEditor = true;
+
+  # don't think these do anything at the moment.
+  #programs.neovim.vimAlias = false;
+  #programs.neovim.viAlias  = false;
+
   programs.nixvim={
     enable = true;
     #vimAlias = false;
     #viAlias = false;
     options = {
         nocompatible = true;
-
         # Default indenting
         smartindent = true;
         tabstop = 4;
         shiftwidth = 4;
         expandtab = true;
         softtabstop = 4;
-
         number = true;
         ruler  = true;
         hlsearch = true;
@@ -77,9 +80,55 @@ with lib;
         
         background = "dark";
         colorcolumn = 80;
-
-
-
+    };
+    globals = {
+      clipboard = {
+        name = "Testclip";
+        copy = {
+          "+" = ["xclip"];
+          "*" = ["xclip"];
+        };
+        paste = {
+          "+" = ["xclip"];
+          "*" = ["xclip"];
+        };
+        cache_enabled = true;
       };
+    };
+    extraPackages = [pkgs.xclip];
+    plugins = {
+      nix.enable = true;
+      nvim-autopairs.enable = true;
+      treesitter.enable = true;
+
+      treesitter.ensureInstalled = [
+        "nix"
+      ];
+
+      lsp = {
+        enable = true;
+        servers = {
+          rnix-lsp.enable = true;
+          pyright.enable = true;
+        };
+      };
+    };
+    extraPlugins = [
+          #Language highlighting
+          pkgs.vimPlugins.indentLine
+          pkgs.vimPlugins.rainbow 
+          #pkgs.vimPlugins.vim-nix
+
+          #Completion
+          pkgs.vimPlugins.vim-repeat 
+          pkgs.vimPlugins.vim-surround 
+          pkgs.vimPlugins.lexima-vim
+
+          #Navigation
+          pkgs.vimPlugins.vim-signature 
+          pkgs.vimPlugins.ctrlp 
+          pkgs.vimPlugins.nerdtree
+          #Syncronization
+        ];
   };
 }
