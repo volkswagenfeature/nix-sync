@@ -6,7 +6,9 @@ with lib;
     python39Full
     htop
     neofetch
-
+    xclip
+    cryptsetup
+    btrfs-progs
   ];
 
   # ssh-agent config
