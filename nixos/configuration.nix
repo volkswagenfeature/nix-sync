@@ -2,10 +2,16 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, inputs, ... }:
-
+{ config, pkgs, inputs, nixpkgs, ... }:
+with nixpkgs.lib;
+with nixpkgs.lib.debug;
+with builtins;
+let
+  # autodetect = (x: (builtins.trace x x)) 
+  autodetect =  []; 
+in
 {
-  imports =
+  imports = autodetect ++
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       #./imports/HomeManager.nix
@@ -13,7 +19,6 @@
       ./mylibs/terminal.nix
       ./mylibs/system.nix
       ./mylibs/gui/xserver.nix
- 
     ];
 
   # Enable nix flakes
