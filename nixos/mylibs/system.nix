@@ -62,7 +62,7 @@ with lib;
 
   # Homemanager configs
   home-manager.users.tristan = {pkgs, ...}:{
-    programs.fish.enable = true;
+    #programs.ohmyfish.enable = true;
     home.stateVersion = "22.11";
 
   };
