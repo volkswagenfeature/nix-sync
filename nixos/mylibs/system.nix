@@ -55,10 +55,13 @@ with lib;
       usbutils
 
     ];
+    shell = pkgs.fish;
     openssh.authorizedKeys.keyFiles = [
       "/home/tristan/.ssh/github_ed25519"
     ];
   };
+  #enviroment.shells = [pkgs.fish];
+  
 
   # Homemanager configs
   home-manager.users.tristan = {pkgs, ...}:{
