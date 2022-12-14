@@ -9,7 +9,11 @@
 
     nixvim = {
       url = "github:pta2002/nixvim";
-      # This isn't the problem...
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    mach-nix = {
+      url = "github:DavHau/mach-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

@@ -2,13 +2,23 @@
 with lib;
 {
   environment.systemPackages = with pkgs; [
+    # System core components
     toybox
-    python39Full
-    htop
-    neofetch
-    xclip
     cryptsetup
     btrfs-progs
+
+    # Runtime packages
+    python39Full
+
+    # Monitoring 
+    htop
+    neofetch
+
+    # Clipboard utility
+    xclip
+
+    # cloud syncronization
+    rclone
   ];
 
   # ssh-agent config
@@ -48,11 +58,13 @@ with lib;
       discord
       graphviz
       imagemagick
+      obsidian
 
       # Hardware utils. 
       # I should be the only user to mess with hardware...
       minicom
       usbutils
+
 
     ];
     shell = pkgs.fish;
