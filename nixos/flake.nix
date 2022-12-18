@@ -1,6 +1,7 @@
 {
   inputs = {  
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.11";
+    flake-utils.url = "github:numtide/flake-utils";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-22.11";
@@ -10,11 +11,14 @@
     nixvim = {
       url = "github:pta2002/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
     };
 
     mach-nix = {
       url = "github:DavHau/mach-nix";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
+
     };
   };
   outputs = { self, nixpkgs, home-manager, ... } @ inputs: 
