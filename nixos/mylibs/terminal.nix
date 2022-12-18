@@ -16,10 +16,6 @@ with lib;
     nix-index
     any-nix-shell
 
-
-
-
-
   ];
 
   documentation.dev.enable = true;
