@@ -11,12 +11,10 @@ in
 {
   imports = autodetect ++
     [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
       #./imports/HomeManager.nix
       ./mylibs/editor.nix
       ./mylibs/terminal.nix
       ./mylibs/system.nix
-      ./mylibs/gui/xserver.nix
     ];
 
   # Enable nix flakes
@@ -26,13 +24,8 @@ in
   '';
 
 
-  # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.efi.efiSysMountPoint = "/boot/efi";
-
   # Enable CUPS to print documents.
-  services.printing.enable = true;
+  # services.printing.enable = true;
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 

@@ -4,8 +4,6 @@ with lib;
   environment.systemPackages = with pkgs; [
     # System core components
     toybox
-    cryptsetup
-    btrfs-progs
 
     # Runtime packages
     python39Full
@@ -25,13 +23,13 @@ with lib;
   programs.ssh.startAgent = true;
 
   ### Networking ##
-  networking.hostName = "BetaBlue-NixOS-2022"; # Define your hostname.
+  networking.hostName = "WSL-NixOS-2022"; # Define your hostname.
 
   # Enable networking
-  networking.networkmanager.enable = true;
+  # networking.networkmanager.enable = true;
 
   # Enable network manager applet
-  programs.nm-applet.enable = true;
+  # programs.nm-applet.enable = true;
 
   ### Internationilization/Input ###
   # Set your time zone.
@@ -53,12 +51,8 @@ with lib;
     description = "tristan";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-      firefox
-      super-slicer
-      discord
       graphviz
       imagemagick
-      obsidian
 
       # Hardware utils. 
       # I should be the only user to mess with hardware...
