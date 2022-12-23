@@ -112,15 +112,15 @@
         "nmdSrc": "nmdSrc"
       },
       "locked": {
-        "lastModified": 1670208577,
-        "narHash": "sha256-hDa+hqAWlTaEvT5iCyy2hLPHS9uybbSkeSlqyvXJjKM=",
-        "owner": "pta2002",
+        "lastModified": 1671831304,
+        "narHash": "sha256-Dsq78hG1DYl43RzxcEC5teIGOmU+9gw/K3C2XbMZwrQ=",
+        "owner": "volkswagenfeature",
         "repo": "nixvim",
-        "rev": "472e10f069c57da281ef178b28423f7f6b2529c2",
+        "rev": "9454679f23c8ef24d727180d76683a4ca758a117",
         "type": "github"
       },
       "original": {
-        "owner": "pta2002",
+        "owner": "volkswagenfeature",
         "repo": "nixvim",
         "type": "github"
       }
