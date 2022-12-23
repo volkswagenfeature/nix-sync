@@ -96,6 +96,7 @@ with lib;
         };
         cache_enabled = true;
       };
+      number = true;
     };
     extraPackages = [pkgs.xclip];
     plugins = {
