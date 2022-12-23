@@ -17,6 +17,7 @@ in
       ./mylibs/terminal.nix
       ./mylibs/system.nix
       ./mylibs/gui/xserver.nix
+      ./mylibs/gui/apps.nix
     ];
 
   # Enable nix flakes
