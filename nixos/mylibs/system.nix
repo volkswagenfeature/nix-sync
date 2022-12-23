@@ -53,12 +53,7 @@ with lib;
     description = "tristan";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-      firefox
-      super-slicer
-      discord
-      graphviz
-      imagemagick
-      obsidian
+      # GUI apps should be moved to ./gui/apps.nix
 
       # Hardware utils. 
       # I should be the only user to mess with hardware...
