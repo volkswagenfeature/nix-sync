@@ -63,8 +63,12 @@ with lib;
 
   programs.nixvim={
     enable = true;
-    #vimAlias = false;
-    #viAlias = false;
+
+    # set up aliases
+    viAlias = true;
+    #vimdiffAlias = true;
+    vimAlias = true;
+
     options = {
         # Default indenting
         smartindent = true;
@@ -98,6 +102,10 @@ with lib;
       };
       number = true;
     };
+    extraConfigVim = "
+    set number
+    "; 
+
     extraPackages = [pkgs.xclip];
     plugins = {
       nix.enable = true;
