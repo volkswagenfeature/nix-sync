@@ -72,7 +72,18 @@ with lib;
 
   # Homemanager configs
   home-manager.users.tristan = {pkgs, ...}:{
-    #programs.ohmyfish.enable = true;
+    programs.fish.enable = true;
+    programs.fish.plugins = [
+      {
+        name = "tide-theme";
+        src = pkgs.fetchFromGitHub {
+          owner = "IlanCosman";
+          repo = "tide";
+          rev = "0cf2993d37e317a405114b78df6a5440eeb88bbb";
+          sha256 = "x0wwXjKCDwtoUUJaiixeRRt5J6+EFD4Qev6kuOhd9Zw=";
+        };
+      }
+    ];
     home.stateVersion = "22.11";
 
   };
