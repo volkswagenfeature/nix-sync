@@ -1,6 +1,94 @@
 {lib, pkgs, config, inputs, ...}:
 with lib;
 {
+  ### NEOVIM CONFIGS ###
+
+  programs.nixvim={
+      enable = true;
+
+      # set up aliases
+      viAlias = true;
+      #vimdiffAlias = true;
+      vimAlias = true;
+
+      options = {
+          # Default indenting
+          smartindent = true;
+          tabstop = 4;
+          shiftwidth = 4;
+          expandtab = true;
+          softtabstop = 4;
+          number = true;
+
+          # Disabled in neovim, on by default
+          #ruler  = true;
+          #hlsearch = true;
+          #syntax = true;
+          # nocompatible = true;
+
+          background = "dark";
+          colorcolumn = 80;
+      };
+      globals = {
+        clipboard = {
+          name = "Testclip";
+          copy = {
+            "+" = ["xclip"];
+            "*" = ["xclip"];
+          };
+          paste = {
+            "+" = ["xclip"];
+            "*" = ["xclip"];
+          };
+          cache_enabled = true;
+        };
+      };
+      extraConfigVim = "
+      set number
+      "; 
+
+      extraPackages = [pkgs.xclip];
+      plugins = {
+        nix.enable = true;
+        surround.enable = true;
+        nvim-autopairs.enable = true;
+        treesitter.enable = true;
+
+        treesitter.ensureInstalled = [
+          "nix"
+        ];
+
+        lsp = {
+          enable = true;
+          servers = {
+            rnix-lsp.enable = true;
+            pyright.enable = true;
+          };
+        };
+      };
+      extraPlugins = [
+            #Language highlighting
+            pkgs.vimPlugins.indentLine
+            pkgs.vimPlugins.rainbow 
+            #pkgs.vimPlugins.vim-nix
+
+            #Completion
+            pkgs.vimPlugins.vim-repeat 
+            # pkgs.vimPlugins.vim-surround 
+            pkgs.vimPlugins.lexima-vim
+            pkgs.vimPlugins.which-key
+
+            #Navigation
+            pkgs.vimPlugins.vim-signature 
+            pkgs.vimPlugins.ctrlp 
+            pkgs.vimPlugins.nerdtree
+            #Syncronization
+          ];
+  };
+
+
+  ##### VIM CONFIGS #####
+
   environment.systemPackages = with pkgs; [ 
     ((vim_configurable.override { }).customize {
       name = "vim";    
@@ -55,91 +143,10 @@ with lib;
 
     #( inputs.nixvim.build pkgs { })
   ];
-  programs.vim.defaultEditor = true;
+  #programs.vim.defaultEditor = true;
 
   # don't think these do anything at the moment.
   #programs.neovim.vimAlias = false;
   #programs.neovim.viAlias  = false;
 
-  programs.nixvim={
-    enable = true;
-
-    # set up aliases
-    viAlias = true;
-    #vimdiffAlias = true;
-    vimAlias = true;
-
-    options = {
-        # Default indenting
-        smartindent = true;
-        tabstop = 4;
-        shiftwidth = 4;
-        expandtab = true;
-        softtabstop = 4;
-        number = true;
-
-        # Disabled in neovim, on by default
-        #ruler  = true;
-        #hlsearch = true;
-        #syntax = true;
-        # nocompatible = true;
-
-        background = "dark";
-        colorcolumn = 80;
-    };
-    globals = {
-      clipboard = {
-        name = "Testclip";
-        copy = {
-          "+" = ["xclip"];
-          "*" = ["xclip"];
-        };
-        paste = {
-          "+" = ["xclip"];
-          "*" = ["xclip"];
-        };
-        cache_enabled = true;
-      };
-      number = true;
-    };
-    extraConfigVim = "
-    set number
-    "; 
-
-    extraPackages = [pkgs.xclip];
-    plugins = {
-      nix.enable = true;
-      nvim-autopairs.enable = true;
-      treesitter.enable = true;
-
-      treesitter.ensureInstalled = [
-        "nix"
-      ];
-
-      lsp = {
-        enable = true;
-        servers = {
-          rnix-lsp.enable = true;
-          pyright.enable = true;
-        };
-      };
-    };
-    extraPlugins = [
-          #Language highlighting
-          pkgs.vimPlugins.indentLine
-          pkgs.vimPlugins.rainbow 
-          #pkgs.vimPlugins.vim-nix
-
-          #Completion
-          pkgs.vimPlugins.vim-repeat 
-          pkgs.vimPlugins.vim-surround 
-          pkgs.vimPlugins.lexima-vim
-
-          #Navigation
-          pkgs.vimPlugins.vim-signature 
-          pkgs.vimPlugins.ctrlp 
-          pkgs.vimPlugins.nerdtree
-          #Syncronization
-        ];
-  };
-}
+  }
