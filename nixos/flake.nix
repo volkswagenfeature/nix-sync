@@ -20,6 +20,11 @@
       inputs.flake-utils.follows = "flake-utils";
 
     };
+    NixOS-WSL = {
+      url = "github:nix-community/NixOS-WSL";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
+    };
   };
   outputs = { self, nixpkgs, home-manager, ... } @ inputs: 
   with inputs;
