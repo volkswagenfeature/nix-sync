@@ -26,7 +26,7 @@
   let system = "x86_64-linux";
   in 
   {
-    nixosConfigurations.BetaBlue-NixOS-2022 = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.WSL-NixOS-2023 = nixpkgs.lib.nixosSystem {
       inherit system;
       modules =
         [ ({ pkgs, ... }: {

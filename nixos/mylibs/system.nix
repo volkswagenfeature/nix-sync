@@ -23,7 +23,7 @@ with lib;
   programs.ssh.startAgent = true;
 
   ### Networking ##
-  networking.hostName = "WSL-NixOS-2022"; # Define your hostname.
+  networking.hostName = "WSL-NixOS-2023"; # Define your hostname.
 
   # Enable networking
   # networking.networkmanager.enable = true;
