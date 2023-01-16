@@ -45,17 +45,30 @@
             #  })
             #];
           })
-          ./configuration.nix 
 
+          inputs.NixOS-WSL.nixosModules.wsl
           inputs.home-manager.nixosModules.home-manager
           #{
           #  home-manager.useGlobalPkgs = true;
           #  home-manager.useUserPackages = true;
           #} 
           inputs.nixvim.nixosModules.nixvim
+          ./configuration.nix
+
           {
+            wsl = {
+              enable = true;
+              wslConf.automount.root = "/mnt";
+              defaultUser = "nixos";
+              startMenuLaunchers = true;
 
+              # Enable native Docker support
+              # docker-native.enable = true;
 
+              # Enable integration with Docker Desktop (needs to be installed)
+              # docker-desktop.enable = true;
+
+            };
           }
         ];
         specialArgs = {inherit inputs;};
