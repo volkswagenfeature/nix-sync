@@ -16,6 +16,9 @@ with lib;
     nix-index
     any-nix-shell
 
+    # Multitasking
+    byobu
+
   ];
 
   documentation.dev.enable = true;

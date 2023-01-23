@@ -56,7 +56,7 @@
           ./configuration.nix
 
           {
-            wsl = {
+             wsl = {
               enable = true;
               wslConf.automount.root = "/mnt";
               defaultUser = "tristan";

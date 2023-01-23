@@ -17,7 +17,7 @@ with lib;
 
     # cloud syncronization
     rclone
-    firefox
+    
   ];
 
   # ssh-agent config
