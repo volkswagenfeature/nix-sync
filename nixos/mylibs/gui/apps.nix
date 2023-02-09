@@ -1,7 +1,10 @@
 {lib,pkgs,config, ... }:
 with lib;
+let
+  secrets = (import ../../secrets.nix {});
+in
 {
-  users.users.tristan.packages = with pkgs; [
+  users.users."${secrets.primaryuser}".packages = with pkgs; [
     # Networking
     firefox
 
@@ -26,7 +29,7 @@ with lib;
 	  kitty
 	  feh
 	 ];
-  home-manager.users.tristan = {pkgs,...}:{
+  home-manager.users."${secrets.primaryuser}"= {pkgs,...}:{
     config.programs.kitty  = {
       # Themes at https://github.com/kovidgoyal/kitty-themes
       theme = "ayu";

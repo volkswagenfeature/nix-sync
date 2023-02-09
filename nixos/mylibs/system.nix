@@ -1,5 +1,8 @@
 {lib, pkgs, config, inputs, ... }:
 with lib;
+let
+  secrets = (import ../secrets.nix {});
+in
 {
   environment.systemPackages = with pkgs; [
     # System core components
@@ -37,7 +40,7 @@ with lib;
   programs.ssh.startAgent = true;
 
   ### Networking ##
-  networking.hostName = "BetaBlue-NixOS-2022"; # Define your hostname.
+  networking.hostName = "${secrets.hostname}"; # Define your hostname.
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -60,9 +63,9 @@ with lib;
 
   ### User configs ###
 
-  users.users.tristan = {
+  users.users."${secrets.primaryuser}"= {
     isNormalUser = true;
-    description = "tristan";
+    description = "${secrets.primaryuser}";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
       # GUI apps should be moved to ./gui/apps.nix
@@ -75,15 +78,12 @@ with lib;
 
     ];
     shell = pkgs.fish;
-    openssh.authorizedKeys.keyFiles = [
-      "/home/tristan/.ssh/github_ed25519"
-    ];
   };
   #enviroment.shells = [pkgs.fish];
   
 
   # Homemanager configs
-  home-manager.users.tristan = {pkgs, ...}:{
+  home-manager.users."${secrets.primaryuser}"= {pkgs, ...}:{
     programs.fish.enable = true;
     programs.fish.plugins = [
       {
@@ -108,15 +108,5 @@ with lib;
       */
     ];
     home.stateVersion = "22.11";
-
   };
-
-  #Alternate test user
-  users.users.test = {
-    isNormalUser = true;
-    description = "testUser";
-    password = "";
-    extraGroups = [];
-  };
-
 }
