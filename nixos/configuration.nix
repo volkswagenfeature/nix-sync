@@ -20,6 +20,7 @@ in
       ./mylibs/system.nix
       ./mylibs/gui/xserver.nix
       ./mylibs/gui/apps.nix
+      ./mylibs/gui/sway.nix
     ];
 
   # Enable nix flakes

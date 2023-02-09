@@ -26,6 +26,12 @@ with lib;
 	  kitty
 	  feh
 	 ];
+  home-manager.users.tristan = {pkgs,...}:{
+    config.programs.kitty  = {
+      # Themes at https://github.com/kovidgoyal/kitty-themes
+      theme = "ayu";
+    };
+  };
 }
 
 
