@@ -58,6 +58,8 @@ with lib;
           "nix"
         ];
 
+        magma-nvim.enable = true;
+
         lsp = {
           enable = true;
           servers = {
@@ -76,7 +78,7 @@ with lib;
             pkgs.vimPlugins.vim-repeat 
             # pkgs.vimPlugins.vim-surround 
             pkgs.vimPlugins.lexima-vim
-            pkgs.vimPlugins.which-key
+            pkgs.vimPlugins.which-key-nvim
 
             #Navigation
             pkgs.vimPlugins.vim-signature 

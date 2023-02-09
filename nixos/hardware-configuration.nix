@@ -6,6 +6,7 @@
 {
   imports =
     [ (modulesPath + "/installer/scan/not-detected.nix")
+      ./secrets.nix
     ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usb_storage" "sd_mod" ];
@@ -29,7 +30,7 @@
       options = ["subvol=home"];
     };
 
-  fileSystems."/home/tristan/bulk" =
+  fileSystems."/home/${primaryuser}/bulk" =
     { device = "/dev/disk/by-uuid/b10ea7e7-08de-46ba-9bb0-17a7d58ee673";
       fsType = "btrfs";
       options = ["subvol=bulk"];
