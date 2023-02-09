@@ -23,10 +23,13 @@
   };
   outputs = { self, nixpkgs, home-manager, ... } @ inputs: 
   with inputs;
-  let system = "x86_64-linux";
+  let 
+    system = "x86_64-linux";
+    secrets = ( import ./secrets.nix {} );
+
   in 
   {
-    nixosConfigurations.BetaBlue-NixOS-2022 = nixpkgs.lib.nixosSystem {
+    nixosConfigurations."${secrets.hostname}"= nixpkgs.lib.nixosSystem {
       inherit system;
       modules =
         [ ({ pkgs, ... }: {

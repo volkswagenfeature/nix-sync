@@ -3,6 +3,9 @@
 
 
 let
+  # Secrets
+  secrets = ( import ../../secrets.nix {} );
+
   # bash script to let dbus know about important env variables and
   # propagate them to relevent services run at the end of sway config
   # see
@@ -72,7 +75,7 @@ in
     /*
     displayManager.ly = {
       enable = true;
-      defaultUser = "tristan";
+      defaultUser = "${secrets.primaryuser}";
     }; */
   };
 
@@ -106,7 +109,7 @@ in
   };
 
   ### HomeManager section
-  home-manager.users.tristan = {pkgs, ...}:{
+  home-manager.users."${secrets.primaryuser}"= {pkgs, ...}:{
     wayland.windowManager.sway = {
       enable = true;
       config = rec {
