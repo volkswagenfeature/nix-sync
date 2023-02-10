@@ -25,12 +25,9 @@ in
 
     # password management
     kpcli
-    keepassxc
 
     # secrets managment
     keychain
-
-
   ];
 
   # Enable polkit ( required for sway and homemanager )
@@ -80,33 +77,4 @@ in
     shell = pkgs.fish;
   };
   #enviroment.shells = [pkgs.fish];
-  
-
-  # Homemanager configs
-  home-manager.users."${secrets.primaryuser}"= {pkgs, ...}:{
-    programs.fish.enable = true;
-    programs.fish.plugins = [
-      {
-        name = "tide-theme";
-        src = pkgs.fetchFromGitHub {
-          owner = "IlanCosman";
-          repo = "tide";
-          rev = "0cf2993d37e317a405114b78df6a5440eeb88bbb";
-          sha256 = "x0wwXjKCDwtoUUJaiixeRRt5J6+EFD4Qev6kuOhd9Zw=";
-        };
-      } 
-      /*
-      {
-        name = "theme-chain";
-        src = pkgs.fetchFromGitHub {
-          owner = "oh-my-fish";
-          repo = "theme-chain";
-          rev = "1cffea20b15bbcd11e578cd88dca097cc2ca23f4";
-          sha256 = "x0wwXjKCDwtoUUJaiixeRRt5J6+EFD4Qev6kuOhd9Zw=";
-        };
-      }
-      */
-    ];
-    home.stateVersion = "22.11";
-  };
 }

@@ -23,6 +23,9 @@ in
     # image processing
     imagemagick
     feh
+
+    # Password managment
+    keepassxc
   ];
 
   environment.systemPackages = with pkgs; [
