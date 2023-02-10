@@ -77,4 +77,13 @@ in
     shell = pkgs.fish;
   };
   #enviroment.shells = [pkgs.fish];
+
+  home-manager.users."${secrets.primaryuser}"= {pkgs, ...}:{
+    programs.keychain = {
+      enable = true;
+      enableFishIntegration = true;
+      keys = map toString secrets.ssh_keys.paths;
+
+    };
+  };
 }
