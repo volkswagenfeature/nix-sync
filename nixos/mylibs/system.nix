@@ -86,4 +86,18 @@ in
 
     };
   };
+
+  services.restic.backups."${secrets.primaryuser}" = {
+    rcloneConfig = {
+      type = "dropbox";
+      token = builtins.toJSON builtins.trace "Loading ${secrets.rclone.dropbox.token}" secrets.rclone.dropbox.token;
+
+    };
+  };
+ /*
+  systemd.timers."rclone-test" = {
+    wantedBy = ["timers.target"];
+    timerConfig = 
+  }
+  */
 }
