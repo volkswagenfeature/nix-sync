@@ -59,6 +59,8 @@ with lib;
         ];
 
         magma-nvim.enable = true;
+        # coq-nvim.enable = true; # Not working as of 2023-02-25
+        nvim-cmp.enable = true;
 
         lsp = {
           enable = true;
