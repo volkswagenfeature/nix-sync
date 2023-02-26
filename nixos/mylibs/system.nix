@@ -28,6 +28,9 @@ in
 
     # secrets managment
     keychain
+
+    # Zipfile handling
+    zip
   ];
 
   # Enable polkit ( required for sway and homemanager )
@@ -87,17 +90,41 @@ in
     };
   };
 
+  /*
+  # Eventually should replace manual config + service declearation below
+  # but doesn't work yet.
   services.restic.backups."${secrets.primaryuser}" = {
+    passwordFile =  "/home/${secrets.primaryuser}/.config/rclone/rclone.conf";
+    rcloneConfigFile = /. + "/home/${secrets.primaryuser}/.config/rclone/rclone.conf";
+
+    
     rcloneConfig = {
-      type = "dropbox";
-      token = builtins.toJSON builtins.trace "Loading ${secrets.rclone.dropbox.token}" secrets.rclone.dropbox.token;
+      #type = "dropbox";
+      token = traceVal (builtins.toJSON ( secrets.rclone.dropbox ));
 
     };
+   
   };
- /*
+  */
+ 
+  /*
   systemd.timers."rclone-test" = {
     wantedBy = ["timers.target"];
-    timerConfig = 
-  }
+    timerConfig = {
+      onBootSec = "5m";
+      onUnitActiveSec = "2m";
+      Unit = "rclone-test.service";
+    };
+  };
   */
+
+  systemd.services."rclone-test" = {
+    script = ''
+    '';
+    serviceConfig = {
+      Type = "oneshot";
+      User = "nobody";
+    };
+
+  };
 }
