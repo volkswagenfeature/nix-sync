@@ -17,7 +17,7 @@ in
       ./mylibs/editor.nix
       ./mylibs/terminal.nix
       ./mylibs/system.nix
-      #./hardware-configuration.nix
+      ./hardware-configuration.nix
     ];
 
 
