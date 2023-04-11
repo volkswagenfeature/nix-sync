@@ -18,6 +18,7 @@ in
       ./hardware-configuration.nix
     ];
 
+  enviroment.systemPackages = [pkgs.hello];
 
   # Enable nix flakes
   nix.package = pkgs.nixFlakes;
