@@ -17,6 +17,11 @@ with lib;
 
     # cloud syncronization
     rclone
+
+    # Build tools
+    make
+    gnumake
+    hello
     
   ];
 

@@ -8,7 +8,6 @@ with lib;
 
       # set up aliases
       viAlias = true;
-      #vimdiffAlias = true;
       vimAlias = true;
 
       options = {
@@ -18,7 +17,7 @@ with lib;
           shiftwidth = 4;
           expandtab = true;
           softtabstop = 4;
-          number = true;
+          number = true; # Doesn't work for some reason
 
           # Disabled in neovim, on by default
           #ruler  = true;
@@ -64,6 +63,18 @@ with lib;
             rnix-lsp.enable = true;
             pyright.enable = true;
           };
+        };
+
+        nvim-cmp = {
+          enable = true;
+          snippet.expand = ''
+          function(args)
+            luasnip.lsp_expand(args.body)
+          end
+          '';
+
+
+
         };
       };
       extraPlugins = [
