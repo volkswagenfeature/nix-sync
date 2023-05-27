@@ -32,6 +32,9 @@ in
 
     # Zipfile handling
     zip
+
+    # Geolocation framework (only used by gammastep atm)
+    geoclue2
   ];
 
   # Enable polkit ( required for sway and homemanager )
