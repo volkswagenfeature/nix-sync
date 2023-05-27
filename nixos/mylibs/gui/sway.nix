@@ -65,7 +65,7 @@ in
     mako # notification system developed by swaywm maintainer
 
     # Brightness utilities
-    redshift
+    gammastep
     light
   ];
 
