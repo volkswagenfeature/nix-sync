@@ -15,6 +15,7 @@ in
     # Design
     graphviz
     super-slicer
+    gimp-with-plugins
 
     # Utilities
     kitty

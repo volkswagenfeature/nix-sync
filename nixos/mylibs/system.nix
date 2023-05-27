@@ -12,6 +12,7 @@ in
 
     # Runtime packages
     python39Full
+    # poetry
 
     # Monitoring 
     htop
