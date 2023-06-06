@@ -16,6 +16,7 @@ in
     graphviz
     super-slicer
     gimp-with-plugins
+    blender
 
     # Utilities
     kitty

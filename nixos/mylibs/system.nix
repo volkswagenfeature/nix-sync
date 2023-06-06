@@ -34,7 +34,9 @@ in
     zip
 
     # Geolocation framework (only used by gammastep atm)
-    geoclue2
+    geoclue2-with-demo-agent # Same thing as the override???
+    #geoclue2#.override {withDemoAgent = config.services.geoclue2.enableDemoAgent;}
+    avahi
   ];
 
   # Enable polkit ( required for sway and homemanager )
@@ -129,6 +131,17 @@ in
       Type = "oneshot";
       User = "nobody";
     };
-
   };
+  services.avahi.enable = true;
+  #services.geoclue-agent.enable = true; # does not exist
+
+  services.geoclue2 = {
+    enable = true;
+
+    appConfig = {
+      gammastep = {isAllowed = true; isSystem = true;};
+      where-am-i = {isAllowed = true; isSystem = false;};
+    };
+  };
+
 }
