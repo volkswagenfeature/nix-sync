@@ -108,6 +108,19 @@ in
     wrapperFeatures.gtk = true;
   };
 
+  # Gammastep conifgs ( doesn't work )
+  /*
+  services.gammastep = {
+    enable = true;
+    # manually specified long and lat for now
+    provider = "manual";
+    temperature = {
+      day = 6500;
+      night = 3000;
+    };
+  };
+  */
+
   ### HomeManager section
   home-manager.users."${secrets.primaryuser}"= {pkgs, ...}:{
     wayland.windowManager.sway = {
