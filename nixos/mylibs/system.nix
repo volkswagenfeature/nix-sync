@@ -32,6 +32,7 @@ in
 
     # Zipfile handling
     zip
+    unzip
 
     # Geolocation framework (only used by gammastep atm)
     geoclue2-with-demo-agent # Same thing as the override???
