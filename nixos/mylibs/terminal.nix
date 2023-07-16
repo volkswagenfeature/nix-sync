@@ -21,6 +21,9 @@ in
 
     # preview fonts
     fontpreview
+
+    # big terminal font
+    figlet
   ];
 
   fonts.fonts = with pkgs; [
@@ -58,6 +61,7 @@ in
       functions = { 
         screenshot = ''grim -g "$(slurp)" '';
         fullscreenshot = ''grim'';
+        icat = ''kitty +kitten icat $argv'';
       };
     }; 
    home.stateVersion = "22.11";

@@ -17,6 +17,7 @@ in
     # Monitoring 
     htop
     neofetch
+    nix-tree #Explore the package tree
 
     # Clipboard utility
     xclip

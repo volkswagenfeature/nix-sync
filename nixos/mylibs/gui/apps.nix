@@ -7,6 +7,9 @@ in
   users.users."${secrets.primaryuser}".packages = with pkgs; [
     # Networking
     firefox
+    chromium
+    
+    #ungoogled-chromium #for later
 
     # Social media
     discord
