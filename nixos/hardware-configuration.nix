@@ -21,21 +21,36 @@ in
     { device = "/dev/disk/by-uuid/7FC7-0A23";
       fsType = "vfat";
     };
-
+/*
+  # flashdrive temp fix 
+  fileSystems."/home" = 
+    { device = "/dev/disk/by-uuid/04a3cc18-e16c-4ed1-9932-e81a293529d4";
+      fsType = "ext4";
+    };
+*/
+  # SD card busted filesystems.
   fileSystems."/home" =
-    { device = "/dev/disk/by-uuid/b10ea7e7-08de-46ba-9bb0-17a7d58ee673";
+    { device = "/dev/disk/by-uuid/863256c3-63d8-4530-abf0-af5e2fc3f96d";
       fsType = "btrfs";
       options = ["subvol=home"];
     };
 
   fileSystems."/home/${secrets.primaryuser}/bulk" =
-    { device = "/dev/disk/by-uuid/b10ea7e7-08de-46ba-9bb0-17a7d58ee673";
+    { device = "/dev/disk/by-uuid/863256c3-63d8-4530-abf0-af5e2fc3f96d";
       fsType = "btrfs";
       options = ["subvol=bulk"];
     };
+    
+  fileSystems."/home/${secrets.primaryuser}/bulk/dropbox" =
+    { device = "/dev/disk/by-uuid/863256c3-63d8-4530-abf0-af5e2fc3f96d";
+      fsType = "btrfs";
+      options = ["subvol=dropbox"];
+    };
+
+
 
   boot.initrd.luks.devices."enc" = 
-    { device = "/dev/sdb";
+    { device = "/dev/disk/by-uuid/ffd43f69-4797-4598-a1d9-c6aa6a0c30d0";
       #header = "/root/header.img";
       allowDiscards = true;
     };
