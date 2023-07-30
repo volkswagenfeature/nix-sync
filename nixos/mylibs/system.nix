@@ -4,6 +4,7 @@ with lib;
   environment.systemPackages = with pkgs; [
     # System core components
     toybox
+    btrfs-progs
 
     # Runtime packages
     python39Full
@@ -22,6 +23,8 @@ with lib;
     make
     gnumake
     hello
+
+    
     
   ];
 
