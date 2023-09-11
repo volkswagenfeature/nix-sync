@@ -7,6 +7,11 @@ with lib;
   };
 
   hardware.opengl.enable = true;
+  virtualisation.docker = { 
+    enable = true;
+    enableNvidia = true;
+  }
+  lolhi
   enviroment.systemPackages = with pkgs; lib.traceVal [
   ];
 
