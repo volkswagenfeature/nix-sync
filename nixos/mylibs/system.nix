@@ -19,6 +19,8 @@ in
     neofetch
     nix-tree #Explore the package tree
 
+    pv
+
     # Clipboard utility
     xclip
 

@@ -24,6 +24,9 @@ in
 
     # big terminal font
     figlet
+
+    # TUI file browser
+    ranger
   ];
 
   fonts.fonts = with pkgs; [
@@ -64,7 +67,17 @@ in
         icat = ''kitty +kitten icat $argv'';
       };
     }; 
-   home.stateVersion = "22.11";
+    /*
+    programs.ranger = 
+    {  
+      enable = true;
+      settings = {
+        preview_images = true;
+        preview_images_method = "kitty";
+      };
+    };
+    */
+    home.stateVersion = "22.11";
   };
      
 }
