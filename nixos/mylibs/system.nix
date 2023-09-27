@@ -22,7 +22,7 @@ in
     pv
 
     # Clipboard utility
-    xclip
+    wl-clipboard-x11
 
     # cloud syncronization
     rclone
