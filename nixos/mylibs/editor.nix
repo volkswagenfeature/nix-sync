@@ -44,7 +44,7 @@ with lib;
       };
     };
 
-    extraPackages = [pkgs.xclip];
+    extraPackages = [pkgs.wl-clipboard-x11];
     plugins = {
       nix.enable = true;
       surround.enable = true;
