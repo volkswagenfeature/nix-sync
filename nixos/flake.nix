@@ -9,7 +9,7 @@
     };
 
     nixvim = {
-      url = "github:/volkswagenfeature/nixvim";
+      url = "github:/nix-community/nixvim/nixos-23.05";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
     };
