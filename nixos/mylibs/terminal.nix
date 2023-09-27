@@ -35,6 +35,7 @@ in
   ];
 
   documentation.dev.enable = true;
+  programs.fish.enable = true;
 
   home-manager.users."${secrets.primaryuser}"= {pkgs, ...}:{
     programs.fish = { 
