@@ -42,6 +42,8 @@ in
     #geoclue2#.override {withDemoAgent = config.services.geoclue2.enableDemoAgent;}
     avahi
   ];
+  # Create a compatible filesystem for scripts with shebangs
+  services.envfs.enable = true;
 
   # Enable polkit ( required for sway and homemanager )
   security.polkit.enable = true;

@@ -18,31 +18,27 @@ with lib;
       shiftwidth = 4;
       expandtab = true;
       softtabstop = 4;
+      # Should be on by default. Should be turned on by this option
+      # Isn't.
       number = true;
-
+      
       # Disabled in neovim, on by default
       #ruler  = true;
       #hlsearch = true;
       #syntax = true;
       # nocompatible = true;
-
       background = "dark";
-      colorcolumn = 80;
-    };
-    globals = {
+      colorcolumn = "80";
+      highlight = {
+        # Doesn't work. Troubleshoot or workaround
+        ColorColumn.ctermbg= "DarkGrey";
+      };
       clipboard = {
-        name = "Testclip";
-        copy = {
-          "+" = ["xclip"];
-          "*" = ["xclip"];
-        };
-        paste = {
-          "+" = ["xclip"];
-          "*" = ["xclip"];
-        };
-        cache_enabled = true;
+        register = "unnamed";
+        providers.wl-clipboard.enable=true;
       };
     };
+    globals = {};
 
     extraPackages = [pkgs.wl-clipboard-x11];
     plugins = {
@@ -102,6 +98,17 @@ with lib;
 
         };
       };
+      # Don't think I use this much.
+      # Finds keybindings for commands you run.
+      # I tend to look up the keybindings directly.
+      # https://github.com/folke/which-key.nvim
+      which-key = {
+        enable = true;
+      };
+      # Haven't set this up yet, and might do well to use Ranger instead somehow.
+      # Alternatives are neo-tree and nvim-tree
+
+
     };
     extraPlugins = [
       #Language highlighting
@@ -114,13 +121,11 @@ with lib;
       pkgs.vimPlugins.vim-repeat 
       # pkgs.vimPlugins.vim-surround 
       pkgs.vimPlugins.lexima-vim
-      pkgs.vimPlugins.which-key-nvim
       pkgs.vimPlugins.lsp_signature-nvim
 
       #Navigation
       pkgs.vimPlugins.vim-signature 
       pkgs.vimPlugins.ctrlp 
-      pkgs.vimPlugins.nerdtree
       #Syncronization
     ];
     maps = {
