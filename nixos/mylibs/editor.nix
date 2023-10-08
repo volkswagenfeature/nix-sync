@@ -46,7 +46,6 @@ with lib;
       surround.enable = true;
       nvim-autopairs.enable = true;
       treesitter.enable = true;
-
       treesitter.ensureInstalled = [
         "nix"
       ];
@@ -105,23 +104,20 @@ with lib;
       which-key = {
         enable = true;
       };
-      # Haven't set this up yet, and might do well to use Ranger instead somehow.
-      # Alternatives are neo-tree and nvim-tree
 
 
     };
     extraPlugins = [
       #Language highlighting
       pkgs.vimPlugins.indentLine
-      pkgs.vimPlugins.rainbow 
       pkgs.vimPlugins.vim-fish
       #pkgs.vimPlugins.vim-nix
 
       #Completion
-      pkgs.vimPlugins.vim-repeat 
-      # pkgs.vimPlugins.vim-surround 
-      pkgs.vimPlugins.lexima-vim
-      pkgs.vimPlugins.lsp_signature-nvim
+      pkgs.vimPlugins.vim-repeat # Here to help with vim-surround
+      pkgs.vimPlugins.nvim-ts-rainbow2 # Seems not to work right
+      pkgs.vimPlugins.lexima-vim # Autocompleting parenthesis
+      pkgs.vimPlugins.lsp_signature-nvim #type signature completion, like: fn(int,str)
 
       #Navigation
       pkgs.vimPlugins.vim-signature 
