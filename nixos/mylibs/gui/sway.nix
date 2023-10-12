@@ -67,6 +67,9 @@ in
     # Brightness utilities
     gammastep
     light
+
+    # Displays a overlay bar
+    wob
   ];
 
   services.xserver = {
@@ -86,6 +89,9 @@ in
     pulse.enable = true;
   };
 
+  services.udev.extraRules = ''
+    ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="intel_backlight", MODE="0666", RUN+="${pkgs.coreutils}/bin/chmod a+w /sys/class/backlight/intel_backlight/brightness"
+  '';
 
   # xdg-desktop-portal works by exposing a series of D-Bus interfaces
   # known as portals under a well-known name
@@ -108,18 +114,6 @@ in
     wrapperFeatures.gtk = true;
   };
 
-  # Gammastep conifgs ( doesn't work )
-  /*
-  services.gammastep = {
-    enable = true;
-    # manually specified long and lat for now
-    provider = "manual";
-    temperature = {
-      day = 6500;
-      night = 3000;
-    };
-  };
-  */
 
   ### HomeManager section
   home-manager.users."${secrets.primaryuser}"= {pkgs, ...}:{
@@ -135,11 +129,22 @@ in
           natural_scroll = "enabled";
 
         };
+
         input."2821:6078:ASUS_Computer_Inc._ASUS_GAMING_MOUSE_GX950" = { # Config for mouse has to be fixed before going to do art.
           pointer_accel = "-0.5"; # seems to do nothing
         };
         modifier = "Mod4";
       }; 
+    };
+    # Gammastep conifgs ( doesn't work )
+    services.gammastep = {
+      enable = true;
+      # manually specified long and lat for now
+      provider = "geoclue2";
+      temperature = {
+        day = 6500;
+        night = 3000;
+      };
     };
   };
 
