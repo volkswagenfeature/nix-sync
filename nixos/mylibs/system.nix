@@ -1,4 +1,4 @@
-{lib, pkgs, config, inputs, ... }:
+{lib, pkgs, config, inputs, nix-unstable, ... }:
 with lib;
 let
   secrets = (import ../secrets.nix {});
@@ -25,7 +25,8 @@ in
     wl-clipboard-x11
 
     # cloud syncronization
-    rclone
+    # Using nix-unstable until 1.64 comes to the main nix branch. 
+    nix-unstable.rclone
 
     # password management
     kpcli
@@ -63,6 +64,9 @@ in
   ### Internationilization/Input ###
   # Set your time zone.
   time.timeZone = "America/New_York";
+  # Keep timezone up to date based on current location. 
+  # Gonna want to confirm this works next time you're somewhere fancy.
+  services.localtimed.enable = true;
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.utf8";
