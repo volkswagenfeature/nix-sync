@@ -139,13 +139,29 @@
         "type": "github"
       }
     },
-    "nixpkgs": {
+    "nix-unstable-raw": {
       "locked": {
-        "lastModified": 1696039360,
-        "narHash": "sha256-g7nIUV4uq1TOVeVIDEZLb005suTWCUjSY0zYOlSBsyE=",
+        "lastModified": 1698134075,
+        "narHash": "sha256-foCD+nuKzfh49bIoiCBur4+Fx1nozo+4C/6k8BYk4sg=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "32dcb45f66c0487e92db8303a798ebc548cadedc",
+        "rev": "8efd5d1e283604f75a808a20e6cde0ef313d07d4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1697851979,
+        "narHash": "sha256-lJ8k4qkkwdvi+t/Xc6Fn74kUuobpu9ynPGxNZR6OwoA=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "5550a85a087c04ddcace7f892b0bdc9d8bb080c8",
         "type": "github"
       },
       "original": {
@@ -270,6 +286,7 @@
         "flake-utils": "flake-utils",
         "home-manager": "home-manager",
         "mach-nix": "mach-nix",
+        "nix-unstable-raw": "nix-unstable-raw",
         "nixpkgs": "nixpkgs",
         "nixvim": "nixvim"
       }

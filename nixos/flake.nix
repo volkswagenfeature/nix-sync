@@ -1,6 +1,8 @@
 {
   inputs = {  
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.05";
+
+    nix-unstable-raw.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
 
     home-manager = {
@@ -52,11 +54,12 @@
           #} 
           inputs.nixvim.nixosModules.nixvim
           {
-
-
           }
         ];
-        specialArgs = {inherit inputs;};
+        specialArgs = {
+          inherit inputs;
+          nix-unstable = inputs.nix-unstable-raw.legacyPackages.${system};
+        };
     };
   };
 }
