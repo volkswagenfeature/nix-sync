@@ -109,11 +109,12 @@ in
   };
 
   # enable sway window manager
-  # Enabled by homemanager, so should not be needed
-  #programs.sway = {
-  #  enable = true;
-  #  wrapperFeatures.gtk = true;
-  #};
+  # Enabled by homemanager, but commenting this out causes breakage. 
+
+  programs.sway = {
+    enable = true;
+    wrapperFeatures.gtk = true;
+  };
 
 
   ### HomeManager section
@@ -135,9 +136,9 @@ in
           pointer_accel = "-0.5"; # seems to do nothing
         };
         modifier = "Mod4";
-        startup [
+        startup = [
           {command = "tail -f /var/lib/misc/wob_fifo | wob";}
-        ]
+        ];
       }; 
     };
     # Gammastep conifgs ( seems to work? )
