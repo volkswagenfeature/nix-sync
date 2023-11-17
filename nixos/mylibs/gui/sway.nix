@@ -89,6 +89,7 @@ in
     pulse.enable = true;
   };
 
+  # Make it so changing my brightness doesn't require sudo
   services.udev.extraRules = ''
     ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="intel_backlight", MODE="0666", RUN+="${pkgs.coreutils}/bin/chmod a+w /sys/class/backlight/intel_backlight/brightness"
   '';
@@ -109,10 +110,10 @@ in
 
   # enable sway window manager
   # Enabled by homemanager, so should not be needed
-  programs.sway = {
-    enable = true;
-    wrapperFeatures.gtk = true;
-  };
+  #programs.sway = {
+  #  enable = true;
+  #  wrapperFeatures.gtk = true;
+  #};
 
 
   ### HomeManager section
@@ -134,12 +135,14 @@ in
           pointer_accel = "-0.5"; # seems to do nothing
         };
         modifier = "Mod4";
+        startup [
+          {command = "tail -f /var/lib/misc/wob_fifo | wob";}
+        ]
       }; 
     };
-    # Gammastep conifgs ( doesn't work )
+    # Gammastep conifgs ( seems to work? )
     services.gammastep = {
       enable = true;
-      # manually specified long and lat for now
       provider = "geoclue2";
       temperature = {
         day = 6500;
@@ -147,6 +150,15 @@ in
       };
     };
   };
+
+  # wob setup
+  systemd.tmpfiles.rules = [
+    "p /var/lib/misc/wob_fifo  666 root root - -"
+  ];
+
+
+
+
 
   #services.udev.extraHwdb = ''
   #  evdev:input:b0003v0B05p17BE*
