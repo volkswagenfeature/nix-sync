@@ -33,13 +33,13 @@ in
       fsType = "btrfs";
       options = ["subvol=bulk" ];
     };
-
+/*
   boot.initrd.luks.devices."enc" = 
     { device = "/dev/disk/by-uuid/ffd43f69-4797-4598-a1d9-c6aa6a0c30d0";
       #header = "/root/header.img";
       allowDiscards = true;
     };
-
+*/
   fileSystems."/nix-sync/nixos" =
     { device = "/etc/nixos";
       options = [ "bind" ];

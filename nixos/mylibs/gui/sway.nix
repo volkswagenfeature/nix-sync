@@ -44,6 +44,11 @@ let
         '';
   };
 
+  # Script for handling wayland events.
+  wob-script = pkgs.writeTextFile {
+
+  };
+
 
 in
 {
@@ -139,6 +144,9 @@ in
         startup = [
           {command = "tail -f /var/lib/misc/wob_fifo | wob";}
         ];
+        # Fetched using wev
+        keycodebindings = {
+        };
       }; 
     };
     # Gammastep conifgs ( seems to work? )
