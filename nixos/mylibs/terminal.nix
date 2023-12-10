@@ -36,6 +36,12 @@ in
 
   documentation.dev.enable = true;
   programs.fish.enable = true;
+  programs.git = {
+    enable = true;
+    config.safe.directory = [ "/nix-sync" ];
+    config.user.email = "2@2.2";
+    config.user.name = "volkswagenfeature";
+  };
 
   home-manager.users."${secrets.primaryuser}"= {pkgs, ...}:{
     programs.fish = { 
@@ -78,7 +84,15 @@ in
       };
     };
     */
-    home.stateVersion = "22.11";
+    /*
+    programs.git = {
+      userName = "volkswagenfeature";
+      userEmail = "2@2.2";
+    };
+    */
+    # We don't have a homemanager for 23.11 yet
+    # home.stateVersion = "${config.system.stateVersion}";
+    home.stateVersion = "23.05";
   };
      
 }
