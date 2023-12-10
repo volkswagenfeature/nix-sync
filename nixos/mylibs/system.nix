@@ -4,6 +4,9 @@ let
   secrets = (import ../secrets.nix {});
 in
 {
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-24.8.6"
+  ];
   environment.systemPackages = with pkgs; [
     # System core components
     toybox
@@ -25,8 +28,8 @@ in
     wl-clipboard-x11
 
     # cloud syncronization
-    # Using nix-unstable until 1.64 comes to the main nix branch. 
-    nix-unstable.rclone
+    # Switched back to 23.11...
+    rclone
 
     # password management
     kpcli
