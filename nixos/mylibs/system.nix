@@ -61,6 +61,7 @@ in
   # Enable networking
   networking.networkmanager.enable = true;
 
+
   # Enable network manager applet
   programs.nm-applet.enable = true;
 
