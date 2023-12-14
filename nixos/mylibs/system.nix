@@ -61,6 +61,9 @@ in
   # Enable networking
   networking.networkmanager.enable = true;
 
+  # Disable networking service to improve boot performance
+  systemd.services.NetworkManager-wait-online.wantedBy = lib.mkForce [];
+
 
   # Enable network manager applet
   programs.nm-applet.enable = true;
@@ -157,5 +160,8 @@ in
       where-am-i = {isAllowed = true; isSystem = false;};
     };
   };
+
+   
+  services.tailscale.enable = true;
 
 }
