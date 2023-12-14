@@ -44,10 +44,12 @@ let
         '';
   };
 
-  # Script for handling wayland events.
-  wob-script = pkgs.writeTextFile {
+  
+  #TUIgreet script and values
+  tuigreet = "${pkgs.greetd.tuigreet}/bin/tuigreet";
+  swaystart= "${pkgs.sway}/bin/sway";
+  swaydebug= "${swaystart} -d > /home/tristan/sway.log 2>&1";
 
-  };
 
 
 in
@@ -77,16 +79,16 @@ in
     wob
   ];
 
-  services.xserver = {
+  ## Display manager
+  services.greetd = {
     enable = true;
-    
-    /*
-    displayManager.ly = {
-      enable = true;
-      defaultUser = "${secrets.primaryuser}";
-    }; */
+    settings = {
+      default_session = {
+        command = "${tuigreet} --time --remember --cmd '${swaystart}'";
+        user = "${secrets.primaryuser}";
+      };
+    };
   };
-
 
   services.pipewire = {
     enable = true;
@@ -94,12 +96,7 @@ in
     pulse.enable = true;
   };
 
-  # Make it so changing my brightness doesn't require sudo
-  services.udev.extraRules = ''
-    ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="intel_backlight", MODE="0666", RUN+="${pkgs.coreutils}/bin/chmod a+w /sys/class/backlight/intel_backlight/brightness"
-  '';
-
-  # xdg-desktop-portal works by exposing a series of D-Bus interfaces
+   # xdg-desktop-portal works by exposing a series of D-Bus interfaces
   # known as portals under a well-known name
   # (org.freedesktop.portal.Desktop) and object path
   # (/org/freedesktop/portal/desktop).
@@ -134,19 +131,14 @@ in
           middle_emulation = "enabled";
           tap = "enabled";
           natural_scroll = "enabled";
-
         };
 
         input."2821:6078:ASUS_Computer_Inc._ASUS_GAMING_MOUSE_GX950" = { # Config for mouse has to be fixed before going to do art.
           pointer_accel = "-0.5"; # seems to do nothing
         };
+        output."eDP-1".scale = "1.5";
+
         modifier = "Mod4";
-        startup = [
-          {command = "tail -f /var/lib/misc/wob_fifo | wob";}
-        ];
-        # Fetched using wev
-        keycodebindings = {
-        };
       }; 
     };
     # Gammastep conifgs ( seems to work? )
@@ -159,15 +151,6 @@ in
       };
     };
   };
-
-  # wob setup
-  systemd.tmpfiles.rules = [
-    "p /var/lib/misc/wob_fifo  666 root root - -"
-  ];
-
-
-
-
 
   #services.udev.extraHwdb = ''
   #  evdev:input:b0003v0B05p17BE*
