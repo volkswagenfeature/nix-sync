@@ -54,6 +54,7 @@ let
 
 in
 {
+  imports = [./brightness/brightness.nix];
   environment.systemPackages = with pkgs; [
     sway
     dbus-sway-environment
