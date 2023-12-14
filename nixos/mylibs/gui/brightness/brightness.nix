@@ -1,69 +1,28 @@
 {config, pkgs, lib, ...}:
 let
-  secrets = ( import ../../secrets.nix {} );
-  wob-fifo = /var/lib/misc/wob_fifo;
-  bl-path = /sys/class/backlight/amdgpu_bl10;
+  secrets = ( import ../../../secrets.nix {} );
+  wob-fifo = "/var/lib/misc/wob_fifo";
+  bl-path = "/sys/class/backlight/amdgpu_bl10";
 
-  brigthtness-script = pkgs.writeShellScript "brightness-script"
-  ''
-  BACKLIGHT_PATH="${bl-path}"
-  MIN_BRIGHTNESS=0
-  MAX_BRIGHTNESS=$( cat ${bl-path}/max_brightness )
-  CUR_BRIGHNESS=$(cat ${bl-path}/brightness)
+  # Does this work at all?
+  brightness-script = stdenv.mkDerivation rec {
+    name = "brightness";
+    src = ./brightness.sh;
+    nativeBuildInputs = [pkgs.awk];
+    buildInputs = [pkgs.substituteAll];
+    system = builtins.currentSystem;
+    builder = builtins.writeScript "${name}-builder" ''
+      substituteAll ${src} $out
+    '';
 
-  TARGET_BRIGHTNESS="$((CUR_BRIGHTNESS - MIN_BRIGHTNESS))"
+    #Shell variables
+    fifo_path = "${wob-fifo}";
+    backlight_path = "${bl-path}";
 
-  INCREMENT_BY = $1
-
-  SCALE_FACTOR = 1.5
-
-
-  if [[$INCREMENT_BY -gt 0]]
-  then
-    #  $TARGET_BRIGHTNESS+1 ensures it never hits zero and gets stuck.
-    RES=$( awk -v s="$((TARGET_BRIGHTNESS+1))"\
-               -v e="$SCALE_FACTOR"\
-               -v i="$INCREMENT_BY"\
-    'BEGIN {for (;i > 0; i--) s *= e; printf "%.f\n" s}'\
-    )
-    if [[$RES -gt $((MAX_BRIGHTNESS-MIN_BRIGHTNESS))]]
-    then
-      RES=$((MAX_BRIGHTNESS-MIN_BRIGHTNESS))
-    fi
-        
-  elif [[$INCREMENT_BY -lt 0 ]]  
-  then
-    RES=$( awk -v s="$((TARGET_BRIGHTNESS+1))"\
-               -v e="$SCALE_FACTOR"\
-               -v i="$(($INCREMENT_BY*-1))"\
-    'BEGIN {for (;i > 0; i--) s /= e; printf "%.f\n" s}'\
-    )
-    if [[$RES -lt 0]]
-    then
-      RES=0
-    fi
-  fi
-    RES=$((RES + MIN_BRIGHTNESS))
-
-
-    echo $RES > $BACKLIGHT_PATH
-
-
-    # Log scale display
-    awk -v hi="$((MAX_BRIGHTNESS-MIN_BRIGHTNESS))"\
-        -v r="$((RES-MIN_BRIGHTNESS))"\
-        -v s="$SCALE_FACTOR"\
-        -v i="$RES"\
-    'BEGIN {m_hi=log(hi)/log(s); m_i=log(i)/log(s); printf "%.f\n" m_hi/m_i*100}'\
-    > ${wob-fifo}
-
-
-  # debug print
-  echo $RES
-  '';
+  };
 in
 {
-  enviroment.systemPackages = with pkgs; [wob] ;
+  environment.systemPackages = [pkgs.wob brightness-script] ;
 
   # Make it so brightness control doesn't require sudo
   services.udev.extraRules = ''
@@ -77,16 +36,18 @@ in
   # Volume and brightness specific sway configs
   home-manager.users."${secrets.primaryuser}"= {pkgs, ...}:{
     wayland.windowManager.sway = {
+      /*
       startup = [
         {command = "tail -f ${wob-fifo} | wob";}
       ];
       # Fetched using wev
-      keybindings = {
+      keybindings= {
         "XF86MonBrightnessUp"   = "";
         "XF86MonBrightnessDown" = "";
         "XF86AudioRaiseVolume"  = "";
         "XF86AudioLowerVolume"  = "";
       };
+      */
     };
   };
 }

@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, inputs, nixpkgs, lib, ... }:
+{ config, pkgs, inputs, nixpkgs, lib , ... }:
 with builtins;
 let
   # autodetect = (x: (builtins.trace x x)) 

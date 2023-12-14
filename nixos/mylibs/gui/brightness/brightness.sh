@@ -1,7 +1,8 @@
 #!/bin/bash
 
-  FIFO_PATH="/var/lib/misc/wob_fifo"
-  BACKLIGHT_PATH="/home/tristan/bright-test"
+  FIFO_PATH="@fifo_path@"
+  #"/var/lib/misc/wob_fifo"
+  BACKLIGHT_PATH="@backlight_path@"
   #"/sys/class/backlight/amdgpu_bl0"
   MIN_BRIGHTNESS=0
   MAX_BRIGHTNESS=$( cat $BACKLIGHT_PATH/max_brightness )
