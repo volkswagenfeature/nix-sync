@@ -38,7 +38,7 @@ in
     hunspellDicts.en_US
   ];
 
-  fonts.fonts = with pkgs; [
+  fonts.packages= with pkgs; [
     noto-fonts
     #noto-fonts-extra
   ];
