@@ -1,7 +1,6 @@
 {
   inputs = {  
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
-
     nix-unstable-raw.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
 
@@ -26,7 +25,6 @@
     flake-cnf = {
       url = "github:wamserma/flake-programs-sqlite";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-utils.follows = "flake-utils";
     };
   };
   outputs = { self, nixpkgs, home-manager, ... } @ inputs: 

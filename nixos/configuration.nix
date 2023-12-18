@@ -3,13 +3,8 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, inputs, nixpkgs, lib , ... }:
-with builtins;
-let
-  # autodetect = (x: (builtins.trace x x)) 
-  autodetect =  []; 
-in
 {
-  imports = autodetect ++
+  imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       #./imports/HomeManager.nix
