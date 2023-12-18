@@ -48,12 +48,7 @@ in
 	  kitty
 	  feh
 	 ];
-  home-manager.users."${secrets.primaryuser}"= {pkgs,...}:{
-    config.programs.kitty  = {
-      # Themes at https://github.com/kovidgoyal/kitty-themes
-      theme = "ayu";
-    };
-  };
+  home-manager.users."${secrets.primaryuser}"= {pkgs,...}:{ };
 }
 
 

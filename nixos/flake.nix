@@ -20,7 +20,13 @@
       url = "github:DavHau/mach-nix";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
+    };
 
+    # A flake-compliant system for command-not-found suggestions
+    flake-cnf = {
+      url = "github:wamserma/flake-programs-sqlite";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
     };
   };
   outputs = { self, nixpkgs, home-manager, ... } @ inputs: 
@@ -38,23 +44,12 @@
             # Let 'nixos-version --json' know about the Git revision
             # of this flake.
             system.configurationRevision = nixpkgs.lib.mkIf (self ? rev) self.rev;
-
-            #nixpkgs.overlays = [
-            #  (_: _: {
-            #    home-manager = inputs.home-manager;
-            #  })
-            #];
           })
-          ./configuration.nix 
 
+          ./configuration.nix 
           inputs.home-manager.nixosModules.home-manager
-          #{
-          #  home-manager.useGlobalPkgs = true;
-          #  home-manager.useUserPackages = true;
-          #} 
           inputs.nixvim.nixosModules.nixvim
-          {
-          }
+          flake-cnf.nixosModules.programs-sqlite
         ];
         specialArgs = {
           inherit inputs;

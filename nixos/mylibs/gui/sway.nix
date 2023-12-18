@@ -54,7 +54,10 @@ let
 
 in
 {
-  imports = [./brightness/brightness.nix];
+  imports = [
+    ./brightness/brightness_monofile.nix
+    #./brightness/brightness.nix
+  ];
   environment.systemPackages = with pkgs; [
     sway
     dbus-sway-environment
@@ -140,7 +143,10 @@ in
         output."eDP-1".scale = "1.5";
 
         modifier = "Mod4";
+      #startup = [{command = "echo hi mom";}];
+      #keybindings = {"XF86MonBrightnessUp"="echo testval";};
       }; 
+
     };
     # Gammastep conifgs ( seems to work? )
     services.gammastep = {
