@@ -14,7 +14,7 @@ in
     btrfs-progs
 
     # Runtime packages
-    python39Full
+    python3Full
     # poetry
 
     # Monitoring 
