@@ -44,54 +44,66 @@ in
   };
 
   home-manager.users."${secrets.primaryuser}"= {pkgs, ...}:{
-    programs.fish = { 
-      enable = true;
-      plugins = [
-        {
-          name = "tide-theme";
+    programs = {  
+      fish = { 
+        enable = true;
+        plugins = [
+          {
+            name = "tide-theme";
+            src = pkgs.fetchFromGitHub {
+              owner = "IlanCosman";
+              repo = "tide";
+              rev = "0cf2993d37e317a405114b78df6a5440eeb88bbb";
+              sha256 = "x0wwXjKCDwtoUUJaiixeRRt5J6+EFD4Qev6kuOhd9Zw=";
+            };
+          } 
+          /*
+          {
+          name = "theme-chain";
           src = pkgs.fetchFromGitHub {
-            owner = "IlanCosman";
-            repo = "tide";
-            rev = "0cf2993d37e317a405114b78df6a5440eeb88bbb";
-            sha256 = "x0wwXjKCDwtoUUJaiixeRRt5J6+EFD4Qev6kuOhd9Zw=";
+          owner = "oh-my-fish";
+          repo = "theme-chain";
+          rev = "1cffea20b15bbcd11e578cd88dca097cc2ca23f4";
+          sha256 = "x0wwXjKCDwtoUUJaiixeRRt5J6+EFD4Qev6kuOhd9Zw=";
           };
-        } 
-        /*
-        {
-        name = "theme-chain";
-        src = pkgs.fetchFromGitHub {
-        owner = "oh-my-fish";
-        repo = "theme-chain";
-        rev = "1cffea20b15bbcd11e578cd88dca097cc2ca23f4";
-        sha256 = "x0wwXjKCDwtoUUJaiixeRRt5J6+EFD4Qev6kuOhd9Zw=";
+          }
+          */
+        ];
+        functions = { 
+          screenshot = ''grim -g "$(slurp)" '';
+          fullscreenshot = ''grim'';
+          icat = ''kitty +kitten icat $argv'';
         };
-        }
-        */
-      ];
-      functions = { 
-        screenshot = ''grim -g "$(slurp)" '';
-        fullscreenshot = ''grim'';
-        icat = ''kitty +kitten icat $argv'';
+      }; 
+      
+      /*
+      # No homemanager module for ranger. Maybe you should write one?
+      ranger = {  
+        enable = true;
+        settings = {
+          preview_images = true;
+          preview_images_method = "kitty";
+        };
       };
-    }; 
-    /*
-    programs.ranger = 
-    {  
-      enable = true;
-      settings = {
-        preview_images = true;
-        preview_images_method = "kitty";
+      */
+     
+      kitty = {
+        enable = true;
+        settings = {
+          confirm_os_window_close = 0;
+        };
+        theme = null;
       };
     };
-    */
     /*
     programs.git = {
       userName = "volkswagenfeature";
       userEmail = "2@2.2";
     };
     */
+
     # We don't have a homemanager for 23.11 yet
-    # home.stateVersion = "${config.system.stateVersion}";
+    #home.stateVersion = "${config.system.stateVersion}";
     home.stateVersion = "23.05";
   };
      
