@@ -29,7 +29,7 @@ in
     ranger
   ];
 
-  fonts.fonts = with pkgs; [
+  fonts.packages= with pkgs; [
     powerline-fonts
     meslo-lgs-nf
   ];

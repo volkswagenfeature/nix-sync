@@ -124,24 +124,20 @@ with lib;
       pkgs.vimPlugins.ctrlp 
       #Syncronization
     ];
-    maps = {
+
+    keymaps = [
+      # testing 
+      { key = ",a";     action = ":echom('hello')<CR>";        mode = "n"; }
       # Magma
-      normal.",a" = {
-        action = ":echom('hello')<CR>";
-      };
-      normal."_".action = ":MagmaEvaluateLine<CR>";
-      /*
-      normal = {  
-        "<M-e>o".action  = ":MagmaEvaluateOperator<CR>";
-        "<M-e>r".action = ":MagmaEvaluateLine<CR>";
-        "<M-e>c".action = ":MagmaReevaluateCell<CR>";
-        "<M-e>d".action = ":MagmaDelete<CR>";
-        "<M-e>O".action = ":MagmaShowOutput<CR>";
-      };
-      */
+      { key = "_";      action = ":MagmaEvaluateLine<CR>";     mode = "n"; }
+      { key = "<M-e>o"; action = ":MagmaEvaluateOperator<CR>"; mode = "n"; }
+      { key = "<M-e>r"; action = ":MagmaEvaluateLine<CR>";     mode = "n"; }
+      { key = "<M-e>c"; action = ":MagmaReevaluateCell<CR>";   mode = "n"; }
+      { key = "<M-e>d"; action = ":MagmaDelete<CR>";           mode = "n"; }
+      { key = "<M-e>O"; action = ":MagmaShowOutput<CR>";       mode = "n"; }
+    ];
 
-    };
-
+    /*
     extraConfigVim = ''
       let localleader = ","
       nnoremap ,a :echo("hello")<CR>
@@ -152,6 +148,7 @@ with lib;
       nnoremap <silent>       <LocalLeader>rc :MagmaReevaluateCell<CR>
       set number
     '';
+    */
 
   };
 
