@@ -5,8 +5,8 @@ let
   bl-path = "/sys/class/backlight/amdgpu_bl10";
 
   # Does this work at all?
-  brightness-script = stdenv.mkDerivation rec {
-    name = "brightness";
+  brightness-script-monofile = stdenv.mkDerivation rec {
+    name = "brightness-monofile";
     src = ./brightness.sh;
     nativeBuildInputs = [pkgs.awk];
     buildInputs = [pkgs.substituteAll];
@@ -22,7 +22,7 @@ let
   };
 in
 {
-  environment.systemPackages = [pkgs.wob brightness-script] ;
+  environment.systemPackages = [pkgs.wob brightness-script-monofile] ;
 
   # Make it so brightness control doesn't require sudo
   services.udev.extraRules = ''

@@ -4,7 +4,6 @@ let
   wob-fifo = "/var/lib/misc/wob_fifo";
   bl-path = "/sys/class/backlight/amdgpu_bl0";
 
-  # Does this work at all?
   brightness-script = pkgs.writeShellScriptBin "brightness" ''
   FIFO_PATH="${wob-fifo}"
   #"/var/lib/misc/wob_fifo"

@@ -64,6 +64,9 @@ in
   # Disable networking service to improve boot performance
   systemd.services.NetworkManager-wait-online.wantedBy = lib.mkForce [];
 
+  # Enable CUPS to print documents.
+  services.printing.enable = true;
+
 
   # Enable network manager applet
   programs.nm-applet.enable = true;
@@ -73,7 +76,7 @@ in
   time.timeZone = "America/New_York";
   # Keep timezone up to date based on current location. 
   # Gonna want to confirm this works next time you're somewhere fancy.
-  services.localtimed.enable = true;
+  #services.localtimed.enable = true;
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.utf8";
