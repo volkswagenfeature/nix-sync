@@ -70,7 +70,7 @@ let
   '';
 in
 {
-  environment.systemPackages = [pkgs.wob brightness-script] ;
+  environment.systemPackages = [pkgs.wob brightness-script ] ;
 
   # Make it so brightness control doesn't require sudo
   /*
@@ -98,14 +98,14 @@ in
       ];
       # setting this currently causes all other sway shortcuts to be disabled,
       # breaking my DE
-      /*
-      keybindings= {
-        "XF86MonBrightnessUp"   = "${brightness-script} 1";
-        "XF86MonBrightnessDown" = "${brightness-script} -1";
+      
+      keybindings = lib.mkOptionDefault {
+        "XF86MonBrightnessUp"   = "exec ${brightness-script}/bin/brightness 1";
+        "XF86MonBrightnessDown" = "exec ${brightness-script}/bin/brightness -1";
         "XF86AudioRaiseVolume"  = "true";
         "XF86AudioLowerVolume"  = "true";
-      };
-      */
+      } ;
+      
       
     };
   };

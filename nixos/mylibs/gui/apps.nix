@@ -20,9 +20,11 @@ in
     super-slicer
     gimp-with-plugins
     blender
+    krita
 
     # Utilities
     kitty
+    #nix-unstable.obsidian
     obsidian
 
     # image processing

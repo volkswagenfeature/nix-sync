@@ -45,6 +45,9 @@ in
     geoclue2-with-demo-agent # Same thing as the override???
     #geoclue2#.override {withDemoAgent = config.services.geoclue2.enableDemoAgent;}
     avahi
+
+    # Bluetooth
+    bluez
   ];
   # Create a compatible filesystem for scripts with shebangs
   services.envfs.enable = true;
@@ -67,9 +70,13 @@ in
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
-
   # Enable network manager applet
   programs.nm-applet.enable = true;
+
+  # Enable bluetooth.
+  services.blueman.enable = true;
+  hardware.bluetooth.enable = true;
+  #hardware.bluetooth.powerOnBoot = true;
 
   ### Internationilization/Input ###
   # Set your time zone.
