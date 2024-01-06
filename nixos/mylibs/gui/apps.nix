@@ -1,4 +1,4 @@
-{lib,pkgs,config, ... }:
+{lib,pkgs,config, nix-unstable,... }:
 with lib;
 let
   secrets = (import ../../secrets.nix {});
@@ -24,8 +24,8 @@ in
 
     # Utilities
     kitty
-    #nix-unstable.obsidian
-    obsidian
+    nix-unstable.obsidian
+    #obsidian
 
     # image processing
     imagemagick
