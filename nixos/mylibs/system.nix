@@ -80,7 +80,7 @@ in
   time.timeZone = "America/New_York";
   # Keep timezone up to date based on current location. 
   # Gonna want to confirm this works next time you're somewhere fancy.
-  #services.localtimed.enable = true;
+  services.localtimed.enable = true;
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.utf8";
@@ -161,6 +161,8 @@ in
 
   services.geoclue2 = {
     enable = true;
+    # switching to google because mozilla can't provide a fix for some reason.
+    geoProviderUrl = "https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyBQLrZNtaQz3KgXw2O0dDUFIxyscxpujNQ";
 
     appConfig = {
       gammastep = {isAllowed = true; isSystem = true;};
