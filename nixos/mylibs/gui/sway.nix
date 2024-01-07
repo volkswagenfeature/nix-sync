@@ -151,10 +151,12 @@ in
     # Gammastep conifgs ( seems to work? )
     services.gammastep = {
       enable = true;
-      #provider = "geoclue2";
+      provider = "geoclue2";
+      /*
       provider = "manual";
       latitude = 38.8;
       longitude = -77.04;
+      */
 
       temperature = {
         day = 6500;
