@@ -45,6 +45,9 @@ in
 
     # Bluetooth
     bluez
+
+    # Audio
+    pamixer
   ];
   # Create a compatible filesystem for scripts with shebangs
   services.envfs.enable = true;
