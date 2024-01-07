@@ -55,7 +55,7 @@ let
 in
 {
   imports = [
-    ./brightness/brightness_monofile.nix
+    ./media-keys/media-keys.nix
     #./brightness/brightness.nix
   ];
   environment.systemPackages = with pkgs; [
@@ -94,13 +94,7 @@ in
     };
   };
 
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    pulse.enable = true;
-  };
-
-   # xdg-desktop-portal works by exposing a series of D-Bus interfaces
+  # xdg-desktop-portal works by exposing a series of D-Bus interfaces
   # known as portals under a well-known name
   # (org.freedesktop.portal.Desktop) and object path
   # (/org/freedesktop/portal/desktop).
@@ -152,6 +146,8 @@ in
     services.gammastep = {
       enable = true;
       provider = "geoclue2";
+
+      # If location breaks again, swap this in.
       /*
       provider = "manual";
       latitude = 38.8;
