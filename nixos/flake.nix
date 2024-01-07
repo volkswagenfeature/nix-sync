@@ -52,7 +52,14 @@
         ];
         specialArgs = {
           inherit inputs;
-          nix-unstable = inputs.nix-unstable-raw.legacyPackages.${system};
+          #nix-unstable = inputs.nix-unstable-raw.legacyPackages.${system};
+          nix-unstable = import inputs.nix-unstable-raw {
+            system = "${system}";
+            config.allowUnfree = true;
+            config.permittedInsecurePackages = [
+              "electron-25.9.0"
+            ];
+          };
         };
     };
   };
