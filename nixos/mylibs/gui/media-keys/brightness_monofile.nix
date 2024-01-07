@@ -68,6 +68,27 @@ let
 
   # debug print
   '';
+
+  mute-script = pkgs.writeShellScriptBin "mute" ''
+    if [[ $(${pkgs.pamixer} -t --get-mute) = "true" ]] 
+    then
+      echo 999 > ${wob-fifo}
+    else
+      ${pkgs.pamixer} --get-volumne > ${wob-fifo}
+    fi
+  '';
+
+  vol-control = pkgs.writeShellScriptBin "vol-control" ''
+    eval "${pkgs.pamixer}/bin/pamixer -$1 10"
+    if [[ $(${pkgs.pamixer}/bin/pamixer --get-mute) = "true" ]] &&\
+       [[ $(${pkgs.pamixer}/bin/pamixer --get-volume) -ne 0 ]] 
+    then
+      echo $(($(${pkgs.pamixer}/bin/pamixer --get-volume)+199)) > ${wob-fifo}
+
+    else
+      ${pkgs.pamixer}/bin/pamixer --get-volume > ${wob-fifo}
+    fi
+  '';
 in
 {
   environment.systemPackages = [pkgs.wob brightness-script ] ;
@@ -102,8 +123,11 @@ in
       keybindings = lib.mkOptionDefault {
         "XF86MonBrightnessUp"   = "exec ${brightness-script}/bin/brightness 1";
         "XF86MonBrightnessDown" = "exec ${brightness-script}/bin/brightness -1";
-        "XF86AudioRaiseVolume" = "exec pamixer -i 10 --get-volume > ${wob-fifo}";
-        "XF86AudioRaiseVolume" = "exec pamixer -d 10 --get-volume > ${wob-fifo}";
+        #"XF86AudioRaiseVolume" = "exec pamixer -i 10 --get-volume > ${wob-fifo}";
+        #"XF86AudioLowerVolume" = "exec pamixer -d 10 --get-volume > ${wob-fifo}";
+        "XF86AudioRaiseVolume" = "exec ${vol-control}/bin/vol-control i";
+        "XF86AudioLowerVolume" = "exec ${vol-control}/bin/vol-control d";
+        "XF86AudioMute"        = "exec ${vol-control}/bin/vol-control t";
       } ;
       
       
