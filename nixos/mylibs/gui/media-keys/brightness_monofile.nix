@@ -102,8 +102,8 @@ in
       keybindings = lib.mkOptionDefault {
         "XF86MonBrightnessUp"   = "exec ${brightness-script}/bin/brightness 1";
         "XF86MonBrightnessDown" = "exec ${brightness-script}/bin/brightness -1";
-        "XF86AudioRaiseVolume"  = "true";
-        "XF86AudioLowerVolume"  = "true";
+        "XF86AudioRaiseVolume" = "exec pamixer -i 10 --get-volume > ${wob-fifo}";
+        "XF86AudioRaiseVolume" = "exec pamixer -d 10 --get-volume > ${wob-fifo}";
       } ;
       
       
