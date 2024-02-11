@@ -1,64 +1,44 @@
 #!/bin/bash
 
-  FIFO_PATH="@fifo_path@"
-  #"/var/lib/misc/wob_fifo"
-  BACKLIGHT_PATH="@backlight_path@"
-  #"/sys/class/backlight/amdgpu_bl0"
-  MIN_BRIGHTNESS=0
-  MAX_BRIGHTNESS=$( cat $BACKLIGHT_PATH/max_brightness )
-  CUR_BRIGHTNESS=$(cat $BACKLIGHT_PATH/brightness)
+  
+  FIFO_PATH="wob-fifo"
+  #FIFO_PATH="/var/lib/misc/wob_fifo"
 
-  TARGET_BRIGHTNESS="$((CUR_BRIGHTNESS - MIN_BRIGHTNESS))"
+  BACKLIGHT_PATH="bl-path"
+  #BACKLIGHT_PATH="/sys/class/backlight/amdgpu_bl0"
 
-  INCREMENT_BY=$1
-
-  SCALE_FACTOR=1.5
-
-  echo "MAX=$MAX_BRIGHTNESS MIN=$MIN_BRIGHTNESS CUR=$CUR_BRIGHTNESS"
+  read -a VAL_ARRAY <<< "val-array" 
+  #VAL_ARRAY=( 0 1 2 4 8 16 32 64 128 255 )
 
 
-  if [[ $INCREMENT_BY -gt 0 ]]
-  then
-    #  $TARGET_BRIGHTNESS+1 ensures it never hits zero and gets stuck.
-    RES=$( awk -v s="$((TARGET_BRIGHTNESS+1))"\
-               -v e="$SCALE_FACTOR"\
-               -v i="$INCREMENT_BY"\
-    'BEGIN {for (;i > 0; i--) s *= e; printf "%.f", s}'\
-    )
-    echo "RES=$RES"
+  CUR_BRIGHT=$(<$BACKLIGHT_PATH/brightness)
+  INC_BY=$1
 
-    if [[ $RES -gt $((MAX_BRIGHTNESS-MIN_BRIGHTNESS)) ]]
-    then
-      RES=$((MAX_BRIGHTNESS-MIN_BRIGHTNESS))
-    fi
-        
-  elif [[ $INCREMENT_BY -lt 0 ]]  
-  then
-    RES=$( awk -v s="$((TARGET_BRIGHTNESS+1))"\
-               -v e="$SCALE_FACTOR"\
-               -v i="$(($INCREMENT_BY*-1))"\
-    'BEGIN {for (;i > 0; i--) s /= e; printf "%.f\n", s}'\
-    )
-    echo "RES=$RES"
+  closest_index() {
+    target=$1
+    closest_index=0
+    min_difference=$((target - ${2}))
+ 
+    for num in "${@:2}"; do
+        difference=$((target - num))
+        if ((difference < 0)); then 
+            difference=$((difference * -1))
+        fi
+          
+        if ((difference < min_difference)); then
+            min_difference=$difference
+            closest_index=$((closest_index + 1))
+        fi
+    done  
+    echo $closest_index
+   }
+   ((TAR_I= $(closest_index "$CUR_BRIGHT" "${VAL_ARRAY[@]}") + $INC_BY))
 
-    if [[  $RES -lt 0  ]]
-    then
-      RES=0
-    fi
+   
+  if (($TAR_I >= 1 && $TAR_I <= ${#VAL_ARRAY[@]})); then
+    echo "${VAL_ARRAY[TAR_I]}"> $BACKLIGHT_PATH/brightness
   fi
-    RES=$((RES + MIN_BRIGHTNESS))
 
+  echo "$(( 100 * ( TAR_I-1 ) / ( "${#VAL_ARRAY[@]}"-1 ) ))" > $FIFO_PATH
 
-    echo $RES > $BACKLIGHT_PATH/brightness
-
-
-    # Log scale display
-    echo "WRITING:"
-    awk -v hi="$((MAX_BRIGHTNESS-MIN_BRIGHTNESS))"\
-        -v r="$((RES-MIN_BRIGHTNESS))"\
-        -v s="$SCALE_FACTOR"\
-        -v i="$RES"\
-    'BEGIN {m_hi=log(hi)/log(s); m_i=log(i)/log(s); ratio=m_i/m_hi*100; printf "%.f\n", ratio }'\
-    > $FIFO_PATH
-
-  # debug print
+;
