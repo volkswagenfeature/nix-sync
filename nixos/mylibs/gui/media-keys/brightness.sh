@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
   
   FIFO_PATH="wob-fifo"
@@ -41,4 +41,3 @@
 
   echo "$(( 100 * ( TAR_I-1 ) / ( "${#VAL_ARRAY[@]}"-1 ) ))" > $FIFO_PATH
 
-;
