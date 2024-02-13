@@ -34,8 +34,8 @@ with lib;
         ColorColumn.ctermbg= "DarkGrey";
       };
       clipboard = {
-        register = "unnamed";
-        providers.wl-clipboard.enable=true;
+        register = "unnamedplus";
+        providers.wl-copy.enable=true;
       };
     };
     globals = {};
