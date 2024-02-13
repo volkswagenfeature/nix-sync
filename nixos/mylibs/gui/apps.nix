@@ -39,6 +39,7 @@ in
     libreoffice-qt
     hunspell
     hunspellDicts.en_US
+    webcord-vencord
   ];
 
   fonts.packages= with pkgs; [

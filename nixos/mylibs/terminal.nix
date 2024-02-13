@@ -18,7 +18,6 @@ in
     # Shell assist
     nix-index
     any-nix-shell
-    cope
 
     # preview fonts
     fontpreview
