@@ -7,14 +7,14 @@ let
   blpath = "/sys/class/backlight/amdgpu_bl0";
 
   # Others
-  steps = 9;
+  steps = 9; # has to be greater than 4 
   blmax = 255;
 
   ### Package definitions ###
 
   brightness = pkgs.stdenv.mkDerivation rec {
       name = "brightness";
-      inherit wobfifo blpath steps blmax;
+      inherit wobfifo blpath; 
 
       src = ./.;
 
@@ -23,7 +23,12 @@ let
         cp -t $out/bin/ ./brightness.sh 
         chmod +x $out/bin/brightness.sh
         
-        SPECIAL=$( ./generator.sh )
+        SPECIAL=$( awk -v m="${toString blmax}"\
+                       -v i="${toString ( steps - 2 )}"\
+                       'BEGIN { res = m^(1/i);
+		        printf "0 ";
+		        for(j=1; j<(m+1); j *= res) printf"%.f ",j }'\
+                 )
         substituteInPlace $out/bin/brightness.sh \
           --replace "wob-fifo"  "$wobfifo"\
           --replace bl-path   "$blpath"\
