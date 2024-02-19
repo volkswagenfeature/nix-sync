@@ -9,6 +9,9 @@
 
   read -a VAL_ARRAY <<< "val-array" 
   #VAL_ARRAY=( 0 1 2 4 8 16 32 64 128 255 )
+  #TODO: There is some weird hysteresis in the values generated here.
+  #TODO: You need to debug the values written to $BACKLIGHT_PATH/brightness
+  #TODO: and $FIFO_PATH and find out what's going on
 
 
   CUR_BRIGHT=$(<$BACKLIGHT_PATH/brightness)
