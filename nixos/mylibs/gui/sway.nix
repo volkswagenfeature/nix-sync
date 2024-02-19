@@ -79,8 +79,6 @@ in
     gammastep
     light
 
-    # Displays a overlay bar
-    wob
   ];
 
   ## Display manager
