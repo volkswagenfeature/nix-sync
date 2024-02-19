@@ -32,6 +32,7 @@
   let 
     system = "x86_64-linux";
     secrets = ( import ./secrets.nix {} );
+    sysversion = "23.11";
 
   in 
   {
@@ -42,11 +43,16 @@
             # Let 'nixos-version --json' know about the Git revision
             # of this flake.
             system.configurationRevision = nixpkgs.lib.mkIf (self ? rev) self.rev;
-            system.stateVersion = "23.11";
+            system.stateVersion = "${sysversion}";
 
             nix.package = pkgs.nixFlakes;
             nix.settings.experimental-features = "nix-command flakes";
             nixpkgs.config.allowUnfree = true;
+
+            # Enable Homemanager
+            home-manager.users."${secrets.primaryuser}" = {pkgs, ...}:{
+              home.stateVersion = "${sysversion}";
+            };
  
           })
           ./hardware-configuration.nix

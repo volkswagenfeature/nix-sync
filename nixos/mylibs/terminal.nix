@@ -105,9 +105,6 @@ in
     };
     */
 
-    # We don't have a homemanager for 23.11 yet
-    #home.stateVersion = "${config.system.stateVersion}";
-    home.stateVersion = "23.05";
   };
      
 }
