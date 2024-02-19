@@ -43,9 +43,21 @@
             # of this flake.
             system.configurationRevision = nixpkgs.lib.mkIf (self ? rev) self.rev;
             system.stateVersion = "23.11";
-          })
 
-          ./configuration.nix 
+            nix.package = pkgs.nixFlakes;
+            nix.settings.experimental-features = "nix-command flakes";
+            nixpkgs.config.allowUnfree = true;
+ 
+          })
+          ./hardware-configuration.nix
+          #./imports/HomeManager.nix
+          ./mylibs/editor.nix
+          ./mylibs/terminal.nix
+          ./mylibs/system.nix
+          #./mylibs/gui/xserver.nix
+          ./mylibs/gui/apps.nix
+          ./mylibs/gui/sway.nix
+
           inputs.home-manager.nixosModules.home-manager
           inputs.nixvim.nixosModules.nixvim
           flake-cnf.nixosModules.programs-sqlite
@@ -60,6 +72,7 @@
               "electron-25.9.0"
             ];
           };
+
         };
     };
   };
