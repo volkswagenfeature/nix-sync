@@ -9,6 +9,7 @@ in
     toybox
     cryptsetup
     btrfs-progs
+    pciutils # The lspci that comes with toybox sucks ass
 
     # Runtime packages
     python3Full
@@ -18,7 +19,6 @@ in
     htop
     neofetch
     nix-tree #Explore the package tree
-
     pv
 
     # Clipboard utility
