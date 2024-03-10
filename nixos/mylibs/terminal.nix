@@ -30,6 +30,7 @@ in
 
     # Network utilities
     nmap
+    
   ];
 
   fonts.packages= with pkgs; [
@@ -98,13 +99,6 @@ in
         theme = null;
       };
     };
-    /*
-    programs.git = {
-      userName = "volkswagenfeature";
-      userEmail = "2@2.2";
-    };
-    */
-
   };
      
 }

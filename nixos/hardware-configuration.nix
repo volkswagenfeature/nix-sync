@@ -17,7 +17,10 @@ in
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/efi";
- 
+  boot.resumeDevice = "/dev/disk/by-uuid/54d8eb27-9f0e-42b1-8457-2ec7f3577085";
+  security.protectKernelImage = false;
+
+
 
   # LUKS unlock
   boot.initrd.luks.devices = {

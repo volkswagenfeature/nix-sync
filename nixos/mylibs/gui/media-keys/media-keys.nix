@@ -1,3 +1,8 @@
+# TODO: Configurations for: users, keybindings, blpath, steps, blmax
+# TODO: rewrite homemanager section for multi-user
+# TODO: Add non-homemanager implementation for keybindings?
+# TODO: Stick this in a flake?
+# TODO: Switch from sway keybindings to ACPI handlers?
 {config, pkgs, lib, stdenv, ...}:
 let
   secrets  = (import ../../../secrets.nix {});

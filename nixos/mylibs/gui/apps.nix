@@ -40,6 +40,9 @@ in
     hunspell
     hunspellDicts.en_US
     webcord-vencord
+
+    #gaems
+    steam
   ];
 
   fonts.packages= with pkgs; [
@@ -47,11 +50,18 @@ in
     #noto-fonts-extra
   ];
 
-
   environment.systemPackages = with pkgs; [
-	  kitty
-	  feh
-	 ];
+    kitty
+    feh
+  ];
+
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true; 
+    dedicatedServer.openFirewall = true; 
+  };
+
+
   home-manager.users."${secrets.primaryuser}"= {pkgs,...}:{ };
 }
 
