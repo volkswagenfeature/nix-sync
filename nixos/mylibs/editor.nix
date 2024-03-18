@@ -45,6 +45,8 @@ with lib;
       nix.enable = true;
       surround.enable = true;
       nvim-autopairs.enable = true;
+      rainbow-delimiters.enable = true; 
+
       treesitter.enable = true;
       treesitter.ensureInstalled = [
         "nix"
@@ -92,7 +94,8 @@ with lib;
       lsp = {
         enable = true;
         servers = {
-          rnix-lsp.enable = true;
+          rnix-lsp.enable = false;
+          nil_ls.enable = true;
           pyright.enable = true;
 
         };
@@ -115,7 +118,7 @@ with lib;
 
       #Completion
       pkgs.vimPlugins.vim-repeat # Here to help with vim-surround
-      pkgs.vimPlugins.nvim-ts-rainbow2 # Seems not to work right
+      #pkgs.vimPlugins.nvim-ts-rainbow2 # Seems not to work right
       pkgs.vimPlugins.lexima-vim # Autocompleting parenthesis
       pkgs.vimPlugins.lsp_signature-nvim #type signature completion, like: fn(int,str)
 
