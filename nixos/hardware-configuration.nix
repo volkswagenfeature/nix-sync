@@ -13,12 +13,14 @@ in
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "thunderbolt" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ "dm-snapshot" ];
   boot.kernelModules = [ "kvm-amd" "mt7921e" ];
+  # boot.kernelParams = [ "amd_iommu=off" "iommu=soft" ]; # Doesn't fix resume.
   boot.extraModulePackages = [ ];
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/efi";
   boot.resumeDevice = "/dev/disk/by-uuid/54d8eb27-9f0e-42b1-8457-2ec7f3577085";
-  security.protectKernelImage = false;
+  # security.protectKernelImage = false; # Also to allow for resuming
+  # Resume offset variable????
 
 
 

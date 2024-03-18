@@ -77,6 +77,7 @@ in
           screenshot = ''grim -g "$(slurp)" '';
           fullscreenshot = ''grim'';
           icat = ''kitty +kitten icat $argv'';
+          ssh = ''kitty +kitten ssh $argv'';
         };
       }; 
       

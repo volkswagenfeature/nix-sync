@@ -1,6 +1,7 @@
 # TODO: Configurations for: users, keybindings, blpath, steps, blmax
 # TODO: rewrite homemanager section for multi-user
 # TODO: Add non-homemanager implementation for keybindings?
+#         - Would require writing my own boilerplate for generating/merging sway configs. Maybe not worth it?
 # TODO: Stick this in a flake?
 # TODO: Switch from sway keybindings to ACPI handlers?
 {config, pkgs, lib, stdenv, ...}:
@@ -14,6 +15,13 @@ let
   # Others
   steps = 9; # has to be greater than 4 
   blmax = 255;
+
+  # variable for acpi vs sway keybinding (TODO)
+  method = "sway"; # or "acpi"
+
+  # variable for status control method (TODO)
+  display = "wob"; # or "libnotify"?
+
 
   ### Package definitions ###
 
