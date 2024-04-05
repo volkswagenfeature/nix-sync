@@ -14,6 +14,9 @@ in
     # Social media
     discord
     element-desktop
+    telegram-desktop
+    signal-desktop
+    whatsapp-for-linux
 
     # Design
     graphviz
