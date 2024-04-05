@@ -13,7 +13,7 @@ in
 
     # Runtime packages
     python3Full
-    # poetry
+    poetry
 
     # Monitoring 
     htop
@@ -23,10 +23,6 @@ in
 
     # Clipboard utility
     wl-clipboard-x11
-
-    # cloud syncronization
-    # Switched back to 23.11...
-    rclone
 
     # password management
     kpcli
