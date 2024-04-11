@@ -2,4 +2,5 @@
 /**/.github
 /**/.gitignore
 *.swp
+/**/result
 #/**/secrets.nix
