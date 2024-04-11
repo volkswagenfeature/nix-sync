@@ -27,6 +27,7 @@ in
 
     # password management
     kpcli
+    gnupg
 
     # secrets managment
     keychain
