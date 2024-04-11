@@ -61,7 +61,8 @@
           ./mylibs/system.nix
           ./mylibs/gui/apps.nix
           ./mylibs/gui/sway.nix
-          ./mylibs/cloudsync.nix
+          ./mylibs/utilities/cloudsync.nix
+          ./mylibs/utilities/downloadmount.nix
 
           inputs.home-manager.nixosModules.home-manager
           inputs.nixvim.nixosModules.nixvim

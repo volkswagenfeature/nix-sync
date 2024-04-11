@@ -10,6 +10,7 @@ in
     cryptsetup
     btrfs-progs
     pciutils # The lspci that comes with toybox sucks ass
+    inotify-tools # for filewatching 
 
     # Runtime packages
     python3Full
@@ -110,6 +111,7 @@ in
   };
   #enviroment.shells = [pkgs.fish];
 
+
   home-manager.users."${secrets.primaryuser}"= {pkgs, ...}:{
     programs.keychain = {
       enable = true;
@@ -119,42 +121,12 @@ in
     };
   };
 
-  /*
-  # Eventually should replace manual config + service declearation below
-  # but doesn't work yet.
-  services.restic.backups."${secrets.primaryuser}" = {
-    passwordFile =  "/home/${secrets.primaryuser}/.config/rclone/rclone.conf";
-    rcloneConfigFile = /. + "/home/${secrets.primaryuser}/.config/rclone/rclone.conf";
 
-    
-    rcloneConfig = {
-      #type = "dropbox";
-      token = traceVal (builtins.toJSON ( secrets.rclone.dropbox ));
 
-    };
-   
-  };
-  */
- 
-  /*
-  systemd.timers."rclone-test" = {
-    wantedBy = ["timers.target"];
-    timerConfig = {
-      onBootSec = "5m";
-      onUnitActiveSec = "2m";
-      Unit = "rclone-test.service";
-    };
-  };
-  */
 
-  systemd.services."rclone-test" = {
-    script = ''
-    '';
-    serviceConfig = {
-      Type = "oneshot";
-      User = "nobody";
-    };
-  };
+  ### Services ###
+
+
   services.avahi.enable = true;
   #services.geoclue-agent.enable = true; # does not exist
 
