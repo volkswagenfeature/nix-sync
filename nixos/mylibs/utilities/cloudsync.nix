@@ -1,6 +1,6 @@
 {libs,pkgs, config, inputs, nix-unstable, ...}:
   let 
-    secrets = (import ../secrets.nix {});
+    secrets = (import ../../secrets.nix {});
 
     config = secrets.rclone.config;
 
