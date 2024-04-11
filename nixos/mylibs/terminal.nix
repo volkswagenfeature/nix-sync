@@ -42,9 +42,12 @@ in
   programs.fish.enable = true;
   programs.git = {
     enable = true;
-    config.safe.directory = [ "/nix-sync" ];
-    config.user.email = "2@2.2";
-    config.user.name = "volkswagenfeature";
+    config = {  
+      safe.directory = [ "/nix-sync" ];
+      user.email = "2@2.2";
+      user.name = "volkswagenfeature";
+      core.editor = "vim";
+    };
   };
 
   home-manager.users."${secrets.primaryuser}"= {pkgs, ...}:{
