@@ -47,7 +47,7 @@ in
     pamixer
   ];
   # Symlink nix-sync directory
-  systemd.tmpfiles.rules = ["L /nix-sync/nixos - - - - /etc/nixos"];
+  # systemd.tmpfiles.rules = ["L /nix-sync/nixos - - - - /etc/nixos"];
 
   # Create a compatible filesystem for scripts with shebangs
   services.envfs.enable = true;

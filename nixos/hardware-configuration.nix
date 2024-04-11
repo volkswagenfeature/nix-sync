@@ -61,12 +61,10 @@ in
     { device = "/dev/disk/by-uuid/020C-0253";
       fsType = "vfat";
     };
-  /* 
   fileSystems."/nix-sync/nixos" = 
     { device = "/etc/nixos";
       options = [ "bind" ];
     };
-  */
   swapDevices = [ { device = "/dev/disk/by-uuid/54d8eb27-9f0e-42b1-8457-2ec7f3577085"; } ]; 
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
