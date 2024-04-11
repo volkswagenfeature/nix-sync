@@ -44,7 +44,7 @@ in
     enable = true;
     config = {  
       safe.directory = [ "/nix-sync" ];
-      user.email = "2@2.2";
+      user.email = "13547477+volkswagenfeature@users.noreply.github.com";
       user.name = "volkswagenfeature";
       core.editor = "vim";
     };
