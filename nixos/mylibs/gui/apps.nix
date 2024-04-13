@@ -8,6 +8,7 @@ in
     # Networking
     firefox
     chromium
+    deluge
     
     #ungoogled-chromium #for later
 
@@ -28,6 +29,7 @@ in
     # Utilities
     kitty
     nix-unstable.obsidian
+    vlc
     # TODO: write function to autodetect the version of electron obsidian wants
     # and allow it even if it's insecure.
 
