@@ -4,7 +4,7 @@
     logdir = /var/log/bisync-script;
     sync_apps = {
       dbox = {
-        local  = /bulk/tristan-dropbox;
+        local  = "/bulk/${secrets.primaryuser}-dropbox";
         remote = "dropbox:";
       };
     };

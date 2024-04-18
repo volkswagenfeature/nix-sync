@@ -48,7 +48,7 @@ let
   #TUIgreet script and values
   tuigreet = "${pkgs.greetd.tuigreet}/bin/tuigreet";
   swaystart= "${pkgs.sway}/bin/sway";
-  swaydebug= "${swaystart} -d > /home/tristan/sway.log 2>&1";
+  swaydebug= "${swaystart} -d > /var/log/sway.log 2>&1";
 
 
 
