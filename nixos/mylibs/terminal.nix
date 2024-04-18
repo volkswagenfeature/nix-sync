@@ -1,4 +1,4 @@
-{lib, pkgs, config, ...}:
+{lib, pkgs, config, nix-unstable,  ...}:
 with lib;
 let
   secrets = (import ../secrets.nix {});
@@ -18,6 +18,8 @@ in
     # Shell assist
     nix-index
     any-nix-shell
+    nix-unstable.obsidian
+    nix-unstable.nh
 
     # preview fonts
     fontpreview
@@ -49,6 +51,8 @@ in
       core.editor = "vim";
     };
   };
+
+  #programs.nh.enable = true;
 
   home-manager.users."${secrets.primaryuser}"= {pkgs, ...}:{
     programs = {  

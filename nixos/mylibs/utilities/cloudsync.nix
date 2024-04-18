@@ -1,6 +1,7 @@
 {libs,pkgs, config, inputs, nix-unstable, ...}:
   let 
     secrets = (import ../../secrets.nix {});
+    logdir = /var/log/bisync-script;
     sync_apps = {
       dbox = {
         local  = /bulk/tristan-dropbox;
@@ -52,6 +53,7 @@
           ;;
       esac
       '';
+      
     in
       ( pkgs.lib.foldlAttrs caseopt casestart cases ) + caseend;
 
@@ -73,26 +75,25 @@
       # Select rclone args
       ${modes}
 
-      RCLONE_CMD="rclone bisync $PATHS $FLAGS ''${@:3}"
+      # Setup logging
+      LOGCMD="tee ${toString logdir}/bisync_$1_$2_$(date +%FT%H_%M_%S).log"
+
+      RCLONE_CMD="rclone bisync $PATHS $FLAGS ''${@:3} | $LOGCMD "
       echo "Preparing to execute this bisync command:"
       echo $RCLONE_CMD
       read -p "Continue? [y/N] " confirm
       if [[ $confirm == [yY] || $confirm == [yY][eE][sS] ]]
       then
-          exec $RCLONE_CMD
+          exec "$RCLONE_CMD"
       fi
     '';
 
   in
 {
+  systemd.tmpfiles.rules = ["d ${toString logdir} 775 - users - -"];
   environment.systemPackages = with pkgs; [
     nix-unstable.rclone
     ( pkgs.writeTextDir "rclone.conf" (iniGen config) )
     bisync
   ];
-
-
-
-  
-
 }
