@@ -1,7 +1,7 @@
 {libs,pkgs, config, inputs, nix-unstable, ...}:
   let 
     secrets = (import ../../secrets.nix {});
-    logdir = /var/log/bisync-script;
+    logdir =/var/log/bisync-script;
     sync_apps = {
       dbox = {
         local  = "/bulk/${secrets.primaryuser}-dropbox";
@@ -76,21 +76,23 @@
       ${modes}
 
       # Setup logging
-      LOGCMD="tee ${toString logdir}/bisync_$1_$2_$(date +%FT%H_%M_%S).log"
+      LOGPATH="${toString logdir}/bisync_$1_$2_$(date +%FT%H_%M_%S).log"
+      LOGCMD="tee $LOGPATH"
 
-      RCLONE_CMD="rclone bisync $PATHS $FLAGS ''${@:3} | $LOGCMD "
+      RCLONE_CMD="rclone bisync $PATHS $FLAGS --log-file \"$LOGPATH\" ''${@:3} "
       echo "Preparing to execute this bisync command:"
       echo $RCLONE_CMD
+      echo as $(id)
       read -p "Continue? [y/N] " confirm
       if [[ $confirm == [yY] || $confirm == [yY][eE][sS] ]]
       then
-          exec "$RCLONE_CMD"
+          eval "$RCLONE_CMD"
       fi
     '';
 
   in
 {
-  systemd.tmpfiles.rules = ["d ${toString logdir} 775 - users - -"];
+  systemd.tmpfiles.rules = ["d ${toString logdir} 775 tristan users - -"];
   environment.systemPackages = with pkgs; [
     nix-unstable.rclone
     ( pkgs.writeTextDir "rclone.conf" (iniGen config) )

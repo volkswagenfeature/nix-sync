@@ -56,7 +56,8 @@ in
     enable = true;
     flake = "/nix-sync/nixos";
   };
-*/
+  */
+
 
   home-manager.users."${secrets.primaryuser}"= {pkgs, ...}:{
     programs = {  
