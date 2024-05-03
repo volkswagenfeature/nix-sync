@@ -51,12 +51,11 @@ in
       core.editor = "vim";
     };
   };
-/*
+
   programs.nh = {
-    enable = true;
+    #enable = true;
     flake = "/nix-sync/nixos";
   };
-  */
 
 
   home-manager.users."${secrets.primaryuser}"= {pkgs, ...}:{

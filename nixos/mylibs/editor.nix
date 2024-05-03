@@ -52,6 +52,8 @@ with lib;
         "nix"
       ];
 
+      conform-nvim.enable = true;
+
       magma-nvim.enable = true;
       # coq-nvim.enable = true; # Not working as of 2023-02-25
       # nvim-cmp stolen wholesale from github.com/GaetanLepage/dotfiles

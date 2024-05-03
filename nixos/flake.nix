@@ -68,8 +68,7 @@
           inputs.home-manager.nixosModules.home-manager
           inputs.nixvim.nixosModules.nixvim
           flake-cnf.nixosModules.programs-sqlite
-          #inputs.nix-unstable-raw.legacyPackages.x86_64-linux.nh
-          "${nix-unstable-raw.outPath}/pkgs/by-name/nh/nh/package.nix"
+          "${nix-unstable-raw}/nixos/modules/programs/nh.nix"
         ];
         specialArgs = {
           inherit inputs;
