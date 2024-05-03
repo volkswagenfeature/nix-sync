@@ -57,16 +57,64 @@
     in
       ( pkgs.lib.foldlAttrs caseopt casestart cases ) + caseend;
 
-      remote-targets = casegen "$1" "PATHS" (
-        builtins.mapAttrs (k: v: " ${toString v.local} ${toString v.remote} ") 
-        sync_apps
-      ) "echo no targetspec named $1; exit";
+    # TODO: Sanitize values going into key-value? 
+    # TODO: backslash at end of string would cause issues unless double escaped. 
+    # TODO: Other special cases?
+    fformat = flags: 
+      with pkgs.lib;
+      with builtins;
+      let
+        grouped = ( lists.groupBy (f: 
+        if builtins.isAttrs f then "keyValue" else 
+        (if builtins.stringLength f > 1 then "longFlag" 
+        else "shortFlag")) flags );
+        mapAttrsToStringSep = sep: func: at: (
+          strings.concatStringsSep sep (attrsets.mapAttrsToList func at)
+        ) ;
+      in 
+      (  
+        ( if grouped ? shortFlag then 
+          (" -"+strings.concatStrings grouped.shortFlag ) 
+          else "" )
+        +" "
+        + ( if grouped ? longFlag then
+          ( strings.concatMapStringsSep " " (f:"--"+f) grouped.longFlag ) 
+          else "" )
+        +" "
+        + ( if grouped ? keyValue then
+            ( strings.concatMapStringsSep " " 
+            (of: strings.concatStringsSep " " (debug.traceValSeq ( attrsets.mapAttrsToList 
+            (k: v:  "--${k}=\"${v}\"") (of) )) 
+              )
+            (grouped.keyValue) )
+          else "")
+      );
+    
+  
 
-      modes = casegen "$2" "FLAGS" {
-        firstrun = " --create-empty-src-dirs --resilient --resync -MvP ";
-        sync = " --create-empty-src-dirs --resilient -MvP  ";
-      } "echo no mode definition for $2; exit";
+    remote-targets = casegen "$1" "PATHS" (
+      builtins.mapAttrs (k: v: " ${toString v.local} ${toString v.remote} ") 
+      sync_apps
+    ) "echo no targetspec named $1; exit";
 
+    commonflags = pkgs.lib.debug.traceVal (fformat [
+      "create-empty-src-dirs"
+      "resilient"
+      "recover"
+      "M" "v" "P"
+      "fix-case"
+      {compare="size,checksum";
+      max-lock="3m";}
+    ]);
+
+    modes = casegen "$2" "FLAGS" {
+      firstrun = "${commonflags} " + "--resync";
+      sync = "${commonflags}";
+    } "echo no mode definition for $2; exit";
+
+
+    # TODO: rewrite with seperate "check" phase if hash isn't speedy.
+    # TODO: check phase 1: size and modtime, check phase 2: hash
 
     bisync = pkgs.writeScriptBin "bisync" ''
       # Select paths to the remote
