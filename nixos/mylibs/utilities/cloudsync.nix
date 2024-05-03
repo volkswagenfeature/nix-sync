@@ -83,10 +83,9 @@
         +" "
         + ( if grouped ? keyValue then
             ( strings.concatMapStringsSep " " 
-            (of: strings.concatStringsSep " " (debug.traceValSeq ( attrsets.mapAttrsToList 
-            (k: v:  "--${k}=\"${v}\"") (of) )) 
-              )
-            (grouped.keyValue) )
+              (mapAttrsToStringSep " " (k: v:  "--${k}=\"${v}\"") ) 
+              (grouped.keyValue) 
+            )
           else "")
       );
     
@@ -97,14 +96,16 @@
       sync_apps
     ) "echo no targetspec named $1; exit";
 
-    commonflags = pkgs.lib.debug.traceVal (fformat [
+    commonflags = (fformat [
       "create-empty-src-dirs"
       "resilient"
       "recover"
       "M" "v" "P"
       "fix-case"
-      {compare="size,checksum";
-      max-lock="3m";}
+      {
+        compare="size,checksum";
+        max-lock="3m";
+      }
     ]);
 
     modes = casegen "$2" "FLAGS" {

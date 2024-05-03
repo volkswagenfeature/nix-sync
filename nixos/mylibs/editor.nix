@@ -40,7 +40,7 @@ with lib;
     };
     globals = {};
 
-    extraPackages = [pkgs.wl-clipboard-x11];
+    extraPackages = with pkgs; [wl-clipboard-x11 nixpkgs-fmt nixfmt];
     plugins = {
       nix.enable = true;
       surround.enable = true;
@@ -52,7 +52,14 @@ with lib;
         "nix"
       ];
 
-      conform-nvim.enable = true;
+      conform-nvim = {
+        enable = true;
+        formattersByFt = {
+          nix = ["nixfmt"];
+
+        };
+
+      };
 
       magma-nvim.enable = true;
       # coq-nvim.enable = true; # Not working as of 2023-02-25
