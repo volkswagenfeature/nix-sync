@@ -1,2 +1,108 @@
 #! /bin/bash
-echo "Hi committer!"
+######## CONFIGURABLES ########
+mapfile PROHIBITEDNAMES < <(echo -e ".*secrets.nix")
+
+
+SECTION_HEADER="\033[0;36m====\033[0m%s\033[0;36m====\033[0m\n"
+
+
+
+
+######## SETUP ##########
+
+GITPATH=$( git rev-parse --show-toplevel )
+
+# Get path to secrets, and do detection/error handling for that.
+mapfile SECRETPATH < <( find $GITPATH -name secrets.nix )
+if [[ "${#SECRETPATH[@]}" -ne 1 ]] then
+    echo "Error. More than one filepath with name 'secrets.nix' found."
+    for p in ${SECRETPATH[@]}; do echo ">" $p; done 
+    exit 1
+fi
+
+# Get all paths staged for commit.
+mapfile STAGED < <(\
+    git diff --name-only --cached |
+    xargs -I{} echo -n "$GITPATH/{} "
+)
+
+# If run as 'pre-commit all', add everything except the prohibited files.
+if [[ $1 == "all" ]]; then
+    declare -a TOCHECK
+    for TF in $(git ls-files $GITPATH); do
+        for PF in ${PROHIBITEDNAMES[@]}; do
+            if [[ "$TF" =~ $PF ]]; then
+                SKIP=1
+            fi
+        done
+        if [[ -n $SKIP ]]; then
+            unset SKIP
+        else
+            TOCHECK+=($TF)
+        fi
+    done
+else
+    # Otherwise, just check staged files
+    TOCHECK=("${STAGED[@]}") 
+fi
+
+
+# Load and format variables from nixfile
+mapfile NIXVARS < <( echo -e $( nix eval --impure --expr "
+    let l = (import <nixpkgs> {}).lib;
+    in l.strings.concatMapStringsSep \"\\n\" toString (
+        l.lists.flatten( 
+            l.collect ( a: !builtins.isAttrs a) (import $SECRETPATH {})
+        )
+    )
+" ) | tr -d '"' )
+
+
+
+##### CHECKING #####
+EXIT=0
+
+printf $SECTION_HEADER "FORBIDDEN FILE CHECK"
+for PF in ${PROHIBITEDNAMES[@]}; do
+    for SF in ${TOCHECK[@]}; do
+        if [[ "$SF" =~ $PF ]]; then
+            echo -e "File path '$SF' matched regex \033[1;31m$PF\033[0m"
+            FAIL=1
+
+        else
+            #echo " $SF != $PF"
+            true
+        fi
+        done
+done
+if [[ -n $FAIL ]]; then
+    EXIT=1
+    unset FAIL
+else
+    echo -e "\033[1;32mPASS\033[1;0m"
+fi
+
+
+printf $SECTION_HEADER "SECRET STRING CHECK"
+for FILE in ${TOCHECK[@]}; do
+    for VAR in ${NIXVARS[@]}; do
+        if [[ $(grep -c "$VAR" "$FILE") -ne 0 ]]; then
+            echo -e "\nFound prohibited string \033[1;31m$VAR\033[0m in $FILE"
+            echo "grep results: "
+            echo -e "\033[0;36m======\033[0m"
+
+            grep -n -C 3 --group-separator='======' --color=always \
+            "$VAR" "$FILE"
+            echo -e "\033[0;36m======\033[0m"
+            FAIL=1
+        fi
+    done
+done
+if [[ -n $FAIL ]]; then
+    EXIT=1
+    unset FAIL
+else
+    echo -e "\033[1;32mPASS\033[1;0m"
+fi
+
+exit $EXIT
