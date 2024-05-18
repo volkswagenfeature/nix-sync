@@ -142,7 +142,9 @@ let
 
 in
 {
-  systemd.tmpfiles.rules = [ "d ${toString logdir} 775 tristan users - -" ];
+  systemd.tmpfiles.rules = [ 
+    "d ${toString logdir} 775 ${secrets.primaryuser} users - -" 
+  ];
   environment.systemPackages = with pkgs; [
     nix-unstable.rclone
     (pkgs.writeTextDir "rclone.conf" (iniGen config))
