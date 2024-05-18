@@ -18,4 +18,4 @@ The hook is just a pair of simple checks: that you're not committing any files y
 
 `secret_management.sh` can be run as `secret_management.sh set`, which adds `secrets.nix` to the index withoug adding its contents, or `secret_management.sh unset` which removes it from the index.
 
-The hook is designed to be automatically run by git when you have `core.hooksPath configured, but also can be run as `pre_commit all` in order to check every file in your git repo (except excluded ones like secrets.nix) for the forbidden strings.
+The hook is designed to be automatically run by git when you have `core.hooksPath` configured, but also can be run as `pre_commit all` in order to check every file in your git repo (except excluded ones like secrets.nix) for the forbidden strings.
