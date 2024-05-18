@@ -62,6 +62,8 @@ let
   # TODO: Sanitize values going into key-value? 
   # TODO: backslash at end of string would cause issues unless double escaped. 
   # TODO: Other special cases?
+  # TODO: redo with a implementation based on lib.cli.toGNUCommandLine
+
   fformat = flags:
     with pkgs.lib;
     with builtins;
