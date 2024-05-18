@@ -25,6 +25,7 @@ in
     gimp-with-plugins
     blender
     krita
+    freecad
 
     # Utilities
     kitty

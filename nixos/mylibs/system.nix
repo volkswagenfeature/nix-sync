@@ -46,6 +46,9 @@ in
 
     # Audio
     pamixer
+
+    # Cysec
+    wireshark
   ];
   # Symlink nix-sync directory
   # systemd.tmpfiles.rules = ["L /nix-sync/nixos - - - - /etc/nixos"];
