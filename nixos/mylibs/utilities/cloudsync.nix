@@ -86,7 +86,7 @@ let
     else
       "") + " " + (if grouped ? keyValue then
       (strings.concatMapStringsSep " "
-        (mapAttrsToStringSep " " (k: v: ''--${k}="${v}"''))
+        (mapAttrsToStringSep " " (k: v: ''--${k}=\"${v}\"''))
         (grouped.keyValue))
     else
       ""));
