@@ -18,6 +18,8 @@ in
     telegram-desktop
     signal-desktop
     whatsapp-for-linux
+    zulip
+    zulip-term
 
     # Design
     graphviz

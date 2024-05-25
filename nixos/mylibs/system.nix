@@ -47,8 +47,9 @@ in
     # Audio
     pamixer
 
-    # Cysec
-    wireshark
+    # Virtual Enviroments
+    conda
+    micromamba
   ];
   # Symlink nix-sync directory
   # systemd.tmpfiles.rules = ["L /nix-sync/nixos - - - - /etc/nixos"];
