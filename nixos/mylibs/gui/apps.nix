@@ -28,6 +28,7 @@ in
     blender
     krita
     freecad
+    unityhub
 
     # Utilities
     kitty
