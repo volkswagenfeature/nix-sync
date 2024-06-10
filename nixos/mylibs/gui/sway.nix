@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, nix-unstable, ... }:
 # Straight copied from https://nixos.wiki/wiki/Sway
 
 
@@ -59,7 +59,7 @@ in
     #./brightness/brightness.nix
   ];
   environment.systemPackages = with pkgs; [
-    sway
+    nix-unstable.sway
     dbus-sway-environment
     configure-gtk
     wayland

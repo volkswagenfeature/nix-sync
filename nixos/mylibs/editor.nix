@@ -11,7 +11,7 @@ with lib;
     #vimdiffAlias = true;
     vimAlias = true;
 
-    options = {
+    opts = {
       # Default indenting
       smartindent = true;
       tabstop = 4;
@@ -40,7 +40,7 @@ with lib;
     };
     globals = {};
 
-    extraPackages = with pkgs; [wl-clipboard-x11 nixpkgs-fmt nixfmt];
+    extraPackages = with pkgs; [wl-clipboard-x11 nixpkgs-fmt nixfmt-classic];
     plugins = {
       nix.enable = true;
       surround.enable = true;
@@ -55,7 +55,7 @@ with lib;
       conform-nvim = {
         enable = true;
         formattersByFt = {
-          nix = ["nixfmt"];
+          nix = ["nixfmt-classic"];
 
         };
 
@@ -66,28 +66,22 @@ with lib;
       # nvim-cmp stolen wholesale from github.com/GaetanLepage/dotfiles
       # Path: /home/tui/neovim/completion.nix
       # kind of works... 
-      nvim-cmp = {
+      cmp = {
         enable = true;
 
-        snippet.expand = "luasnip";
+        settings.snippet.expand = "function(args) require('luasnip').lsp_expand(args.body) end";
 
-        mapping = {
+        settings.mapping = {
           "<C-d>" = "cmp.mapping.scroll_docs(-4)";
           "<C-f>" = "cmp.mapping.scroll_docs(4)";
           "<C-Space>" = "cmp.mapping.complete()";
           "<C-e>" = "cmp.mapping.close()";
-          "<Tab>" = {
-            modes = ["i" "s"];
-            action = "cmp.mapping.select_next_item()";
-          };
-          "<S-Tab>" = {
-            modes = ["i" "s"];
-            action = "cmp.mapping.select_prev_item()";
-          };
+          "<Tab>" = "cmp.mapping(cmp.mapping.select_next_item(),{'i','s'})";
+          "<S-Tab>" = "cmp.mapping(cmp.mapping.select_prev_item(),{'i','s'})";
           "<CR>" = "cmp.mapping.confirm({ select = true })";
         };
 
-        sources = [
+        settings.sources = [
           {name = "path";}
           #{name = "calc";}
           #{name = "nvim_lsp";}
@@ -100,11 +94,11 @@ with lib;
 
       luasnip.enable = true;
 
-      lsp = {
+      lsp= {
         enable = true;
         servers = {
           rnix-lsp.enable = false;
-          nil_ls.enable = true;
+          nil-ls.enable = true;
           pyright.enable = true;
 
         };

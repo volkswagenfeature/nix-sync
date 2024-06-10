@@ -1,18 +1,18 @@
 {
   inputs = {  
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
     nix-unstable-raw.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-23.11";
+      url = "github:nix-community/home-manager/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nixvim = {
-      url = "github:/nix-community/nixvim/nixos-23.11";
+      url = "github:/nix-community/nixvim/nixos-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-utils.follows = "flake-utils";
+      #inputs.flake-utils.follows = "flake-utils";
     };
 
     mach-nix = {
@@ -32,7 +32,7 @@
   let 
     system = "x86_64-linux";
     secrets = ( import ./secrets.nix {} );
-    sysversion = "23.11";
+    sysversion = "24.05";
 
   in 
   {
@@ -68,7 +68,7 @@
           inputs.home-manager.nixosModules.home-manager
           inputs.nixvim.nixosModules.nixvim
           flake-cnf.nixosModules.programs-sqlite
-          "${nix-unstable-raw}/nixos/modules/programs/nh.nix"
+          #"${nix-unstable-raw}/nixos/modules/programs/nh.nix"
         ];
         specialArgs = {
           inherit inputs;

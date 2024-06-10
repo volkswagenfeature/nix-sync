@@ -23,7 +23,7 @@ in
 
     # Design
     graphviz
-    super-slicer
+    #nix-unstable.super-slicer #(Broken as of 2024-06-09)
     gimp-with-plugins
     blender
     krita

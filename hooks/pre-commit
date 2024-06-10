@@ -56,6 +56,7 @@ mapfile NIXVARS < <( echo -e $( nix eval --impure --expr "
         )
     )
 " ) | tr -d '"' )
+#echo "${NIXVARS[@]}"
 
 
 

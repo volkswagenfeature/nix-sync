@@ -19,7 +19,7 @@ in
     nix-index
     any-nix-shell
     nix-unstable.obsidian
-    nix-unstable.nh
+    #nix-unstable.nh
 
     # preview fonts
     fontpreview
@@ -52,10 +52,6 @@ in
     };
   };
 
-  programs.nh = {
-    #enable = true;
-    flake = "/nix-sync/nixos";
-  };
 
 
   home-manager.users."${secrets.primaryuser}"= {pkgs, ...}:{
