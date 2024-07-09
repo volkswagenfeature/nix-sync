@@ -147,7 +147,7 @@ in
   ];
   environment.systemPackages = with pkgs; [
     nix-unstable.rclone
-    (pkgs.writeTextDir "rclone.conf" (iniGen config))
+    #(pkgs.writeTextDir "rclone.conf" (iniGen config))
     bisync
   ];
 }

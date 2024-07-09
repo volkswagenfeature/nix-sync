@@ -12,7 +12,7 @@ in
 
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "thunderbolt" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ "dm-snapshot" ];
-  boot.kernelModules = [ "kvm-amd" "mt7921e" ];
+  boot.kernelModules = [ "kvm-amd" "mt7921e" "amdgpu" ];
   # boot.kernelParams = [ "amd_iommu=off" "iommu=soft" ]; # Doesn't fix resume.
   boot.extraModulePackages = [ ];
   boot.loader.systemd-boot.enable = true;
@@ -78,4 +78,15 @@ in
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   # Power management? It was in the old file...
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+
+  # More GPU setup
+  hardware.opengl.enable = true;
+
+  hardware.opengl.extraPackages = with pkgs; [
+    amdvlk
+  ];
+  # For 32 bit applications 
+  hardware.opengl.extraPackages32 = with pkgs; [
+    driversi686Linux.amdvlk
+  ];
 }

@@ -19,7 +19,7 @@ in
     nix-index
     any-nix-shell
     nix-unstable.obsidian
-    #nix-unstable.nh
+    nh
 
     # preview fonts
     fontpreview

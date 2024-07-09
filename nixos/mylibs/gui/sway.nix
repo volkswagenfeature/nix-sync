@@ -48,7 +48,7 @@ let
   #TUIgreet script and values
   tuigreet = "${pkgs.greetd.tuigreet}/bin/tuigreet";
   swaystart= "${pkgs.sway}/bin/sway";
-  swaydebug= "${swaystart} -d > /var/log/sway.log 2>&1";
+  swaydebug= "${swaystart} -d > /home/${secrets.primaryuser}/swaylog3 2>&1";
 
 
 
@@ -59,7 +59,7 @@ in
     #./brightness/brightness.nix
   ];
   environment.systemPackages = with pkgs; [
-    nix-unstable.sway
+    sway
     dbus-sway-environment
     configure-gtk
     wayland
@@ -84,10 +84,10 @@ in
   ## Display manager
   services.greetd = {
     enable = true;
+    package = pkgs.greetd.tuigreet;
     settings = {
       default_session = {
         command = "${tuigreet} --time --remember --cmd '${swaystart}'";
-        user = "${secrets.primaryuser}";
       };
     };
   };
@@ -140,7 +140,7 @@ in
       }; 
 
     };
-    # Gammastep conifgs ( seems to work? )
+    # Gammastep conifgs 
     services.gammastep = {
       enable = true;
       provider = "geoclue2";
