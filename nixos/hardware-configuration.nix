@@ -84,6 +84,7 @@ in
 
   hardware.opengl.extraPackages = with pkgs; [
     amdvlk
+    rocmPackages.clr.icd
   ];
   # For 32 bit applications 
   hardware.opengl.extraPackages32 = with pkgs; [
