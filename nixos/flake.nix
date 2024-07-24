@@ -26,6 +26,14 @@
       url = "github:wamserma/flake-programs-sqlite";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Command-not-found can also be implemented by using nix-index
+    # This version pulls pre-generated databases from github
+    # saving builtime
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs = { self, nixpkgs, home-manager, ... } @ inputs: 
   with inputs;
@@ -67,7 +75,11 @@
 
           inputs.home-manager.nixosModules.home-manager
           inputs.nixvim.nixosModules.nixvim
-          flake-cnf.nixosModules.programs-sqlite
+          #inputs.flake-cnf.nixosModules.programs-sqlite #Currently broken
+          nix-index-database.nixosModules.nix-index
+
+
+
           #"${nix-unstable-raw}/nixos/modules/programs/nh.nix"
         ];
         specialArgs = {

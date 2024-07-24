@@ -51,6 +51,12 @@ in
     conda
     micromamba
   ];
+  # Nix config modifications
+  nix.settings.trusted-substituters = ["https://ai.cachix.org"];
+  nix.settings.trusted-public-keys = ["ai.cachix.org-1:N9dzRK+alWwoKXQlnn0H6aUx0lU/mspIoz8hMvGvbbc="];
+
+
+
   # Symlink nix-sync directory
   # systemd.tmpfiles.rules = ["L /nix-sync/nixos - - - - /etc/nixos"];
 

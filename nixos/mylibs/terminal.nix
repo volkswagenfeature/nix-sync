@@ -16,10 +16,11 @@ in
     man-pages-posix
 
     # Shell assist
-    nix-index
+    # nix-index # Replaced by flake nix-index-database
     any-nix-shell
     nix-unstable.obsidian
     nh
+    nix-output-monitor
 
     # preview fonts
     fontpreview
@@ -42,6 +43,7 @@ in
 
   documentation.dev.enable = true;
   programs.fish.enable = true;
+  programs.nix-index.enable = true;
   programs.git = {
     enable = true;
     config = {  
