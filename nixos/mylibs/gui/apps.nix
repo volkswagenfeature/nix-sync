@@ -29,6 +29,7 @@ in
     krita
     freecad
     unityhub
+    kicad
 
     # Utilities
     kitty
@@ -49,9 +50,6 @@ in
     hunspell
     hunspellDicts.en_US
     webcord-vencord
-
-    #gaems
-    steam
   ];
 
   fonts.packages= with pkgs; [
