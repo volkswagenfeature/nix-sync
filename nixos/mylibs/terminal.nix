@@ -19,7 +19,6 @@ in
     # nix-index # Replaced by flake nix-index-database
     any-nix-shell
     nix-unstable.obsidian
-    nh
     nix-output-monitor
 
     # preview fonts
@@ -53,7 +52,12 @@ in
       core.editor = "vim";
     };
   };
-
+  programs.nh = {
+    enable = true;
+    clean.enable = true;
+    clean.extraArgs = "--keep-since 4d --keep 3";
+    flake = "/nix-sync/nixos";
+  };
 
 
   home-manager.users."${secrets.primaryuser}"= {pkgs, ...}:{
