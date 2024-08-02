@@ -48,20 +48,17 @@ in
     pamixer
 
     # Virtual Enviroments
-    conda
-    micromamba
+    # Might not even work. Plus I have poetry2nix.
+    #conda
+    #micromamba
   ];
   # Nix config modifications
   nix.settings.trusted-substituters = ["https://ai.cachix.org"];
   nix.settings.trusted-public-keys = ["ai.cachix.org-1:N9dzRK+alWwoKXQlnn0H6aUx0lU/mspIoz8hMvGvbbc="];
 
 
-
   # Symlink nix-sync directory
   # systemd.tmpfiles.rules = ["L /nix-sync/nixos - - - - /etc/nixos"];
-
-  # Create a compatible filesystem for scripts with shebangs
-  services.envfs.enable = true;
 
   # Enable polkit ( required for sway and homemanager )
   security.polkit.enable = true;
@@ -78,25 +75,17 @@ in
   # Disable networking service to improve boot performance
   systemd.services.NetworkManager-wait-online.wantedBy = lib.mkForce [];
 
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-
   # Enable network manager applet
   programs.nm-applet.enable = true;
 
   # Enable bluetooth.
-  services.blueman.enable = true;
   hardware.bluetooth.enable = true;
   #hardware.bluetooth.powerOnBoot = true;
+
 
   ### Internationilization/Input ###
   # Set your time zone.
   time.timeZone = "America/New_York";
-  # Keep timezone up to date based on current location. 
-  # Gonna want to confirm this works next time you're somewhere fancy.
-  services.localtimed.enable = true;
-
-  # Select internationalisation properties.
   i18n.defaultLocale = "en_US.utf8";
 
   # Setup home-manager global options
@@ -135,45 +124,51 @@ in
     };
   };
 
-
-
-
   ### Services ###
+  services = {
+    # Create a compatible filesystem for scripts with shebangs
+    envfs.enable = true; 
+    # Enable cups
+    printing.enable = true;
+    # Enable bluetooth service
+    blueman.enable = true;
+    # Sync your system clock when you travel
+    localtimed.enable = true;
+    # Something to do with geopositioning?
+    avahi.enable = true;
+    geoclue2 = {
+      enable = true;
+      # switching to google because mozilla can't provide a fix for some reason.
+      geoProviderUrl = "https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyBQLrZNtaQz3KgXw2O0dDUFIxyscxpujNQ";
 
-
-  services.avahi.enable = true;
-  #services.geoclue-agent.enable = true; # does not exist
-
-  services.geoclue2 = {
-    enable = true;
-    # switching to google because mozilla can't provide a fix for some reason.
-    geoProviderUrl = "https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyBQLrZNtaQz3KgXw2O0dDUFIxyscxpujNQ";
-
-    appConfig = {
-      gammastep = {isAllowed = true; isSystem = true;};
-      where-am-i = {isAllowed = true; isSystem = false;};
+      appConfig = {
+        gammastep = {isAllowed = true; isSystem = true;};
+        where-am-i = {isAllowed = true; isSystem = false;};
+      };
     };
+    # Audio configs
+    pipewire = {
+       enable = true;
+       alsa.enable = true;
+       alsa.support32Bit = true;
+       pulse.enable = true;
+       # If you want to use JACK applications, uncomment this
+       #jack.enable = true;
+       # use the example session manager (no others are packaged yet so this is enabled by default,
+       # no need to redefine it in your config for now)
+       #media-session.enable = true;
+      };
+    # Tailscale VPN
+    tailscale.enable = true;
+    # hardware updates
+    fwupd.enable = true;
   };
 
-   
-  services.tailscale.enable = true;
 
   ### Audio ###
   # Enable sound with pipewire.
   # sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
-  services.pipewire = {
-   enable = true;
-   alsa.enable = true;
-   alsa.support32Bit = true;
-   pulse.enable = true;
-   # If you want to use JACK applications, uncomment this
-   #jack.enable = true;
-   # use the example session manager (no others are packaged yet so this is enabled by default,
-   # no need to redefine it in your config for now)
-   #media-session.enable = true;
-  };
-
-
+  
 }
