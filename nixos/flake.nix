@@ -69,6 +69,7 @@
           ./mylibs/system.nix
           ./mylibs/gui/apps.nix
           ./mylibs/gui/sway.nix
+          ./mylibs/gui/rice.nix
           ./mylibs/utilities/cloudsync.nix
           ./mylibs/utilities/downloadmount.nix
           #./mylibs/utilities/testfile.nix

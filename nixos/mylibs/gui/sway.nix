@@ -23,22 +23,6 @@ let
   systemctl --user start pipewire pipewire-media-session xdg-desktop-portal xdg-desktop-portal-wlr
       '';
   };
-
-  wallPath = /bulk + "/${secrets.primaryuser}-dropbox" + /Photos/Backgrounds;
-  swap-delay = "10m";
-  backgroundScript = pkgs.writeShellApplication {
-    name = "backgroundScript";
-    runtimeInputs = [pkgs.swaybg pkgs.findutils pkgs.imagemagick];
-    text = ''
-      while true; do
-        find ${wallPath} -type f \
-          -exec magick identify {} \;\
-          -exec swaybg --image {} --mode fill \;\
-          -exec sleep ${swap-delay} \;
-      done
-    '';
-  };
-
   # currently, there is some friction between sway and gtk:
   # https://github.com/swaywm/sway/wiki/GTK-3-settings-on-Wayland
   # the suggested way to set gtk settings is with gsettings
@@ -77,7 +61,6 @@ in
     # Local scripts
     dbus-sway-environment
     configure-gtk
-    backgroundScript
 
     # nixpkgs
     swayfx
@@ -159,20 +142,10 @@ in
           scale = "1.5";
           #bg = "/home/${secrets.primaryuser}/Straight-flat-inconsolata3.png center";
         };
-        gaps = {
-          inner = 5;
-          outer = 10;
-        };
         terminal = "kitty";
         modifier = "Mod4";
-        startup = [{command = "${backgroundScript}/bin/backgroundScript";}];
         #keybindings = {"XF86MonBrightnessUp"="echo testval";};
       }; 
-      extraConfig = ''
-        blur enable
-        default_dim_inactive 0.3
-        corner_radius 5
-      '';
     };
     # Gammastep conifgs 
     services.gammastep = {
