@@ -24,6 +24,21 @@ let
       '';
   };
 
+  wallPath = /bulk + "/${secrets.primaryuser}-dropbox" + /Photos/Backgrounds;
+  swap-delay = "10m";
+  backgroundScript = pkgs.writeShellApplication {
+    name = "backgroundScript";
+    runtimeInputs = [pkgs.swaybg pkgs.findutils pkgs.imagemagick];
+    text = ''
+      while true; do
+        find ${wallPath} -type f \
+          -exec magick identify {} \;\
+          -exec swaybg --image {} --mode fill \;\
+          -exec sleep ${swap-delay} \;
+      done
+    '';
+  };
+
   # currently, there is some friction between sway and gtk:
   # https://github.com/swaywm/sway/wiki/GTK-3-settings-on-Wayland
   # the suggested way to set gtk settings is with gsettings
@@ -59,9 +74,13 @@ in
     #./brightness/brightness.nix
   ];
   environment.systemPackages = with pkgs; [
-    sway
+    # Local scripts
     dbus-sway-environment
     configure-gtk
+    backgroundScript
+
+    # nixpkgs
+    sway
     wayland
     xdg-utils # for openning default programms when clicking links
     glib # gsettings
@@ -69,6 +88,7 @@ in
     gnome3.adwaita-icon-theme  # default gnome cursors
     swaylock
     swayidle
+    swaybg
     grim # screenshot functionality
     slurp # screenshot functionality
     wl-clipboard # wl-copy and wl-paste for copy/paste from stdin / stdout
@@ -132,10 +152,12 @@ in
         input."2821:6078:ASUS_Computer_Inc._ASUS_GAMING_MOUSE_GX950" = { # Config for mouse has to be fixed before going to do art.
           pointer_accel = "-0.5"; # seems to do nothing
         };
-        output."eDP-1".scale = "1.5";
-
+        output."eDP-1" = {
+          scale = "1.5";
+          #bg = "/home/${secrets.primaryuser}/Straight-flat-inconsolata3.png center";
+        };
         modifier = "Mod4";
-      #startup = [{command = "echo hi mom";}];
+      startup = [{command = "${backgroundScript}/bin/backgroundScript";}];
       #keybindings = {"XF86MonBrightnessUp"="echo testval";};
       }; 
 
