@@ -23,6 +23,13 @@ in
       kitty.settings.background_opacity = "0.3";
     };
     wayland.windowManager.sway = {
+      config.colors.focused = rec {
+        border = "#ffffff";
+        childBorder = border;
+        background = "#cccccc";
+        text = "#444444";
+        indicator = "#444444";
+      };
       config.gaps = {
         inner = 5;
         outer = 10;
@@ -30,6 +37,7 @@ in
       config.startup = [{command = "${backgroundScript}/bin/backgroundScript";}];
       extraConfig = ''
         blur enable
+        blur_brightness 0.8
         default_dim_inactive 0.3
         corner_radius 5
         blur_radius 7 
