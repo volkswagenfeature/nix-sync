@@ -21,6 +21,27 @@ in
   home-manager.users."${secrets.primaryuser}" = {pkgs, ...}:{
     programs = {
       kitty.settings.background_opacity = "0.3";
+      fish.plugins = [
+        /*{
+        name = "shellder-theme";
+          src = pkgs.fetchFromGitHub {
+            owner = "simnalamburt";
+            repo = "shellder";
+            rev = "fcfef62c86fe2857ddac30d8ac36e99e8d765fae";
+            sha256 = "sha256-wCtM4D3GEK8pTepzs0YBznSgSOmV+VqdAS7yifosICQ=";
+          };
+        }*/
+
+        {
+          name = "tidetheme";
+          src = pkgs.fetchFromGitHub {
+            owner = "IlanCosman";
+            repo = "tide";
+            rev = "0cf2993d37e317a405114b78df6a5440eeb88bbb";
+            sha256 = "x0wwXjKCDwtoUUJaiixeRRt5J6+EFD4Qev6kuOhd9Zw=";
+          };
+        }
+        ];
     };
     wayland.windowManager.sway = {
       config.colors.focused = rec {

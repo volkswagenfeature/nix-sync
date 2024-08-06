@@ -64,28 +64,6 @@ in
     programs = {  
       fish = { 
         enable = true;
-        plugins = [
-          {
-            name = "tide-theme";
-            src = pkgs.fetchFromGitHub {
-              owner = "IlanCosman";
-              repo = "tide";
-              rev = "0cf2993d37e317a405114b78df6a5440eeb88bbb";
-              sha256 = "x0wwXjKCDwtoUUJaiixeRRt5J6+EFD4Qev6kuOhd9Zw=";
-            };
-          } 
-          /*
-          {
-          name = "theme-chain";
-          src = pkgs.fetchFromGitHub {
-          owner = "oh-my-fish";
-          repo = "theme-chain";
-          rev = "1cffea20b15bbcd11e578cd88dca097cc2ca23f4";
-          sha256 = "x0wwXjKCDwtoUUJaiixeRRt5J6+EFD4Qev6kuOhd9Zw=";
-          };
-          }
-          */
-        ];
         functions = { 
           screenshot = ''grim -g "$(slurp)" '';
           fullscreenshot = ''grim'';
