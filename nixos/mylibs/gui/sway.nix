@@ -62,7 +62,7 @@ let
   
   #TUIgreet script and values
   tuigreet = "${pkgs.greetd.tuigreet}/bin/tuigreet";
-  swaystart= "${pkgs.sway}/bin/sway";
+  swaystart= "${pkgs.swayfx}/bin/sway";
   swaydebug= "${swaystart} -d > /home/${secrets.primaryuser}/swaylog3 2>&1";
 
 
@@ -80,7 +80,7 @@ in
     backgroundScript
 
     # nixpkgs
-    sway
+    swayfx
     wayland
     xdg-utils # for openning default programms when clicking links
     glib # gsettings
@@ -128,20 +128,23 @@ in
 
   # enable sway window manager
   # Enabled by homemanager, but commenting this out causes breakage. 
-
+/*
   programs.sway = {
     enable = true;
+    package = pkgs.swayfx;
     wrapperFeatures.gtk = true;
   };
+*/
 
 
   ### HomeManager section
   home-manager.users."${secrets.primaryuser}"= {pkgs, ...}:{
     wayland.windowManager.sway = {
       enable = true;
+      checkConfig = false;
+      package = pkgs.swayfx;
       config = rec {
-        terminal = "kitty";
-        input."type:touchpad" = {
+                input."type:touchpad" = {
           # Docs: https://man.archlinux.org/man/sway-input.5
           click_method = "clickfinger";
           middle_emulation = "enabled";
@@ -156,11 +159,20 @@ in
           scale = "1.5";
           #bg = "/home/${secrets.primaryuser}/Straight-flat-inconsolata3.png center";
         };
+        gaps = {
+          inner = 5;
+          outer = 10;
+        };
+        terminal = "kitty";
         modifier = "Mod4";
-      startup = [{command = "${backgroundScript}/bin/backgroundScript";}];
-      #keybindings = {"XF86MonBrightnessUp"="echo testval";};
+        startup = [{command = "${backgroundScript}/bin/backgroundScript";}];
+        #keybindings = {"XF86MonBrightnessUp"="echo testval";};
       }; 
-
+      extraConfig = ''
+        blur enable
+        default_dim_inactive 0.3
+        corner_radius 5
+      '';
     };
     # Gammastep conifgs 
     services.gammastep = {
