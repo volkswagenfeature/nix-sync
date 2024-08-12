@@ -8,7 +8,10 @@ in
     oh-my-fish
     fish
     tree
+
+    # git + Github CLI
     git
+    gh
     
     # man pages packages
     man-db
