@@ -13,7 +13,7 @@ in
     #ungoogled-chromium #for later
 
     # Social media
-    discord
+    nix-unstable.discord
     element-desktop
     telegram-desktop
     signal-desktop
@@ -27,7 +27,7 @@ in
     gimp-with-plugins
     blender
     krita
-    freecad
+    nix-unstable.freecad
     unityhub
     kicad
 
@@ -37,6 +37,10 @@ in
     vlc
     # TODO: write function to autodetect the version of electron obsidian wants
     # and allow it even if it's insecure.
+
+    #Gaem
+    prismlauncher
+
 
     # image processing
     imagemagick
@@ -54,6 +58,7 @@ in
 
   fonts.packages= with pkgs; [
     noto-fonts
+    minecraftia
     #noto-fonts-extra
   ];
 
@@ -61,12 +66,6 @@ in
     kitty
     feh
   ];
-
-  programs.steam = {
-    enable = true;
-    remotePlay.openFirewall = true; 
-    dedicatedServer.openFirewall = true; 
-  };
 
 
   home-manager.users."${secrets.primaryuser}"= {pkgs,...}:{ };
