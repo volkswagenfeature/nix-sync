@@ -68,6 +68,7 @@ in
 
   ### Networking ##
   networking.hostName = "${secrets.hostname}"; # Define your hostname.
+  networking.hosts = { "127.0.0.1" = ["yodayo.com" "civitai.com"]; };
 
   # Enable networking
   networking.networkmanager.enable = true;

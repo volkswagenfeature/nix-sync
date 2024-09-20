@@ -4,6 +4,8 @@ mapfile PROHIBITEDNAMES < <(echo -e ".*secrets.nix")
 
 
 SECTION_HEADER="\033[0;36m====\033[0m%s\033[0;36m====\033[0m\n"
+# Write function to center justify this.
+
 
 
 
@@ -105,5 +107,16 @@ if [[ -n $FAIL ]]; then
 else
     echo -e "\033[1;32mPASS\033[1;0m"
 fi
+
+
+printf $SECTION_HEADER "FLAKE ON LATEST"
+flakecheck="$(nix flake check --no-update-lock-file --recreate-lock-file 2>&1)"
+if [[ -n $FAIL ]]; then
+    EXIT=1
+    unset FAIL
+else
+    echo -e "\033[38;5;214mNOT IMPLEMENTED\033[1;0m"
+fi
+
 
 exit $EXIT

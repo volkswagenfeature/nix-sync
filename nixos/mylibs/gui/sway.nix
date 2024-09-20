@@ -107,6 +107,11 @@ in
     wlr.enable = true;
     # gtk portal needed to make gtk apps happy
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    # Changed in xdg-desktop-portal 1.17
+    # https://github.com/flatpak/xdg-desktop-portal/blob/1.18.1/doc/portals.conf.rst.in
+    # you should either set `xdg.portal.config` or `xdg.portal.configPackages`
+    # to specify which portal backend to use for the requested interface.
+    config.common.default = "*";
   };
 
   # enable sway window manager

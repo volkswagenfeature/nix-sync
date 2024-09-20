@@ -75,7 +75,7 @@ in
         };
       }; 
       
-      /*
+      
       # No homemanager module for ranger. Maybe you should write one?
       ranger = {  
         enable = true;
@@ -84,7 +84,7 @@ in
           preview_images_method = "kitty";
         };
       };
-      */
+      
      
       kitty = {
         enable = true;

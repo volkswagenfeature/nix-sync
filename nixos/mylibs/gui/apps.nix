@@ -9,6 +9,8 @@ in
     firefox
     chromium
     deluge
+    tor-browser
+    
     
     #ungoogled-chromium #for later
 
@@ -20,6 +22,7 @@ in
     whatsapp-for-linux
     zulip
     zulip-term
+    slack
 
     # Design
     graphviz
