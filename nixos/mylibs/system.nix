@@ -165,6 +165,9 @@ in
     fwupd.enable = true;
   };
 
+  # Still a service. Install docker
+  virtualisation.docker.enable = true;
+
 
   ### Audio ###
   # Enable sound with pipewire.

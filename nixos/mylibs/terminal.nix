@@ -21,7 +21,6 @@ in
     # Shell assist
     # nix-index # Replaced by flake nix-index-database
     any-nix-shell
-    nix-unstable.obsidian
     nix-output-monitor
 
     # preview fonts

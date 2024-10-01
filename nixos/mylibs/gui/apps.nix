@@ -36,7 +36,7 @@ in
 
     # Utilities
     kitty
-    nix-unstable.obsidian
+    obsidian
     vlc
     # TODO: write function to autodetect the version of electron obsidian wants
     # and allow it even if it's insecure.
