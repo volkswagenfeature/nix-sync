@@ -110,13 +110,27 @@ fi
 
 
 printf $SECTION_HEADER "FLAKE ON LATEST"
-flakecheck="$(nix flake check --no-update-lock-file --recreate-lock-file 2>&1)"
+flakepath="$(mktemp "flake.lock.XXXXXX" -p "/tmp" )"
+flakecheck="nix flake check --output-lock-file $flakepath \
+           --recreate-lock-file"
+echo $flakecheck
+$flakecheck | sed
+
+
+
+if eval " $flakecheck"; then
+    echo -e "\n \033[1;31mLockfile out of date\033[0m"
+    UPFLAKE=1
+fi
+
 if [[ -n $FAIL ]]; then
     EXIT=1
     unset FAIL
 else
     echo -e "\033[38;5;214mNOT IMPLEMENTED\033[1;0m"
 fi
+
+# TODO: Add a check for the latest firmware either here or in the build setup?
 
 
 exit $EXIT

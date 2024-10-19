@@ -72,6 +72,7 @@
           ./mylibs/gui/rice.nix
           ./mylibs/utilities/cloudsync.nix
           ./mylibs/utilities/downloadmount.nix
+          ./mylibs/utilities/git-script-reqs.nix
           #./mylibs/utilities/testfile.nix
 
           inputs.home-manager.nixosModules.home-manager

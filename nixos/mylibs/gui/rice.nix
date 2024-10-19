@@ -59,7 +59,7 @@ in
       extraConfig = ''
         blur enable
         blur_brightness 0.8
-        default_dim_inactive 0.3
+        default_dim_inactive 0.0 
         corner_radius 5
         blur_radius 7 
         blur_contrast 0.5
