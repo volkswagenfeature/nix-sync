@@ -112,7 +112,7 @@ fi
 printf $SECTION_HEADER "FLAKE ON LATEST"
 flakepath="$(mktemp "flake.lock.XXXXXX" -p "/tmp" )"
 flakecheck="nix flake check --output-lock-file $flakepath \
-           --recreate-lock-file"
+           --recreate-lock-file '$GITPATH/nixos'"
 echo $flakecheck
 $flakecheck | sed
 
