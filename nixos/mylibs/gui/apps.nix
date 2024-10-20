@@ -43,6 +43,7 @@ in
 
     #Gaem
     prismlauncher
+    steam
 
 
     # image processing
@@ -69,6 +70,11 @@ in
     kitty
     feh
   ];
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true; 
+    dedicatedServer.openFirewall = true; 
+  };
 
 
   home-manager.users."${secrets.primaryuser}"= {pkgs,...}:{ };
