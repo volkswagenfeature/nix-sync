@@ -62,12 +62,12 @@ mapfile NIXVARS < <( echo -e $( nix eval --impure --expr "
 
 prompt_confirm() {
   while true; do
-    read -r -p "$1 [y/n]: " REPLY
+    read -r -n 1 -p "$1 [y/n]: " REPLY
 
     case $REPLY in
       [yY]) echo ; return 0 ;;
       [nN]) echo ; return 1 ;;
-      *) printf " \033[31m %s \n\033[0m" "invalid input"
+      *) printf " \033[31m '$REPLY' %s \n\033[0m" "invalid input"
     esac 
   done  
 }
@@ -123,34 +123,32 @@ fi
 printf $SECTION_HEADER "FLAKE ON LATEST"
 flakepath="$(mktemp "flake.lock.XXXXXX" -p "/tmp" )"
 flakecheck="nix flake check --output-lock-file $flakepath \
-           --recreate-lock-file $GITPATH/nixos"
-echo $flakecheck
-results=$(eval $flakecheck) 
-echo $results
+           --recreate-lock-file $GITPATH/nixos 2&> /dev/null"
+results=$(eval $flakecheck ) 
 
 
-#if true && jd $flakepath $GITPATH/nixos/flake.lock > /dev/null; then
-#    echo -e "\033[1;32mPASS\033[1;0m"
-#else
-#    echo -e "\n \033[1;31mLockfile out of date\033[0m"
-#    if prompt_confirm "Update lockfile?"; then
-#        echo "Requesting password"
-#        sudo cp $flakepath $GITPATH/nixos/flake.lock
-#    else
-#        if prompt_confirm "Commit out of date lockfile?"; then
-#            echo -e "\033[1;33mTEST BYPASSED\033[0m"
-#        else
-#            echo -e "\033[1;31mFAIL\033[0m"
-#            FAIL=1
-#        fi
-#    fi
-#fi
+if jd $flakepath $GITPATH/nixos/flake.lock > /dev/null; then
+    echo -e "\033[1;32mPASS\033[1;0m"
+else
+    echo -e "\n \033[1;31mLockfile out of date\033[0m"
+    if prompt_confirm "Update lockfile?"; then
+        echo "sudo cp:"
+        sudo cp $flakepath $GITPATH/nixos/flake.lock
+        echo -e "\033[1;32mPASS\033[1;0m"
+
+    else
+        if prompt_confirm "Commit out of date lockfile?"; then
+            echo -e "\033[1;33mTEST BYPASSED\033[0m"
+        else
+            echo -e "\033[1;31mFAIL\033[0m"
+            FAIL=1
+        fi
+    fi
+fi
 
 if [[ -n $FAIL ]]; then
     EXIT=1
     unset FAIL
-else
-    echo -e "\033[38;5;214mNOT IMPLEMENTED\033[1;0m"
 fi
 
 # TODO: Add a check for the latest firmware either here or in the build setup?
