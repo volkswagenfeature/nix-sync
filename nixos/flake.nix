@@ -70,6 +70,7 @@
           ./mylibs/gui/apps.nix
           ./mylibs/gui/sway.nix
           ./mylibs/gui/rice.nix
+          ./mylibs/gui/firefox.nix
           ./mylibs/utilities/cloudsync.nix
           ./mylibs/utilities/downloadmount.nix
           ./mylibs/utilities/git-script-reqs.nix
