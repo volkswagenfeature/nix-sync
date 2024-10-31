@@ -1,10 +1,23 @@
 #! /bin/bash
 ######## CONFIGURABLES ########
 mapfile PROHIBITEDNAMES < <(echo -e ".*secrets.nix")
+HEADER_WIDTH=30
 
+# Colors
+RED="[1;31m"
+YELLOW="[38;5;214m"
+GREEN="[1;32m"
 
-SECTION_HEADER="\033[0;36m====\033[0m%s\033[0;36m====\033[0m\n"
+HEDCOL="[0;36m"
+
+#echo -e "\033$RED RED"
+#echo -e "\033$YELLOW YELLOW"
+#echo -e "\033$GREEN GREEN \033[0m"
+
+#SECTION_HEADER="\033[0;36m====\033[0m%s\033[0;36m====\033[0m\n"
 # Write function to center justify this.
+
+
 
 
 
@@ -61,26 +74,66 @@ mapfile NIXVARS < <( echo -e $( nix eval --impure --expr "
 #echo "${NIXVARS[@]}"
 
 prompt_confirm() {
-  while true; do
-    read -r -n 1 -p "$1 [y/n]: " REPLY
+  for ((count=0; count<20 ; count++)); do
+    read -r -N 1 -p "$1 [y/n]: " REPLY < /dev/tty
 
     case $REPLY in
       [yY]) echo ; return 0 ;;
       [nN]) echo ; return 1 ;;
-      *) printf " \033[31m '$REPLY' %s \n\033[0m" "invalid input"
+      *) printf '\033[31m '\''%s'\'' %s \n\033[0m' "$REPLY" "invalid input"
     esac 
   done  
+  if [[ ! "$input" =~ ^[YyNn]$  ]]; then
+	echo "FAILED TO GATHER INPUT."
+    exit 1
+  fi
+}
+
+centered_header() {
+    local title="$1"
+    local width="$HEADER_WIDTH"
+    local title_length=${#title}
+
+    # Calculate the total padding needed (in equal signs)
+    local padding=$(( (width - title_length - 4) / 2 ))
+
+    # Ensure padding is not negative
+    if (( padding < 0 )); then
+        padding=0
+    fi
+
+	if (( title_length % 2 )); then
+		r_padding=$(( padding+1 ))
+    else
+		r_padding=$padding
+    fi
+	
+
+
+    # Generate the padded header using equal signs for padding
+    local l_pad="$(printf '=%.0s' $(seq 1 $padding))"
+	local r_pad="$(printf '=%.0s' $(seq 1 $r_padding))"
+
+    printf "\033[0;36m%s\033[0m\033[0;37m %s \033[0m\033[0;36m%s\033[0m\n" "$l_pad" "$title" "$r_pad"
 }
 
 
 ##### CHECKING #####
 EXIT=0
 
-printf $SECTION_HEADER "FORBIDDEN FILE CHECK"
+echo "Script is: $0 running using $$ PID"
+echo "Current shell used within the script is: `readlink /proc/$$/exe`"
+
+script_shell="$(readlink /proc/$$/exe | sed "s/.*\///")"
+
+echo -e "\nSHELL is = ${script_shell}\n"
+
+#printf $SECTION_HEADER "FORBIDDEN FILE CHECK"
+centered_header "FORBIDDEN FILE CHECK"
 for PF in ${PROHIBITEDNAMES[@]}; do
     for SF in ${TOCHECK[@]}; do
         if [[ "$SF" =~ $PF ]]; then
-            echo -e "File path '$SF' matched regex \033[1;31m$PF\033[0m"
+            echo -e "File path '$SF' matched regex \033${RED}$PF\033[0m"
             FAIL=1
 
         else
@@ -93,15 +146,15 @@ if [[ -n $FAIL ]]; then
     EXIT=1
     unset FAIL
 else
-    echo -e "\033[1;32mPASS\033[1;0m"
+    echo -e "\033${GREEN}PASS\033[1;0m"
 fi
 
 
-printf $SECTION_HEADER "SECRET STRING CHECK"
+centered_header "SECRET STRING CHECK"
 for FILE in ${TOCHECK[@]}; do
     for VAR in ${NIXVARS[@]}; do
         if [[ $(grep -c "$VAR" "$FILE") -ne 0 ]]; then
-            echo -e "\nFound prohibited string \033[1;31m$VAR\033[0m in $FILE"
+            echo -e "\nFound prohibited string \033${RED}$VAR\033[0m in $FILE"
             echo "grep results: "
             echo -e "\033[0;36m======\033[0m"
 
@@ -116,40 +169,51 @@ if [[ -n $FAIL ]]; then
     EXIT=1
     unset FAIL
 else
-    echo -e "\033[1;32mPASS\033[1;0m"
+    echo -e "\033${GREEN}PASS\033[1;0m"
 fi
 
 
-printf $SECTION_HEADER "FLAKE ON LATEST"
+centered_header "FLAKE ON LATEST"
 flakepath="$(mktemp "flake.lock.XXXXXX" -p "/tmp" )"
-flakecheck="nix flake check --output-lock-file $flakepath \
-           --recreate-lock-file $GITPATH/nixos 2&> /dev/null"
-results=$(eval $flakecheck ) 
+fctmp="nix flake check 
+			--output-lock-file $flakepath 
+			--recreate-lock-file $GITPATH/nixos" 
+flakecheck=$(echo $fctmp)
 
+# Don't run if there's no internet.
+if ping -c 1 8.8.8.8 > /dev/null 2>&1; then
+	echo "Running $flakecheck"
+	results=$(eval $flakecheck ) 
+	if jd $flakepath $GITPATH/nixos/flake.lock > /dev/null; then
+			echo -e "\033${GREEN}PASS\033[1;0m"
+	else
+			echo -e "\n \033${RED}Lockfile out of date\033[0m"
+		echo -e "Generated lockfile at $flakepath with length $(wc -l $flakepath) lines"
+			if prompt_confirm "Update lockfile?"; then
+					echo "sudo cp:"
+					sudo cp $flakepath $GITPATH/nixos/flake.lock
+					echo -e "\033${GREEN}PASS\033[1;0m"
 
-if jd $flakepath $GITPATH/nixos/flake.lock > /dev/null; then
-    echo -e "\033[1;32mPASS\033[1;0m"
+			else
+					if prompt_confirm "Commit out of date lockfile?"; then
+							echo -e "\033${YELLOW}TEST BYPASSED\033[0m"
+					else
+							echo -e "\033${RED}FAIL\033[0m"
+							FAIL=1
+					fi
+			fi
+	fi
 else
-    echo -e "\n \033[1;31mLockfile out of date\033[0m"
-    if prompt_confirm "Update lockfile?"; then
-        echo "sudo cp:"
-        sudo cp $flakepath $GITPATH/nixos/flake.lock
-        echo -e "\033[1;32mPASS\033[1;0m"
-
-    else
-        if prompt_confirm "Commit out of date lockfile?"; then
-            echo -e "\033[1;33mTEST BYPASSED\033[0m"
-        else
-            echo -e "\033[1;31mFAIL\033[0m"
-            FAIL=1
-        fi
-    fi
+  echo -e "\033${YELLOW}TEST BYPASSED:\033[0m NO INTERNET"
 fi
+
 
 if [[ -n $FAIL ]]; then
     EXIT=1
     unset FAIL
 fi
+
+
 
 # TODO: Add a check for the latest firmware either here or in the build setup?
 
