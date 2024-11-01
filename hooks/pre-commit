@@ -4,24 +4,20 @@ mapfile PROHIBITEDNAMES < <(echo -e ".*secrets.nix")
 HEADER_WIDTH=30
 
 # Colors
-RED="[1;31m"
-YELLOW="[38;5;214m"
-GREEN="[1;32m"
+RED="\033[1;31m"
+YELLOW="\033[38;5;214m"
+GREEN="\033[1;32m"
 
-HEDCOL="[0;36m"
+HEDCOL="\033[0;36m"
+RST="\033[0m"
 
-#echo -e "\033$RED RED"
-#echo -e "\033$YELLOW YELLOW"
-#echo -e "\033$GREEN GREEN \033[0m"
+## System messages ##
+# The message used in a auto-generated commit.
+COMMITMSG="Pre-commit updated lockfile on $(date -Iseconds)" 
 
-#SECTION_HEADER="\033[0;36m====\033[0m%s\033[0;36m====\033[0m\n"
-# Write function to center justify this.
-
-
-
-
-
-
+## Paths ##
+# The relative path to the lockfile within the git directory
+LOCKFILE="nixos/flake.lock"
 
 ######## SETUP ##########
 
@@ -80,7 +76,7 @@ prompt_confirm() {
     case $REPLY in
       [yY]) echo ; return 0 ;;
       [nN]) echo ; return 1 ;;
-      *) printf '\033[31m '\''%s'\'' %s \n\033[0m' "$REPLY" "invalid input"
+      *) printf '\033[31m '\''%s'\'' %s \n${RST}' "$REPLY" "invalid input"
     esac 
   done  
   if [[ ! "$input" =~ ^[YyNn]$  ]]; then
@@ -113,27 +109,29 @@ centered_header() {
     # Generate the padded header using equal signs for padding
     local l_pad="$(printf '=%.0s' $(seq 1 $padding))"
 	local r_pad="$(printf '=%.0s' $(seq 1 $r_padding))"
-
-    printf "\033[0;36m%s\033[0m\033[0;37m %s \033[0m\033[0;36m%s\033[0m\n" "$l_pad" "$title" "$r_pad"
+	local head_template="${HEDCOL}%s${RST} %s ${HEDCOL}%s${RST}\n" 
+    printf "$head_template" "$l_pad" "$title" "$r_pad"
 }
 
 
 ##### CHECKING #####
 EXIT=0
 
-echo "Script is: $0 running using $$ PID"
-echo "Current shell used within the script is: `readlink /proc/$$/exe`"
-
-script_shell="$(readlink /proc/$$/exe | sed "s/.*\///")"
-
-echo -e "\nSHELL is = ${script_shell}\n"
+# Debug printopts
+#echo "Script is: $0 running using $$ PID"
+#echo "Current shell used within the script is: `readlink /proc/$$/exe`"
+#echo -e "\033$RED RED"
+#echo -e "\033$YELLOW YELLOW"
+#echo -e "\033$GREEN GREEN ${RST}"
+#script_shell="$(readlink /proc/$$/exe | sed "s/.*\///")"
+#echo -e "\nSHELL is = ${script_shell}\n"
 
 #printf $SECTION_HEADER "FORBIDDEN FILE CHECK"
 centered_header "FORBIDDEN FILE CHECK"
 for PF in ${PROHIBITEDNAMES[@]}; do
     for SF in ${TOCHECK[@]}; do
         if [[ "$SF" =~ $PF ]]; then
-            echo -e "File path '$SF' matched regex \033${RED}$PF\033[0m"
+            echo -e "File path '$SF' matched regex ${RED}$PF${RST}"
             FAIL=1
 
         else
@@ -146,7 +144,7 @@ if [[ -n $FAIL ]]; then
     EXIT=1
     unset FAIL
 else
-    echo -e "\033${GREEN}PASS\033[1;0m"
+    echo -e "${GREEN}PASS\033[1;0m"
 fi
 
 
@@ -154,13 +152,13 @@ centered_header "SECRET STRING CHECK"
 for FILE in ${TOCHECK[@]}; do
     for VAR in ${NIXVARS[@]}; do
         if [[ $(grep -c "$VAR" "$FILE") -ne 0 ]]; then
-            echo -e "\nFound prohibited string \033${RED}$VAR\033[0m in $FILE"
+            echo -e "\nFound prohibited string ${RED}$VAR${RST} in $FILE"
             echo "grep results: "
-            echo -e "\033[0;36m======\033[0m"
+            echo -e "${HEDCOL}======${RST}"
 
             grep -n -C 3 --group-separator='======' --color=always \
             "$VAR" "$FILE"
-            echo -e "\033[0;36m======\033[0m"
+            echo -e "${HEDCOL}======${RST}"
             FAIL=1
         fi
     done
@@ -169,42 +167,69 @@ if [[ -n $FAIL ]]; then
     EXIT=1
     unset FAIL
 else
-    echo -e "\033${GREEN}PASS\033[1;0m"
+    echo -e "${GREEN}PASS\033[1;0m"
 fi
 
 
 centered_header "FLAKE ON LATEST"
 flakepath="$(mktemp "flake.lock.XXXXXX" -p "/tmp" )"
 fctmp="nix flake check 
-			--output-lock-file $flakepath 
-			--recreate-lock-file $GITPATH/nixos" 
+        --output-lock-file $flakepath 
+	--recreate-lock-file $GITPATH/nixos" 
 flakecheck=$(echo $fctmp)
+
+CopyLock () {
+        if [[ $EXIT -eq 0 ]]; then
+                echo "sudo cp:"
+                sudo cp $flakepath $GITPATH/$LOCKFILE < /dev/tty
+                git commit -m "${COMMITMSG}" --no-verify -- "$GITPATH/$LOCKFILE"
+                echo -e "${GREEN}PASS${RST}"
+        else
+                echo -e "${YELLOW}Refusing to makee changes due to prior failures${RST}"
+        fi
+}
 
 # Don't run if there's no internet.
 if ping -c 1 8.8.8.8 > /dev/null 2>&1; then
-	echo "Running $flakecheck"
+	echo -e "Running \n${HEDCOL}$flakecheck${RST}\nCommand output follows:"
+	echo -e "\n${HEDCOL}======${RST}"
 	results=$(eval $flakecheck ) 
-	if jd $flakepath $GITPATH/nixos/flake.lock > /dev/null; then
-			echo -e "\033${GREEN}PASS\033[1;0m"
-	else
-			echo -e "\n \033${RED}Lockfile out of date\033[0m"
-		echo -e "Generated lockfile at $flakepath with length $(wc -l $flakepath) lines"
-			if prompt_confirm "Update lockfile?"; then
-					echo "sudo cp:"
-					sudo cp $flakepath $GITPATH/nixos/flake.lock
-					echo -e "\033${GREEN}PASS\033[1;0m"
+        ret=$?
+	echo -e "${HEDCOL}======${RST}"
+	if [[ $ret -eq 0 ]]; then
+                if [[ -s "$GITPATH/$LOCKFILE" ]]; then
+                        jcompare="jd $flakepath \"$GITPATH/$LOCKFILE\" > /dev/null "
+                        #echo "$jcompare"
+                        eval "$jcompare"
 
-			else
-					if prompt_confirm "Commit out of date lockfile?"; then
-							echo -e "\033${YELLOW}TEST BYPASSED\033[0m"
-					else
-							echo -e "\033${RED}FAIL\033[0m"
-							FAIL=1
-					fi
-			fi
+                        if [[ $? -eq 0 ]]; then
+                                echo -e "${GREEN}PASS\033[1;0m"
+                        else
+                                echo -e "\n${RED}Lockfile out of date${RST}\n"
+                                echo -e "Generated lockfile at $flakepath with $(wc -l < $flakepath) lines"
+                                if prompt_confirm "Update local lockfile?"; then
+                                        CopyLock
+                                else
+                                        if prompt_confirm "Commit out of date lockfile?"; then
+                                                echo -e "${YELLOW}TEST BYPASSED${RST}"
+                                        else
+                                                echo -e "${RED}FAIL${RST}"
+                                                FAIL=1
+                                        fi
+                                fi
+                        fi
+                else
+                        echo -e "${YELLOW}Lockfile empty or missing, Copying new lockfile.${RST}"
+                        CopyLock
+                fi
+
+
+	else
+		echo -e "${RED}FAIL${RST} Encountered error running flake"
+		FAIL=1
 	fi
 else
-  echo -e "\033${YELLOW}TEST BYPASSED:\033[0m NO INTERNET"
+  echo -e "${YELLOW}TEST BYPASSED:${RST} NO INTERNET"
 fi
 
 
@@ -217,5 +242,12 @@ fi
 
 # TODO: Add a check for the latest firmware either here or in the build setup?
 
+echo ""
+
+if [[ $EXIT -eq 0 ]]; then
+        echo -e "${HEDCOL}==${GREEN}  All Tests Passed  ${HEDCOL}==${RST}"
+else
+        echo -e "${HEDCOL}==${RED}  Commit Aborted ${HEDCOL}==${RST}"
+fi
 
 exit $EXIT

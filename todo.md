@@ -9,3 +9,8 @@
 - Fingerprint logon?
 - Set up a script that updates the flake and nixos overnight
 - Set up a script that pulls down any flakes in my projects directories overnight so that they run without downloading anything.
+- Add locate (nixpkgs#mlocate), and write a job that runs updatedb alongside it. 
+- Add keyboard shortcut using the [firefox autoconfig](https://support.mozilla.org/en-US/kb/customizing-firefox-using-autoconfig) feature to open ai chat sidebar.
+- Add Lorri and configure to auto-update when on battery power.
+- VIM:
+    - Add auto mark, so whenever I search, jump to top or bottom, or otherwise move, vim adds a mark where I was before so I can go back.
