@@ -1,5 +1,3 @@
-
-
 - get better sway titles
 - (better) Screenshot system
 - lock screen

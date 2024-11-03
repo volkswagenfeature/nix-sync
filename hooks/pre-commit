@@ -178,6 +178,7 @@ fctmp="nix flake check
 	--recreate-lock-file $GITPATH/nixos" 
 flakecheck=$(echo $fctmp)
 
+# Doesn't seem to quite work yet...
 CopyLock () {
         if [[ $EXIT -eq 0 ]]; then
                 echo "sudo cp:"
@@ -191,6 +192,15 @@ CopyLock () {
 
 # Don't run if there's no internet.
 if ping -c 1 8.8.8.8 > /dev/null 2>&1; then
+        #If lockfile exists and is empty, just delete it.
+        #A workaround for the parsing error $flakecheck throws when
+        #it hits a empty file.
+        if [[ -e "$GITPATH/$LOCKFILE" && ! -s "$GITPATH/$LOCKFILE" ]]; then
+                echo -e "Deleting empty flake file"
+                sudo rm "$GITPATH/$LOCKFILE"
+        fi
+
+
 	echo -e "Running \n${HEDCOL}$flakecheck${RST}\nCommand output follows:"
 	echo -e "\n${HEDCOL}======${RST}"
 	results=$(eval $flakecheck ) 
