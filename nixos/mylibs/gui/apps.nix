@@ -30,9 +30,9 @@ in
     gimp-with-plugins
     blender
     krita
-    nix-unstable.freecad
+    nix-unstable.freecad-wayland
     unityhub
-    kicad
+    #kicad # Until I extend my partions, I can't fit this.
 
     # Utilities
     kitty

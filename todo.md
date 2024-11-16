@@ -8,7 +8,11 @@
 - Set up a script that updates the flake and nixos overnight
 - Set up a script that pulls down any flakes in my projects directories overnight so that they run without downloading anything.
 - Add locate (nixpkgs#mlocate), and write a job that runs updatedb alongside it. 
-- Add keyboard shortcut using the [firefox autoconfig](https://support.mozilla.org/en-US/kb/customizing-firefox-using-autoconfig) feature to open ai chat sidebar.
+
+- Firefox
+    - Add keyboard shortcut using the [firefox autoconfig](https://support.mozilla.org/en-US/kb/customizing-firefox-using-autoconfig) feature to open ai chat sidebar.
+    - Set [Firefox File Chooser](https://superuser.com/questions/1740620/firefox-file-chooser-choose-another) to something like ranger, also see if you can switch out the file selection dialog that other apps use by default.
 - Add Lorri and configure to auto-update when on battery power.
 - VIM:
     - Add auto mark, so whenever I search, jump to top or bottom, or otherwise move, vim adds a mark where I was before so I can go back.
+- Set enviroment variables: Prioritize coreutils over toybox/busybox. Set $EDITOR, others.
