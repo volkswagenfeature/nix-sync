@@ -35,69 +35,23 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-  outputs = { self, nixpkgs, home-manager, ... } @ inputs: 
+  outputs = { ... } @ inputs: 
   with inputs;
-  let 
-    system = "x86_64-linux";
+  let
+    extra-args = { 
+      defaults = {
+        system = "x86_64-linux";
+        sysversion = "24.05";
+      };
+    };
+    ssss = v: builtins.trace v v;
     secrets = ( import ./secrets.nix {} );
-    sysversion = "24.05";
+    live-image = (import ./artifacts/live-image.nix (inputs//extra-args));
+    BB-image =(import ./artifacts/BB.nix (inputs//extra-args));
 
   in 
   {
-    nixosConfigurations."${secrets.hostname}"= nixpkgs.lib.nixosSystem rec {
-      inherit system;
-      modules =
-        [ ({ pkgs, ... }: {
-            # Let 'nixos-version --json' know about the Git revision
-            # of this flake.
-            system.configurationRevision = nixpkgs.lib.mkIf (self ? rev) self.rev;
-            system.stateVersion = "${sysversion}";
-
-            nix.package = pkgs.nixFlakes;
-            nix.settings.experimental-features = "nix-command flakes";
-            nixpkgs.config.allowUnfree = true;
-
-            # Enable Homemanager
-            home-manager.users."${secrets.primaryuser}" = {pkgs, ...}:{
-              home.stateVersion = "${sysversion}";
-            };
- 
-          })
-          ./hardware-configuration.nix
-          ./mylibs/editor.nix
-          ./mylibs/terminal.nix
-          ./mylibs/system.nix
-          ./mylibs/gui/apps.nix
-          ./mylibs/gui/sway.nix
-          ./mylibs/gui/rice.nix
-          ./mylibs/gui/firefox.nix
-          ./mylibs/utilities/cloudsync.nix
-          ./mylibs/utilities/downloadmount.nix
-          ./mylibs/utilities/git-script-reqs.nix
-          #./mylibs/utilities/testfile.nix
-
-          inputs.home-manager.nixosModules.home-manager
-          inputs.nixvim.nixosModules.nixvim
-          #inputs.flake-cnf.nixosModules.programs-sqlite #Currently broken
-          nix-index-database.nixosModules.nix-index
-
-
-
-          #"${nix-unstable-raw}/nixos/modules/programs/nh.nix"
-        ];
-        specialArgs = {
-          inherit inputs;
-          #nix-unstable = inputs.nix-unstable-raw.legacyPackages.${system};
-          nix-unstable = import inputs.nix-unstable-raw {
-            system = "${system}";
-            config.allowUnfree = true;
-            config.permittedInsecurePackages = [
-              "electron-25.9.0"
-            ];
-          };
-
-        };
-    };
+    nixosConfigurations."${secrets.hostname}"= nixpkgs.lib.nixosSystem BB-image;
     repl = flake-utils.lib.mkApp {
       drv = pkgs.writeShellScriptBin "repl" ''
         confnix=$(mktemp)
@@ -106,5 +60,7 @@
         nix repl $confnix
       '';
     };
+    nixosConfigurations.live-image = (nixpkgs.lib.nixosSystem live-image);
+    iso = self.nixosConfigurations.live-image.config.system.build.isoImage;
   };
 }

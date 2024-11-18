@@ -6,7 +6,7 @@ in
 {
  environment.systemPackages = with pkgs; [
     # System core components
-    toybox
+    uutils-coreutils
     cryptsetup
     btrfs-progs
     pciutils # The lspci that comes with toybox sucks ass
@@ -72,6 +72,8 @@ in
 
   # Enable networking
   networking.networkmanager.enable = true;
+  # Force disable wpa-supplicant (needed for the ISO)
+  networking.wireless.enable = lib.mkForce false;
 
   # Disable networking service to improve boot performance
   systemd.services.NetworkManager-wait-online.wantedBy = lib.mkForce [];

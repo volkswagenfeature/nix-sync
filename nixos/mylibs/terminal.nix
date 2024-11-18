@@ -1,4 +1,4 @@
-{lib, pkgs, config, nix-unstable,  ...}:
+{lib, pkgs, config, ...}:
 with lib;
 let
   secrets = (import ../secrets.nix {});
