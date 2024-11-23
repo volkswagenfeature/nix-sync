@@ -88,7 +88,8 @@ in
 
   ### Internationilization/Input ###
   # Set your time zone.
-  time.timeZone = "America/New_York";
+  # Should be handled by timed, so has to be unset.
+  #time.timeZone = "America/New_York";
   i18n.defaultLocale = "en_US.utf8";
 
   # Setup home-manager global options

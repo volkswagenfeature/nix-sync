@@ -1,20 +1,19 @@
 {
   inputs = {  
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
     nix-unstable-raw.url = "github:NixOS/nixpkgs/nixos-unstable";
-    flake-utils.url = "github:numtide/flake-utils";
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.05";
+      url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nixvim = {
-      url = "github:/nix-community/nixvim/nixos-24.05";
+      url = "github:/nix-community/nixvim/main";
       inputs.nixpkgs.follows = "nixpkgs";
       #inputs.flake-utils.follows = "flake-utils";
     };
-
+/*
     mach-nix = {
       url = "github:DavHau/mach-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -26,7 +25,7 @@
       url = "github:wamserma/flake-programs-sqlite";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
+*/
     # Command-not-found can also be implemented by using nix-index
     # This version pulls pre-generated databases from github
     # saving builtime
@@ -41,7 +40,7 @@
     extra-args = { 
       defaults = {
         system = "x86_64-linux";
-        sysversion = "24.05";
+        sysversion = "24.11";
       };
     };
     ssss = v: builtins.trace v v;

@@ -34,10 +34,8 @@ rec {
     ../mylibs/utilities/cloudsync.nix
     ../mylibs/utilities/downloadmount.nix
     ../mylibs/utilities/git-script-reqs.nix
-    #./mylibs/utilities/testfile.nix
     inputs.home-manager.nixosModules.home-manager
-    inputs.nixvim.nixosModules.nixvim
-    #inputs.flake-cnf.nixosModules.programs-sqlite #Currently broken
+    inputs.nixvim.nixosModules.nixvim 
     nix-index-database.nixosModules.nix-index
     #"${nix-unstable-raw}/nixos/modules/programs/nh.nix"
   ];
