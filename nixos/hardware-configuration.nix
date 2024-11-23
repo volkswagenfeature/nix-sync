@@ -22,6 +22,9 @@ in
   # security.protectKernelImage = false; # Also to allow for resuming
   # Resume offset variable????
 
+  # Allow firmware updates through a daemon
+  services.fwupd.enable = true;
+
 
 
   # LUKS unlock
@@ -80,14 +83,14 @@ in
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
   # More GPU setup
-  hardware.opengl.enable = true;
+  hardware.graphics.enable = true;
 
-  hardware.opengl.extraPackages = with pkgs; [
+  hardware.graphics.extraPackages = with pkgs; [
     amdvlk
     rocmPackages.clr.icd
   ];
   # For 32 bit applications 
-  hardware.opengl.extraPackages32 = with pkgs; [
+  hardware.graphics.extraPackages32 = with pkgs; [
     driversi686Linux.amdvlk
   ];
 }

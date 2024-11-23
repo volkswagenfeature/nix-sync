@@ -67,8 +67,6 @@ in
     wayland
     xdg-utils # for openning default programms when clicking links
     glib # gsettings
-    dracula-theme # gtk theme
-    gnome3.adwaita-icon-theme  # default gnome cursors
     swaylock
     swayidle
     swaybg

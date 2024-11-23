@@ -51,15 +51,14 @@
   in 
   {
     nixosConfigurations."${secrets.hostname}"= nixpkgs.lib.nixosSystem BB-image;
-    repl = flake-utils.lib.mkApp {
+    /*repl = flake-utils.lib.mkApp {
       drv = pkgs.writeShellScriptBin "repl" ''
         confnix=$(mktemp)
         echo "builtins.getFlake (toString $(git rev-parse --show-toplevel))" >$confnix
         trap "rm $confnix" EXIT
         nix repl $confnix
       '';
-    };
+    };*/
     nixosConfigurations.live-image = (nixpkgs.lib.nixosSystem live-image);
-    iso = self.nixosConfigurations.live-image.config.system.build.isoImage;
   };
 }

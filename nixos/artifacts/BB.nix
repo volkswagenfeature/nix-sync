@@ -8,13 +8,15 @@ in
 rec {
   inherit system;
   modules = [ 
-    ({ pkgs, ... }: {
+    (
+
+      { pkgs, ... }: {
       # Let 'nixos-version --json' know about the Git revision
       # of this flake.
       system.configurationRevision = nixpkgs.lib.mkIf (self ? rev) self.rev;
       system.stateVersion = "${sysversion}";
 
-      nix.package = pkgs.nixFlakes;
+      #nix.package = nixVersions.stable;
       nix.settings.experimental-features = "nix-command flakes ";
       nixpkgs.config.allowUnfree = true;
 
@@ -37,7 +39,6 @@ rec {
     inputs.home-manager.nixosModules.home-manager
     inputs.nixvim.nixosModules.nixvim 
     nix-index-database.nixosModules.nix-index
-    #"${nix-unstable-raw}/nixos/modules/programs/nh.nix"
   ];
 
   specialArgs = {

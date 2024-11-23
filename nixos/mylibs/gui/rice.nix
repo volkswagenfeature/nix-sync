@@ -1,7 +1,7 @@
 {lib, pkgs, config, ...}:
 let 
   secrets = (import ../../secrets.nix {});
-  wallPath = /bulk + "/${secrets.primaryuser}-dropbox" + /Photos/Backgrounds;
+  wallPath = toString (/bulk + "/${secrets.primaryuser}-dropbox" + /Photos/Backgrounds);
   swap-delay = "10m";
   backgroundScript = pkgs.writeShellApplication {
     name = "backgroundScript";
@@ -17,7 +17,11 @@ let
   };
 in
 {
-  environment.systemPackages = [backgroundScript];
+  environment.systemPackages = [
+    backgroundScript
+    pkgs.dracula-theme
+    pkgs.adwaita-icon-theme
+  ];
   home-manager.users."${secrets.primaryuser}" = {pkgs, ...}:{
     programs = {
       kitty.settings.background_opacity = "0.3";

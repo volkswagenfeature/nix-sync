@@ -43,18 +43,18 @@ with lib;
     extraPackages = with pkgs; [wl-clipboard-x11 nixpkgs-fmt nixfmt-classic];
     plugins = {
       nix.enable = true;
-      surround.enable = true;
+      vim-surround.enable = true;
       nvim-autopairs.enable = true;
       rainbow-delimiters.enable = true; 
 
       treesitter.enable = true;
-      treesitter.ensureInstalled = [
+      treesitter.settings.ensure_installed = [
         "nix"
       ];
 
       conform-nvim = {
         enable = true;
-        formattersByFt = {
+        settings.formatters_by_ft = {
           nix = ["nixfmt-classic"];
 
         };
@@ -97,8 +97,8 @@ with lib;
       lsp= {
         enable = true;
         servers = {
-          rnix-lsp.enable = false;
-          nil-ls.enable = true;
+          rnix.enable = false;
+          nil_ls.enable = true;
           pyright.enable = true;
 
         };
@@ -201,7 +201,7 @@ with lib;
 
           #Completion
           vim-repeat 
-          vim-surround 
+          # vim-surround # Should already be included...
           lexima-vim
 
           #Navigation
