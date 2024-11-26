@@ -68,6 +68,7 @@ in
         blur_radius 7 
         blur_contrast 0.5
       '';
+
     };
 
   };

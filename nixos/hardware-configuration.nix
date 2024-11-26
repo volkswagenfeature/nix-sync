@@ -11,7 +11,7 @@ in
   #  ];
 
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "thunderbolt" "usb_storage" "sd_mod" ];
-  boot.initrd.kernelModules = [ "dm-snapshot" ];
+  boot.initrd.kernelModules = [ "dm-snapshot"  ];
   boot.kernelModules = [ "kvm-amd" "mt7921e" "amdgpu" ];
   # boot.kernelParams = [ "amd_iommu=off" "iommu=soft" ]; # Doesn't fix resume.
   boot.extraModulePackages = [ ];
@@ -78,12 +78,19 @@ in
   # networking.interfaces.enp193s0f3u1c2.useDHCP = lib.mkDefault true;
   # networking.interfaces.wlp1s0.useDHCP = lib.mkDefault true;
 
-  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux"; # I don't think this has anything to do with
+  # hardware after all...
   # Power management? It was in the old file...
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
   # More GPU setup
   hardware.graphics.enable = true;
+  /*hardware.amdgpu.amdvlk = {
+    enable = true;
+    support32Bit.enable = true;
+  };
+  */
+
 
   hardware.graphics.extraPackages = with pkgs; [
     amdvlk

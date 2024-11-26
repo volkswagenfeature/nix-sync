@@ -43,7 +43,6 @@
         sysversion = "24.11";
       };
     };
-    ssss = v: builtins.trace v v;
     secrets = ( import ./secrets.nix {} );
     live-image = (import ./artifacts/live-image.nix (inputs//extra-args));
     BB-image =(import ./artifacts/BB.nix (inputs//extra-args));

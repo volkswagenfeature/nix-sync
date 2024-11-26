@@ -7,10 +7,12 @@ in
  environment.systemPackages = with pkgs; [
     # System core components
     uutils-coreutils
-    cryptsetup
-    btrfs-progs
-    pciutils # The lspci that comes with toybox sucks ass
-    inotify-tools # for filewatching 
+    #cryptsetup
+    #btrfs-progs
+    #pciutils # The lspci that comes with toybox sucks ass
+    #inotify-tools # for filewatching 
+    #lshw
+    #vulkan-tools
 
     # Runtime packages
     python3Full
@@ -42,16 +44,16 @@ in
     avahi
 
     # Bluetooth
-    bluez
+    #bluez
 
     # Audio
-    pamixer
+    #pamixer
 
     # Virtual Enviroments
     # Might not even work. Plus I have poetry2nix.
     #conda
     #micromamba
-  ];
+  ] ++ (import ./packsets/inspection-tools.nix pkgs);
   # Nix config modifications
   nix.settings.trusted-substituters = ["https://ai.cachix.org"];
   nix.settings.trusted-public-keys = ["ai.cachix.org-1:N9dzRK+alWwoKXQlnn0H6aUx0lU/mspIoz8hMvGvbbc="];

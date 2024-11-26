@@ -1,9 +1,17 @@
-{lib,pkgs,config, nix-unstable,... }:
+{lib,pkgs,config, nix-unstable, nixpkgs, ... }:
 with lib;
 let
   secrets = (import ../../secrets.nix {});
+  freecad_overlay = (self: super: {
+    freecad-wayland = super.freecad-wayland.overrideAttrs( prev:{
+      version = "1.0.0";
+    });
+  });
 in
 {
+
+  nixpkgs.overlays = [freecad_overlay];
+
   users.users."${secrets.primaryuser}".packages = with pkgs; [
     # Networking
     firefox
@@ -14,25 +22,10 @@ in
     
     #ungoogled-chromium #for later
 
-    # Social media
-    nix-unstable.discord
-    element-desktop
-    telegram-desktop
-    signal-desktop
-    whatsapp-for-linux
-    zulip
-    zulip-term
-    slack
 
     # Design
     graphviz
     #nix-unstable.super-slicer #(Broken as of 2024-06-09)
-    gimp-with-plugins
-    blender
-    krita
-    nix-unstable.freecad-wayland
-    unityhub
-    #kicad # Until I extend my partions, I can't fit this.
 
     # Utilities
     kitty
@@ -54,11 +47,13 @@ in
     keepassxc
 
     # Office
-    libreoffice-qt
-    hunspell
-    hunspellDicts.en_US
+    #libreoffice-qt
+    #hunspell
+    #hunspellDicts.en_US
     webcord-vencord
-  ];
+  ] ++ (import ../packsets/app-suites.nix pkgs)
+    ++ (import ../packsets/social-media.nix pkgs);
+    
 
   fonts.packages= with pkgs; [
     noto-fonts
@@ -76,8 +71,8 @@ in
     dedicatedServer.openFirewall = true; 
   };
 
-
   home-manager.users."${secrets.primaryuser}"= {pkgs,...}:{ };
+
 }
 
 

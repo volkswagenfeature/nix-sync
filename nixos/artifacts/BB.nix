@@ -1,9 +1,9 @@
 {...} @ inputs:
 with inputs;
 let
-  system = "x86_64-linux";
+  system = defaults.system;
   secrets = (import ../secrets.nix {});
-  sysversion = "24.05";
+  sysversion = defaults.sysversion;
 in
 rec {
   inherit system;
