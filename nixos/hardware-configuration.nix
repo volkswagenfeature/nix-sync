@@ -11,8 +11,8 @@ in
   #  ];
 
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "thunderbolt" "usb_storage" "sd_mod" ];
-  boot.initrd.kernelModules = [ "dm-snapshot"  ];
-  boot.kernelModules = [ "kvm-amd" "mt7921e" "amdgpu" ];
+  boot.initrd.kernelModules = [ "dm-snapshot" "amdgpu"  ];
+  boot.kernelModules = [ "kvm-amd" "mt7921e" ];
   # boot.kernelParams = [ "amd_iommu=off" "iommu=soft" ]; # Doesn't fix resume.
   boot.extraModulePackages = [ ];
   boot.loader.systemd-boot.enable = true;
@@ -27,13 +27,14 @@ in
 
 
 
-  # LUKS unlock
+  # LUKS unlock 
   boot.initrd.luks.devices = {
     crypt = {
       device = "/dev/disk/by-label/crypt-part";
       preLVM = true;
     };
   };
+  
 
 
   fileSystems."/" =
