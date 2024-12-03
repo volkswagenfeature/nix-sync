@@ -44,12 +44,11 @@ rec {
   specialArgs = {
     inherit inputs;
     #nix-unstable = inputs.nix-unstable-raw.legacyPackages.${system};
-    nix-unstable = import inputs.nix-unstable-raw {
-      system = "${system}";
-      config.allowUnfree = true;
+    nix-unstable = import inputs.nix-unstable-raw defaults.pkgscon // {
       config.permittedInsecurePackages = [
         "electron-25.9.0"
       ];
     };
+    nix-razor = import inputs.nix-razor-raw defaults.pkgscon;
   };
 }

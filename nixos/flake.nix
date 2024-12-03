@@ -2,6 +2,7 @@
   inputs = {  
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
     nix-unstable-raw.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nix-razor-raw.url = "github:NixOS/nixpkgs/master";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-24.11";
@@ -38,9 +39,13 @@
   with inputs;
   let
     extra-args = { 
-      defaults = {
+      defaults = rec {
         system = "x86_64-linux";
         sysversion = "24.11";
+        pkgscon = {
+          inherit system;
+          config.allowUnfree = true;
+        };
       };
     };
     secrets = ( import ./secrets.nix {} );
