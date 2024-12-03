@@ -42,6 +42,9 @@ in
     meslo-lgs-nf
   ];
 
+  console.font = "${pkgs.powerline-fonts}/share/fonts/truetype/Meslo LG S DZ Regular for Powerline.ttf";
+  fonts.fontDir.enable = true;
+
   documentation.dev.enable = true;
   programs.fish.enable = true;
   programs.nix-index.enable = true;

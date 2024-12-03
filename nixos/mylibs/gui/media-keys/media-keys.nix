@@ -10,7 +10,7 @@ let
 
   # Path variables
   wobfifo = "/var/lib/misc/wob_fifo";
-  blpath = "/sys/class/backlight/amdgpu_bl0";
+  blpath = "/sys/class/backlight/amdgpu_bl1";
 
   # Others
   steps = 9; # has to be greater than 4 
@@ -81,8 +81,7 @@ in
   environment.systemPackages = [pkgs.wob bright-control vol-control pkgs.light];
 
   services.udev.extraRules = ''
-  ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="amdgpu_bl0", MODE="0666", RUN+="${pkgs.coreutils}/bin/chmod a+w /sys/class/backlight/amdgpu_bl0/brightness"
-  ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="amdgpu_bl1", MODE="0666", RUN+="${pkgs.coreutils}/bin/chmod a+w /sys/class/backlight/amdgpu_bl1/brightness
+  ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="amdgpu_bl*", MODE="0666", RUN{program}+="/${pkgs.coreutils}/bin/chmod a+w /sys/class/backlight/%k/brightness"
 '';
 
   # wob setup
