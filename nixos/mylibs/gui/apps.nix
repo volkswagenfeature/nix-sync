@@ -1,4 +1,4 @@
-{lib,pkgs,config, nix-unstable, nixpkgs, ... }:
+{lib,pkgs,config, nix-unstable, nixpkgs, ... }@inputs:
 with lib;
 let
   secrets = (import ../../secrets.nix {});
@@ -51,7 +51,7 @@ in
     #hunspell
     #hunspellDicts.en_US
     webcord-vencord
-  ] ++ (import ../packsets/app-suites.nix pkgs)
+  ] ++ (import ../packsets/app-suites.nix inputs)
     ++ (import ../packsets/social-media.nix pkgs);
     
 
