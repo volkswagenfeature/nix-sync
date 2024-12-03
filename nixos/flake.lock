@@ -237,13 +237,29 @@
         "type": "github"
       }
     },
-    "nix-unstable-raw": {
+    "nix-razor-raw": {
       "locked": {
-        "lastModified": 1733015953,
-        "narHash": "sha256-t4BBVpwG9B4hLgc6GUBuj3cjU7lP/PJfpTHuSqE+crk=",
+        "lastModified": 1733261265,
+        "narHash": "sha256-Kw5qqgEwwEYRZHPmr8ZnW4LTZloG/ELbqJ3rwPcQuAE=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "ac35b104800bff9028425fec3b6e8a41de2bbfff",
+        "rev": "16873e4e8bdb8540c262be4ca8ed600f9214dc30",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "master",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nix-unstable-raw": {
+      "locked": {
+        "lastModified": 1733212471,
+        "narHash": "sha256-M1+uCoV5igihRfcUKrr1riygbe73/dzNnzPsmaLCmpo=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "55d15ad12a74eb7d4646254e13638ad0c4128776",
         "type": "github"
       },
       "original": {
@@ -325,6 +341,7 @@
       "inputs": {
         "home-manager": "home-manager",
         "nix-index-database": "nix-index-database",
+        "nix-razor-raw": "nix-razor-raw",
         "nix-unstable-raw": "nix-unstable-raw",
         "nixpkgs": "nixpkgs",
         "nixvim": "nixvim"
