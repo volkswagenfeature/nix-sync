@@ -1,4 +1,4 @@
-{lib,pkgs,config, nix-unstable, nixpkgs, ... }@inputs:
+{lib,pkgs,config, nix-unstable, nixpkgs, nix-razor, ... }@inputs:
 with lib;
 let
   secrets = (import ../../secrets.nix {});
@@ -7,10 +7,21 @@ let
       version = "1.0.0";
     });
   });
+  ss14_overlay = (self: super: {
+    space-station-14-launcher = super.space-station-14-launcher.overrideAttrs( 
+      prev:{
+        version = "master";
+        
+      }
+    );
+  });
 in
 {
 
-  nixpkgs.overlays = [freecad_overlay];
+  nixpkgs.overlays = [
+    #freecad_overlay
+    ss14_overlay
+  ];
 
   users.users."${secrets.primaryuser}".packages = with pkgs; [
     # Networking
@@ -37,6 +48,7 @@ in
     #Gaem
     prismlauncher
     steam
+    space-station-14-launcher
 
 
     # image processing
