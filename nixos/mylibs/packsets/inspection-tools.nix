@@ -7,6 +7,7 @@ with pkgs;
   minicom
   usbutils
   dmidecode #Analyze what's in SMBIOS flash
+  file 
 
   cryptsetup
   btrfs-progs
