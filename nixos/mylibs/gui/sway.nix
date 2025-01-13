@@ -130,12 +130,14 @@ in
       checkConfig = false;
       package = pkgs.swayfx;
       config = rec {
-                input."type:touchpad" = {
+        input."type:touchpad" = {
           # Docs: https://man.archlinux.org/man/sway-input.5
           click_method = "clickfinger";
           middle_emulation = "enabled";
           tap = "enabled";
           natural_scroll = "enabled";
+          dwt = "disabled";
+
         };
 
         input."2821:6078:ASUS_Computer_Inc._ASUS_GAMING_MOUSE_GX950" = { # Config for mouse has to be fixed before going to do art.

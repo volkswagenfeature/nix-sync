@@ -10,7 +10,6 @@ with lib;
     viAlias = true;
     #vimdiffAlias = true;
     vimAlias = true;
-
     opts = {
       # Default indenting
       smartindent = true;
@@ -39,8 +38,9 @@ with lib;
       };
     };
     globals = {};
-
+    
     extraPackages = with pkgs; [wl-clipboard-x11 nixpkgs-fmt nixfmt-classic];
+
     plugins = {
       nix.enable = true;
       vim-surround.enable = true;
