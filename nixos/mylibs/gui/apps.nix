@@ -57,7 +57,7 @@ in
 
     # Utilities
     kitty
-    #nix-razor.obsidian
+    nix-razor.obsidian
     vlc
     # TODO: write function to autodetect the version of electron obsidian wants
     # and allow it even if it's insecure.
