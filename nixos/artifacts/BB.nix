@@ -18,7 +18,8 @@ rec {
 
       #nix.package = nixVersions.stable;
       nix.settings.experimental-features = "nix-command flakes ";
-      nixpkgs.config.allowUnfree = true;
+      nix.settings.allow-dirty = false;
+      nixpkgs.config = defaults.pkgscon.config;
 
       # Enable Homemanager
       home-manager.users."${secrets.primaryuser}" = {pkgs, ...}:{
@@ -44,11 +45,7 @@ rec {
   specialArgs = {
     inherit inputs;
     #nix-unstable = inputs.nix-unstable-raw.legacyPackages.${system};
-    nix-unstable = import inputs.nix-unstable-raw defaults.pkgscon // {
-      config.permittedInsecurePackages = [
-        "electron-25.9.0"
-      ];
-    };
-    nix-razor = import inputs.nix-razor-raw defaults.pkgscon;
+    nix-unstable = import inputs.nix-unstable-raw defaults.pkgscon ;
+    nix-razor = import inputs.nix-razor-raw defaults.pkgscon ;
   };
 }

@@ -14,19 +14,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
       #inputs.flake-utils.follows = "flake-utils";
     };
-/*
-    mach-nix = {
-      url = "github:DavHau/mach-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-utils.follows = "flake-utils";
-    };
 
-    # A flake-compliant system for command-not-found suggestions
-    flake-cnf = {
-      url = "github:wamserma/flake-programs-sqlite";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-*/
     # Command-not-found can also be implemented by using nix-index
     # This version pulls pre-generated databases from github
     # saving builtime
@@ -45,6 +33,9 @@
         pkgscon = {
           inherit system;
           config.allowUnfree = true;
+          config.permittedInsecurePackages = [
+            "electron-31.7.7"
+          ];
         };
       };
     };
