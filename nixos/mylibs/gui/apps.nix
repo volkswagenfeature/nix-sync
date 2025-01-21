@@ -1,17 +1,34 @@
-{lib,pkgs,config, nix-unstable, nixpkgs, nix-razor, ... }@inputs:
+{
+  lib,
+  pkgs,
+  config, 
+  nix-unstable, 
+  nixpkgs, 
+  nix-razor, 
+  inputs, 
+  extra-args,
+  ...
+}:
 with lib;
 let
   secrets = (import ../../secrets.nix {});
+  system = inputs.defaults.system;
   freecad_overlay = (self: super: {
     freecad-wayland = super.freecad-wayland.overrideAttrs( prev:{
       version = "1.0.0";
     });
   });
   ss14_overlay = (self: super: {
-    space-station-14-launcher = super.space-station-14-launcher.overrideAttrs( 
+    space-station-14-launcher = super.space-station-14-launcher.overrideAttrs(
       prev:{
-        version = "master";
-        
+        version = "0.30.2";
+        src = pkgs.fetchFromGitHub {
+          owner = "space-wizards";
+          repo = "SS14.Launcher";
+          rev = "v0.30.2";
+          hash = "sha256-Rx39FuDPh5sGVjcKjCo4mTQ8Z/x9PD1CvBQh5ICES9Q=";
+          fetchSubmodules = true;
+        };
       }
     );
   });
@@ -40,7 +57,7 @@ in
 
     # Utilities
     kitty
-    obsidian
+    #nix-razor.obsidian
     vlc
     # TODO: write function to autodetect the version of electron obsidian wants
     # and allow it even if it's insecure.
@@ -57,13 +74,12 @@ in
 
     # Password managment
     keepassxc
-
     # Office
     #libreoffice-qt
     #hunspell
     #hunspellDicts.en_US
     webcord-vencord
-  ] ++ (import ../packsets/app-suites.nix inputs)
+  ] ++ ( import  ../packsets/app-suites.nix { inherit pkgs; inherit nix-razor; } )
     ++ (import ../packsets/social-media.nix pkgs);
     
 

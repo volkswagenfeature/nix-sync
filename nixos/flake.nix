@@ -15,6 +15,10 @@
       #inputs.flake-utils.follows = "flake-utils";
     };
 
+    ss14 = {
+      url = "github:/space-wizards/SS14.Launcher/master";
+    };
+
     # Command-not-found can also be implemented by using nix-index
     # This version pulls pre-generated databases from github
     # saving builtime
