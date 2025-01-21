@@ -4,6 +4,30 @@ let
   system = defaults.system;
   secrets = (import ../secrets.nix {});
   sysversion = defaults.sysversion;
+  /*
+  gitmessage = pkgs: rev:( 
+    pkgs.stdenvNoCC.mkDerivation {
+      name = "latest-message";
+      src = ./.;
+      installPhase = "git log --format=%B -n 1 20eeba1f6e8cbd74a73f4c4a556f5092530ab175 > $out/res";
+    }
+  );
+  
+  gitmessage = pkgs: (pkgs.runCommand "" {} ''
+    ${pkgs.git}/bin/git log --format=%B -n 1 20eeba1f6e8cbd74a73f4c4a556f5092530ab175 > $out
+  '');
+  */
+  gitmessage = pkgs: (pkgs.runCommandWith {
+      name = "gitmessage";
+      derivationArgs.src = ./../..;
+    } ''
+      ls -a $src
+      ${pkgs.git}/bin/git log --format=%B -n 1 HEAD
+      echo -n 'hello-thar' > $out
+    '' 
+  );
+
+
 in
 rec {
   inherit system;
@@ -15,10 +39,13 @@ rec {
       # of this flake.
       system.configurationRevision = nixpkgs.lib.mkIf (self ? rev) self.rev;
       system.stateVersion = "${sysversion}";
+      system.nixos.tags = [ 
+        #(builtins.readFile "${gitmessage pkgs}" )
+      ] ;
 
       #nix.package = nixVersions.stable;
       nix.settings.experimental-features = "nix-command flakes ";
-      nix.settings.allow-dirty = false;
+      nix.settings.allow-dirty = true;
       nixpkgs.config = defaults.pkgscon.config;
 
       # Enable Homemanager
