@@ -175,7 +175,10 @@ centered_header "FLAKE ON LATEST"
 flakepath="$(mktemp "flake.lock.XXXXXX" -p "/tmp" )"
 fctmp="nix flake update
         --output-lock-file $flakepath
-        --flake $GITPATH/nixos"
+        --flake $GITPATH/nixos
+        --option warn-dirty false
+        --option allow-dirty true
+        "
 
 flakecheck=$(echo $fctmp)
 
