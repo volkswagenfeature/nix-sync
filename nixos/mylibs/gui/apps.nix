@@ -42,7 +42,6 @@ in
 
   users.users."${secrets.primaryuser}".packages = with pkgs; [
     # Networking
-    firefox
     chromium
     deluge
     tor-browser

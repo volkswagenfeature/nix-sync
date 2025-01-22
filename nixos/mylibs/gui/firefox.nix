@@ -13,6 +13,7 @@ let
 in
   {
     programs.firefox = {
+      package = pkgs.firefox-esr;
       enable = true;
       languagePacks = ["en-US"];
       # Check about:policies#documentation for options.
@@ -37,30 +38,10 @@ in
           Locked = true;
         };
 
+        ExtensionSettings = (import ./ff_extensions.nix {}).ExtensionSettings;
 
-        /*
-        ExtensionSettings = {
-          "addon@darkreader.org"
-          "firefox@ghostery.com"
-          "keepassxc-browser@keepassxc.org"
-          "uBlock0@raymondhill.net"
-          # Violentmonkey
-          "{aecec67f-0d10-4fa7-b7c7-609a2db280cf}"
-          "simple-tab-groups@drive4ik" 
+        SearchEngines = (import ./ff_search.nix {});
 
-          # Themes
-          # "Autumn Twining" theme
-          "{d470e2a3-6538-4b76-938e-252ce9d8c058}"
-          "firefox-compact-dark@mozilla.org"
-          "default-theme@mozilla.org"
-          
-        };
-        BlockedExt = ["addons-search-detection@mozilla.com"
-                      "amazondotcom@search.mozilla.org"
-                      "bing@search.mozilla.org"
-                      "google@search.mozilla.org"
-                     ];
-        */
         Preferences = {
           # Ad mitigation
           "browser.newtabpage.activity-stream.showSponsored" = lock-false;
