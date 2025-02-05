@@ -105,7 +105,7 @@ in
   users.users."${secrets.primaryuser}"= {
     isNormalUser = true;
     description = "${secrets.primaryuser}";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "lxd" "docker"];
     packages = with pkgs; [
       # GUI apps should be moved to ./gui/apps.nix
 
@@ -172,6 +172,11 @@ in
 
   # Still a service. Install docker
   virtualisation.docker.enable = true;
+  # lxd too
+  virtualisation.lxd.enable = true;
+  # Remember, the extra groups on your user "lxd" and "docker" correspond
+  # to this. It's so you can use the two of them without sudo.
+
 
 
   ### Audio ###
