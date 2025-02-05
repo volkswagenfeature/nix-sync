@@ -1,6 +1,6 @@
 #! /bin/bash
 
-format='{%n  "commit": "%H",%n  "author": "%an",%n  "email": "%ae",%n  "date": "%ad",%n  "message": "%s"%n}'  
+format='{%n  "commit": "%H",%n  "tree": "%T",%n  "author": "%an",%n  "email": "%ae",%n  "date": "%ad",%n  "message": "%s"%n}'  
 GITPATH=$(git rev-parse --show-toplevel)
 COMMITINFO="$GITPATH/nixos/.lastcommit.json"
 

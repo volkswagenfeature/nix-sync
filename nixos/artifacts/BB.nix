@@ -13,12 +13,17 @@ let
          (i: a: if i <= len then a else "")
          ( strings.stringToCharacters str )
       );
+      fetch = if (strings.hasSuffix "-dirty" checkrev) then "dirty" else "clean";
+
     in 
       (
         assert builtins.pathExists (lastcommit);
         (
           if (checkrev) != "unknown" 
-          then checkrev 
+          then (
+            assert commitjson.commit == (strings.removeSuffix "-dirty" checkrev);
+            "${fetch}-${truncate checkrev 6}"
+          )
           else "unknown-${truncate commitjson.commit 6}"
         ) + "-" + 
         strings.sanitizeDerivationName ( 
@@ -34,12 +39,12 @@ rec {
   modules = [ 
     ( { pkgs,  ... }: 
     let
-      configurationRevision = "unknown"; 
+      configurationRevision = self.rev or self.dirtyRev or "unknown"; 
     in 
     {
       system.stateVersion = defaults.sysversion;
       system.nixos.tags = [ 
-        ( pkgs.lib.debug.traceVal (gitmessage pkgs configurationRevision))
+        ( pkgs.lib.debug.traceVal (gitmessage pkgs configurationRevision ))
       ] ;
 
       #nix.package = nixVersions.stable;
