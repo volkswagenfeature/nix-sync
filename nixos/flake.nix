@@ -57,7 +57,6 @@
         trap "rm $confnix" EXIT
         nix repl $confnix
       '';
-    };*/
-    nixosConfigurations.live-image = (nixpkgs.lib.nixosSystem live-image);
+      */
   };
 }

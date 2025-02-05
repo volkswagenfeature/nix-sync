@@ -1,9 +1,7 @@
 {...} @ inputs:
 with inputs;
 let
-  system = defaults.system;
   secrets = (import ../secrets.nix {});
-  sysversion = defaults.sysversion;
 
   gitmessage = pkgs: checkrev : 
     with pkgs.lib;
@@ -18,26 +16,30 @@ let
     in 
       (
         assert builtins.pathExists (lastcommit);
-        assert debug.traceVal commitjson.commit == checkrev ;
+        (
+          if (checkrev) != "unknown" 
+          then checkrev 
+          else "unknown-${truncate commitjson.commit 6}"
+        ) + "-" + 
         strings.sanitizeDerivationName ( 
           truncate ( 
-            builtins.elmAt ( 
+            builtins.elemAt ( 
               strings.splitString "\n" ( commitjson.message )
             ) 0
           ) 30       
-        )
+        ) 
       );
 in
 rec {
-  inherit system;
   modules = [ 
-    ( { pkgs, ... }: {
-      # Let 'nixos-version --json' know about the Git revision
-      # of this flake.
-      system.configurationRevision = if (self ? rev) then self.rev else self.dirtyRev;
-      system.stateVersion = "${sysversion}";
+    ( { pkgs,  ... }: 
+    let
+      configurationRevision = "unknown"; 
+    in 
+    {
+      system.stateVersion = defaults.sysversion;
       system.nixos.tags = [ 
-        ( pkgs.lib.debug.traceVal (gitmessage pkgs system.configurationRevision))
+        ( pkgs.lib.debug.traceVal (gitmessage pkgs configurationRevision))
       ] ;
 
       #nix.package = nixVersions.stable;
@@ -47,7 +49,7 @@ rec {
 
       # Enable Homemanager
       home-manager.users."${secrets.primaryuser}" = {pkgs, ...}:{
-        home.stateVersion = "${sysversion}";
+        home.stateVersion = "${defaults.sysversion}";
       };
     })
     ../hardware-configuration.nix
