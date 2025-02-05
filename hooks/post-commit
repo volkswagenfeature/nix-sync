@@ -1,0 +1,11 @@
+#! /bin/bash
+
+format='{%n  "commit": "%H",%n  "author": "%an",%n  "email": "%ae",%n  "date": "%ad",%n  "message": "%s"%n}'  
+GITPATH=$(git rev-parse --show-toplevel)
+COMMITINFO="$GITPATH/nixos/.lastcommit.json"
+
+echo "Requesting sudo to write to file ${COMMITINFO}"
+git log -1 --pretty=format:"${format}" | sudo tee "${COMMITINFO}"
+
+
+echo -e "\nPost-hook wrote to ${COMMITINFO}"

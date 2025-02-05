@@ -3,4 +3,6 @@
 /**/.gitignore
 *.swp
 /**/result
+.lastcommit.json
 #/**/secrets.nix
+
