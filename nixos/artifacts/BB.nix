@@ -5,11 +5,11 @@ let
   secrets = (import ../secrets.nix {});
   sysversion = defaults.sysversion;
 
-  gitmessage = checkrev : 
-    with nixpkgs.lib;
+  gitmessage = pkgs: checkrev : 
+    with pkgs.lib;
     let
       lastcommit = ../.lastcommit.json;
-      commitjson = trivial.importJSON lastcommit;
+      commitjson = trivial.importJSON lastcommit ;
       truncate = str: len: ( 
         strings.concatImapStrings 
          (i: a: if i <= len then a else "")
@@ -17,9 +17,9 @@ let
       );
     in 
       (
-        assert builtins.pathExists (debug.traceVal lastcommit);
-        assert commitjson.commit == checkrev;
-        debug.traceVal strings.sanitizeDerivationName ( 
+        assert builtins.pathExists (lastcommit);
+        assert debug.traceVal commitjson.commit == checkrev ;
+        strings.sanitizeDerivationName ( 
           truncate ( 
             builtins.elmAt ( 
               strings.splitString "\n" ( commitjson.message )
@@ -31,15 +31,13 @@ in
 rec {
   inherit system;
   modules = [ 
-    (
-
-      { pkgs, ... }: {
+    ( { pkgs, ... }: {
       # Let 'nixos-version --json' know about the Git revision
       # of this flake.
-      system.configurationRevision = nixpkgs.lib.mkIf (self ? rev) self.rev;
+      system.configurationRevision = if (self ? rev) then self.rev else self.dirtyRev;
       system.stateVersion = "${sysversion}";
       system.nixos.tags = [ 
-        (gitmessage system.configurationRevision)
+        ( pkgs.lib.debug.traceVal (gitmessage pkgs system.configurationRevision))
       ] ;
 
       #nix.package = nixVersions.stable;
