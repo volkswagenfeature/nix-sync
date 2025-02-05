@@ -4,30 +4,29 @@ let
   system = defaults.system;
   secrets = (import ../secrets.nix {});
   sysversion = defaults.sysversion;
-  /*
-  gitmessage = pkgs: rev:( 
-    pkgs.stdenvNoCC.mkDerivation {
-      name = "latest-message";
-      src = ./.;
-      installPhase = "git log --format=%B -n 1 20eeba1f6e8cbd74a73f4c4a556f5092530ab175 > $out/res";
-    }
-  );
-  
-  gitmessage = pkgs: (pkgs.runCommand "" {} ''
-    ${pkgs.git}/bin/git log --format=%B -n 1 20eeba1f6e8cbd74a73f4c4a556f5092530ab175 > $out
-  '');
-  */
-  gitmessage = pkgs: (pkgs.runCommandWith {
-      name = "gitmessage";
-      derivationArgs.src = ./../..;
-    } ''
-      ls -a $src
-      ${pkgs.git}/bin/git log --format=%B -n 1 HEAD
-      echo -n 'hello-thar' > $out
-    '' 
-  );
 
-
+  gitmessage = checkrev : 
+    with nixpkgs.lib;
+    let
+      lastcommit = ../.lastcommit.json;
+      commitjson = trivial.importJSON lastcommit;
+      truncate = str: len: ( 
+        strings.concatImapStrings 
+         (i: a: if i <= len then a else "")
+         ( strings.stringToCharacters str )
+      );
+    in 
+      (
+        assert builtins.pathExists (debug.traceVal lastcommit);
+        assert commitjson.commit == checkrev;
+        debug.traceVal strings.sanitizeDerivationName ( 
+          truncate ( 
+            builtins.elmAt ( 
+              strings.splitString "\n" ( commitjson.message )
+            ) 0
+          ) 30       
+        )
+      );
 in
 rec {
   inherit system;
@@ -40,7 +39,7 @@ rec {
       system.configurationRevision = nixpkgs.lib.mkIf (self ? rev) self.rev;
       system.stateVersion = "${sysversion}";
       system.nixos.tags = [ 
-        #(builtins.readFile "${gitmessage pkgs}" )
+        (gitmessage system.configurationRevision)
       ] ;
 
       #nix.package = nixVersions.stable;

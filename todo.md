@@ -8,6 +8,8 @@
 - Set up a script that updates the flake and nixos overnight
 - Set up a script that pulls down any flakes in my projects directories overnight so that they run without downloading anything.
 - Add locate (nixpkgs#mlocate), and write a job that runs updatedb alongside it. 
+- Add a system that sets envars for the hook scripts in Nix, ensures they have the dependencies they need, and then copies them to the nix store and symlinks them to the right spot in the .git folder
+
 
 - Firefox
     - Add keyboard shortcut using the [firefox autoconfig](https://support.mozilla.org/en-US/kb/customizing-firefox-using-autoconfig) feature to open ai chat sidebar.
