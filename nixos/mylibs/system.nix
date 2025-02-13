@@ -167,7 +167,13 @@ in
     # Tailscale VPN
     tailscale.enable = true;
     # hardware updates
-    fwupd.enable = true;
+    # Allow firmware updates through a daemon
+    # Disabled as it adds significant time to boot.
+    # It would be clever to write a task to only boot with this when needed.
+    # There is also a manual option: fwupdtool, 
+    # that might pair well with a nix hardware
+    # management tool of some sort.
+    fwupd.enable = false;
   };
 
   # Still a service. Install docker

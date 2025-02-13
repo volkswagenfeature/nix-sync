@@ -22,15 +22,6 @@ in
   # security.protectKernelImage = false; # Also to allow for resuming
   # Resume offset variable????
 
-  # Allow firmware updates through a daemon
-  # Disabled as it adds significant time to boot.
-  # It would be clever to write a task to only boot with this when needed.
-  # There is also a manual option: fwupdtool, that might pair well with a nix hardware
-  # management tool of some sort.
-  services.fwupd.enable = false;
-
-
-
   # LUKS unlock 
   boot.initrd.luks.devices = {
     crypt = {
