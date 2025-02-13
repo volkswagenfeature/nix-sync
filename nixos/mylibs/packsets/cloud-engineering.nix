@@ -1,4 +1,4 @@
-{...}:
+{lib,...}:
 {
   config = {
     virtualisation.docker = {
@@ -6,6 +6,7 @@
       enableOnBoot = false;
     };
     virtualisation.lxd.enable = true;
+    systemd.services.lxd.wantedBy = lib.mkForce [];
   };
 }
 

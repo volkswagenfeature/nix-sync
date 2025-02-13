@@ -34,17 +34,6 @@ in
      geoclue2-with-demo-agent # Same thing as the override???
      #geoclue2#.override {withDemoAgent = config.services.geoclue2.enableDemoAgent;}
      avahi
-
-     # Bluetooth
-     #bluez
-
-     # Audio
-     #pamixer
-
-     # Virtual Enviroments
-     # Might not even work. Plus I have poetry2nix.
-     #conda
-     #micromamba
     ]; 
   # Nix config modifications
   nix.settings.trusted-substituters = ["https://ai.cachix.org"];
