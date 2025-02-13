@@ -7,7 +7,7 @@ let
     with pkgs.lib;
     let
       lastcommit = ../.lastcommit.json;
-      commitjson = trivial.importJSON lastcommit ;
+      commitjson = (assert builtins.pathExists (lastcommit); trivial.importJSON lastcommit) ;
       truncate = str: len: ( 
         strings.concatImapStrings 
          (i: a: if i <= len then a else "")
@@ -17,7 +17,6 @@ let
 
     in 
       (
-        assert builtins.pathExists (lastcommit);
         (
           if (checkrev) != "unknown" 
           then (
