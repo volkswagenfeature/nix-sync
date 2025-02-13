@@ -154,7 +154,7 @@ in
     # There is also a manual option: fwupdtool, 
     # that might pair well with a nix hardware
     # management tool of some sort.
-    fwupd.enable = false;
+    fwupd.enable = true;
   };
 
 
