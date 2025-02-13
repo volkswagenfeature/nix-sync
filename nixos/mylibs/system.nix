@@ -4,56 +4,48 @@ let
   secrets = (import ../secrets.nix {});
 in
 {
- environment.systemPackages = with pkgs; [
-    # System core components
-    uutils-coreutils
-    #cryptsetup
-    #btrfs-progs
-    #pciutils # The lspci that comes with toybox sucks ass
-    #inotify-tools # for filewatching 
-    #lshw
-    #vulkan-tools
+  imports = [
+    ./packsets/cloud-engineering.nix
+    ./packsets/inspection-tools.nix
+  ];
+  environment.systemPackages = with pkgs; [
+     # System core components
+     uutils-coreutils
 
-    # Runtime packages
-    python3Full
-    poetry
+     # Runtime packages
+     python3Full
+     poetry
 
-    # Monitoring 
-    htop
-    neofetch
-    nix-tree #Explore the package tree
-    pv
+     # Clipboard utility
+     wl-clipboard-x11
 
-    # Clipboard utility
-    wl-clipboard-x11
+     # password management
+     kpcli
+     gnupg
 
-    # password management
-    kpcli
-    gnupg
+     # secrets managment
+     keychain
 
-    # secrets managment
-    keychain
+     # Zipfile handling
+     zip
+     unzip
 
-    # Zipfile handling
-    zip
-    unzip
+     # Geolocation framework (only used by gammastep atm)
+     geoclue2-with-demo-agent # Same thing as the override???
+     #geoclue2#.override {withDemoAgent = config.services.geoclue2.enableDemoAgent;}
+     avahi
 
-    # Geolocation framework (only used by gammastep atm)
-    geoclue2-with-demo-agent # Same thing as the override???
-    #geoclue2#.override {withDemoAgent = config.services.geoclue2.enableDemoAgent;}
-    avahi
+     # Bluetooth
+     #bluez
 
-    # Bluetooth
-    #bluez
+     # Audio
+     #pamixer
 
-    # Audio
-    #pamixer
-
-    # Virtual Enviroments
-    # Might not even work. Plus I have poetry2nix.
-    #conda
-    #micromamba
-  ] ++ (import ./packsets/inspection-tools.nix pkgs);
+     # Virtual Enviroments
+     # Might not even work. Plus I have poetry2nix.
+     #conda
+     #micromamba
+    ]; 
   # Nix config modifications
   nix.settings.trusted-substituters = ["https://ai.cachix.org"];
   nix.settings.trusted-public-keys = ["ai.cachix.org-1:N9dzRK+alWwoKXQlnn0H6aUx0lU/mspIoz8hMvGvbbc="];
@@ -175,14 +167,6 @@ in
     # management tool of some sort.
     fwupd.enable = false;
   };
-
-  # Still a service. Install docker
-  virtualisation.docker.enable = true;
-  # lxd too
-  virtualisation.lxd.enable = true;
-  # Remember, the extra groups on your user "lxd" and "docker" correspond
-  # to this. It's so you can use the two of them without sudo.
-
 
 
   ### Audio ###

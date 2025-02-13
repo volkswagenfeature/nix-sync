@@ -34,6 +34,10 @@ let
   });
 in
 {
+  imports = [
+    ../packsets/app-suites.nix 
+    ../packsets/social-media.nix
+  ];
 
   nixpkgs.overlays = [
     #freecad_overlay
@@ -78,9 +82,7 @@ in
     #hunspell
     #hunspellDicts.en_US
     webcord-vencord
-  ] ++ ( import  ../packsets/app-suites.nix { inherit pkgs; inherit nix-razor; } )
-    ++ (import ../packsets/social-media.nix pkgs);
-    
+  ];
 
   fonts.packages= with pkgs; [
     noto-fonts

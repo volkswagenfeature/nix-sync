@@ -5,7 +5,7 @@ GITPATH=$(git rev-parse --show-toplevel)
 COMMITINFO="$GITPATH/nixos/.lastcommit.json"
 
 echo "Requesting sudo to write to file ${COMMITINFO}"
-git log -1 --pretty=format:"${format}" | sudo tee "${COMMITINFO}"
+git log -1 --pretty=format:"${format}" | sudo tee "${COMMITINFO}" > /dev/null
 git add --intent-to-add "${COMMITINFO}"
 git update-index --assume-unchanged "${COMMITINFO}"
 
