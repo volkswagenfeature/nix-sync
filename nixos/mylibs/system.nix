@@ -49,9 +49,12 @@ in
   # ssh-agent config
   programs.ssh.startAgent = true;
 
-  ### Networking ##
+  ### Networking ###
   networking.hostName = "${secrets.hostname}"; # Define your hostname.
   networking.hosts = { "127.0.0.1" = [/*"yodayo.com" "civitai.com"*/]; };
+
+  # Iptables replacement
+  networking.nftables.enable = true;
 
   # Enable networking
   networking.networkmanager.enable = true;
