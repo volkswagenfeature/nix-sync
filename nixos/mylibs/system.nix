@@ -89,7 +89,7 @@ in
   users.users."${secrets.primaryuser}"= {
     isNormalUser = true;
     description = "${secrets.primaryuser}";
-    extraGroups = [ "networkmanager" "wheel" "lxd" "docker"];
+    extraGroups = [ "networkmanager" "wheel" "lxd" "incus" "docker"];
     packages = with pkgs; [
       # GUI apps should be moved to ./gui/apps.nix
 
