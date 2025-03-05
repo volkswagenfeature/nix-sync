@@ -86,6 +86,24 @@ in
 
   ### User configs ###
 
+
+  #For UID and GID range specing
+  users.users.root = {
+    uid = 0;
+    subGidRanges = [
+      {
+        count = 99990;
+        startGid = 100000;
+      }
+    ];
+    subUidRanges = [
+      {
+        count = 99990;
+        startUid = 100000;
+      }
+    ];
+  };
+
   users.users."${secrets.primaryuser}"= {
     isNormalUser = true;
     description = "${secrets.primaryuser}";
@@ -97,10 +115,21 @@ in
       # I should be the only user to mess with hardware...
       minicom
       usbutils
-
-
     ];
     shell = pkgs.fish;
+    uid = 1000;
+    subGidRanges = [
+      {
+        count = 99990;
+        startGid = 200000;
+      }
+    ];
+    subUidRanges = [
+      {
+        count = 99990;
+        startUid = 200000;
+      }
+    ];
   };
   #enviroment.shells = [pkgs.fish];
 
