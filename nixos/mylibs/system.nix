@@ -90,13 +90,13 @@ in
   #For UID and GID range specing
   users.users.root = {
     uid = 0;
-    subGidRanges = [
+    subGidRanges = lib.mkForce [
       {
         count = 99990;
         startGid = 100000;
       }
     ];
-    subUidRanges = [
+    subUidRanges = lib.mkForce [
       {
         count = 99990;
         startUid = 100000;
