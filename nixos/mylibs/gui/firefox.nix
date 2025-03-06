@@ -1,4 +1,4 @@
-{lib,pkgs,config, ...}:
+{lib,pkgs,config,...}:
 with lib;
 let
   secrets = (import ../../secrets.nix {});
@@ -40,7 +40,7 @@ in
 
         ExtensionSettings = (import ./ff_extensions.nix {}).ExtensionSettings;
 
-        SearchEngines = (import ./ff_search.nix {});
+        SearchEngines = (import ./ff_search.nix {inherit config;});
 
         Preferences = {
           # Ad mitigation
