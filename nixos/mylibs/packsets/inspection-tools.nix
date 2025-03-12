@@ -16,5 +16,7 @@
     nix-tree
     pv
     neofetch
+
+    ratarmount
   ];
 }

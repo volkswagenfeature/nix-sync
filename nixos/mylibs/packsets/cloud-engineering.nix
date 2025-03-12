@@ -1,6 +1,10 @@
-{lib,...}:
+{lib,pkgs,...}:
 {
   config = {
+    environment.systemPackages = with pkgs; [
+      dive
+    ];
+
     virtualisation.docker = {
       enable = true;
       enableOnBoot = false;
