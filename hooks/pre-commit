@@ -59,15 +59,29 @@ fi
 
 
 # Load and format variables from nixfile
+
 mapfile NIXVARS < <( echo -e $( nix eval --impure --expr "
-    let l = (import <nixpkgs> {}).lib;
-    in l.strings.concatMapStringsSep \"\\n\" toString (
-        l.lists.flatten( 
-            l.collect ( a: !builtins.isAttrs a) (import $SECRETPATH {})
-        )
-    )
+    with builtins;
+    let 
+      tt = l.trace;
+      tv = l.debug.traceVal;
+      td = l.debug.traceValSeq;
+      ta = d: l.trace \"Value: \${ if (isAttrs d) then ''attrs'' else d }\" ;
+      l = (import <nixpkgs> {}).lib;
+      p = a: l.any (x:(x a)) [
+      	isPath 
+	isString 
+	(i: (isInt i)&&(i > 1000)) 
+	isFloat 
+      ];
+      gs = d: if (p d) then [ d ]
+              else if (isList d) then ( concatMap gs d )
+	      else if (isAttrs d) then (concatMap gs  (attrValues d))
+	      else [];
+    in 
+      concatStringsSep \"\\n\"(gs (import $SECRETPATH {}))
 " ) | tr -d '"' )
-#echo "${NIXVARS[@]}"
+echo "${NIXVARS[@]}"
 
 prompt_confirm() {
   for ((count=0; count<20 ; count++)); do
@@ -196,6 +210,7 @@ CopyLock () {
 }
 
 # Don't run if there's no internet.
+# Don't run it while I'm testing my scripting
 if ping -c 1 8.8.8.8 > /dev/null 2>&1; then
         #If lockfile exists and is empty, just delete it.
         #A workaround for the parsing error $flakecheck throws when
