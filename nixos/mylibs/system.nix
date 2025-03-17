@@ -177,8 +177,6 @@ in
        # no need to redefine it in your config for now)
        #media-session.enable = true;
       };
-    # Tailscale VPN
-    tailscale.enable = true;
     # hardware updates
     # Allow firmware updates through a daemon
     # Disabled as it adds significant time to boot.

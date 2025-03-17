@@ -38,7 +38,8 @@
           inherit system;
           config.allowUnfree = true;
           config.permittedInsecurePackages = [
-            "electron-31.7.7"
+           "electron-32.3.3"
+            #"electron-31.7.7"
           ];
         };
       };
