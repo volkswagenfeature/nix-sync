@@ -25,7 +25,7 @@ in
         wg0 = {
           ips = ["10.100.0.2/24"];
           listenPort = 51820; # From nixos.wiki
-          privateKeyFile = secrets.wireguard_keys.paths[0];
+          privateKeyFile = builtins.elemAt secrets.wireguard.private_paths 0;
           peers = secrets.wireguard.peers;
         };
       };
