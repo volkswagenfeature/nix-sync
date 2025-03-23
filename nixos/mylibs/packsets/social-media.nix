@@ -5,6 +5,7 @@ Communications and stuff I do social media with.
 {pkgs,...}:
 {
   config.environment.systemPackages = with pkgs; [
+    discord
     webcord-vencord
     element-desktop
     telegram-desktop

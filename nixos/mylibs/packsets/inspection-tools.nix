@@ -18,5 +18,6 @@
     neofetch
 
     ratarmount
+    dig
   ];
 }

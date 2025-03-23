@@ -21,14 +21,8 @@ in
       # vpn configuration. Might belong in a different file?
 
       networking.wireguard.enable = true;
-      networking.wireguard.interfaces = {
-        wg0 = {
-          ips = ["10.100.0.2/24"];
-          listenPort = 51820; # From nixos.wiki
-          privateKeyFile = builtins.elemAt secrets.wireguard.private_paths 0;
-          peers = secrets.wireguard.peers;
-        };
-      };
+      networking.wg-quick.interfaces.wg0.configFile = "/home/${secrets.primaryuser}/.ssh/wireguard.conf";
+        
 
       services.tailscale.enable = true;
 

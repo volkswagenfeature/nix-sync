@@ -4,6 +4,9 @@ with lib;
   ### NEOVIM CONFIGS ###
 
   programs.nixvim={
+  # Switch over to nvf? https://github.com/NotAShelf/nvf
+  # A lot of guys on NixOS prefer NixCats https://github.com/BirdeeHub/nixCats-nvim
+  # "Writing in one language, debugging in another"
     enable = true;
 
     # set up aliases
@@ -31,6 +34,7 @@ with lib;
       highlight = {
         # Doesn't work. Troubleshoot or workaround
         ColorColumn.ctermbg= "DarkGrey";
+        enable = true;
       };
       clipboard = {
         register = "unnamedplus";
@@ -50,6 +54,7 @@ with lib;
       treesitter.enable = true;
       treesitter.settings.ensure_installed = [
         "nix"
+        "terraform"
       ];
 
       conform-nvim = {
