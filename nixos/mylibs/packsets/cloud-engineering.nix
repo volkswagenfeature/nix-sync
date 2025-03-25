@@ -23,20 +23,30 @@ in
       # vpn configuration. Might belong in a different file?
 
       networking.wireguard.enable = true;
+      networking.wireguard.interfaces.wg1 = {
+        privateKeyFile = builtins.elemAt secrets.wireguard.private_paths 0;
+        peers = secrets.wireguard.peers;
+      };
+
+/*
       networking.wg-quick.interfaces.wg0 = {
         autostart = false;
         configFile = "/home/${secrets.primaryuser}/.ssh/wireguard.conf";
       };
-      systemd.services.wg-quick-wg0 = { 
-        wantedBy = lib.mkForce ["graphical.target"];
+
+      systemd.services.wg-quick-wg0  = { 
+        wantedBy = lib.mkForce ["network-online.target"];
         after = [ "network-online.target" ];
-        wants = [ "network-online.target" ];
+        #requires = ["wireguard.service"];
       };
+*/
+      /*
       systemd.services.wireguard = {
         wantedBy = lib.mkForce ["wg-quick-wg0.service"];
         after = [ "network-online.target" ];
         wants = [ "network-online.target" ];
       };
+      */
 
         
 
