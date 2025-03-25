@@ -24,6 +24,7 @@ in
 
       networking.wireguard.enable = true;
       networking.wireguard.interfaces.wg1 = {
+        #listenPort = 51820;
         privateKeyFile = builtins.elemAt secrets.wireguard.private_paths 0;
         peers = secrets.wireguard.peers;
       };
