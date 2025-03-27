@@ -1,6 +1,10 @@
 {lib,pkgs,...}:
 let
   secrets = (import ../../secrets.nix {});
+  
+  wg = pkgs.callPackage ../../wireguard.nix {} ;
+  # whatever is in hello.nix
+
 in
   {
     config = {
@@ -8,6 +12,8 @@ in
         dive
         wireguard-tools
         opentofu
+        # App for working with dockertools
+        nix-prefetch-docker
       ];
 
       virtualisation.docker = {
@@ -52,7 +58,6 @@ in
         
 
       services.tailscale.enable = true;
-
     };
   }
 
