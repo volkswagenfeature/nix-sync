@@ -3,12 +3,23 @@ let
   ver = config.system.nixos.release;
 in
 {
+  Force = true;
+  Default = "DuckDuckSearch";
   Remove = [
     "Bing"
     "Amazon.com"
     "eBay"
+    "Google"
   ];
   Add = [
+    {
+      Name = "DuckDuckSearch";
+      URLTemplate = "https://duckduckgo.com/?q={searchTerms}";
+      Method = "GET";
+      IconURL = "https://duckduckgo.com/favicon.ico";
+      Alias = "@ddg";
+    }
+
     { 
       Name = "Github Nix Code"; 
       URLTemplate = "https://github.com/search?type=code&q=lang:nix+NOT+is:fork+{searchTerms}"; 
