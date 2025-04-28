@@ -20,6 +20,7 @@ with pkgs;
     #nix-razor.freecad-wayland
     freecad-wayland
     meshlab
+    prusa-slicer
 
     # Libreoffice plus support packages
     libreoffice-qt

@@ -148,6 +148,10 @@ with lib;
       { key = "<M-e>O"; action = ":MagmaShowOutput<CR>";       mode = "n"; }
     ];
 
+    extraConfigLua = ''
+      vim.wo.number = true
+    '';
+
     /*
     extraConfigVim = ''
       let localleader = ","

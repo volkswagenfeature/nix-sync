@@ -27,15 +27,14 @@ in
       systemd.services.lxd.wantedBy = lib.mkForce [];
 
       # vpn configuration. Might belong in a different file?
-
+/*
       networking.wireguard.enable = true;
       networking.wireguard.interfaces.wg1 = {
         #listenPort = 51820;
         privateKeyFile = builtins.elemAt secrets.wireguard.private_paths 0;
         peers = secrets.wireguard.peers;
       };
-
-/*
+*/
       networking.wg-quick.interfaces.wg0 = {
         autostart = false;
         configFile = "/home/${secrets.primaryuser}/.ssh/wireguard.conf";
@@ -46,7 +45,7 @@ in
         after = [ "network-online.target" ];
         #requires = ["wireguard.service"];
       };
-*/
+
       /*
       systemd.services.wireguard = {
         wantedBy = lib.mkForce ["wg-quick-wg0.service"];
