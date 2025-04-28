@@ -21,6 +21,7 @@ with pkgs;
     freecad-wayland
     meshlab
     prusa-slicer
+    printrun
 
     # Libreoffice plus support packages
     libreoffice-qt
