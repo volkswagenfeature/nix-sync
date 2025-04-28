@@ -83,7 +83,7 @@ mapfile NIXVARS < <( echo -e $( nix eval --impure --expr "
     in 
       concatStringsSep \"\\n\"(gs (import $SECRETPATH {}))
 " ) | tr -d '"' )
-echo "${NIXVARS[@]}"
+#echo "${NIXVARS[@]}"
 
 prompt_confirm() {
   for ((count=0; count<20 ; count++)); do
@@ -214,7 +214,7 @@ CopyLock () {
 # Don't run if there's no internet.
 # Don't run it while I'm testing my scripting
 # Going to have to wait until I get unbanned. Whoops.
-if false; then #ping -c 1 8.8.8.8 > /dev/null 2>&1; then
+if ping -c 1 8.8.8.8 > /dev/null 2>&1; then
         #If lockfile exists and is empty, just delete it.
         #A workaround for the parsing error $flakecheck throws when
         #it hits a empty file.
