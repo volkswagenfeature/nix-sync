@@ -13,11 +13,6 @@ with lib;
 let
   secrets = (import ../../secrets.nix {});
   system = inputs.defaults.system;
-  freecad_overlay = (self: super: {
-    freecad-wayland = super.freecad-wayland.overrideAttrs( prev:{
-      version = "1.0.0";
-    });
-  });
   ss14_overlay = (self: super: {
     space-station-14-launcher = super.space-station-14-launcher.overrideAttrs(
       prev:{
