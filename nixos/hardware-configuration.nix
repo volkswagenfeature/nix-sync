@@ -20,22 +20,25 @@ in
   boot.loader.efi.efiSysMountPoint = "/efi";
   boot.resumeDevice = "/dev/disk/by-uuid/54d8eb27-9f0e-42b1-8457-2ec7f3577085";
 
+  /*
   services.logind = {
     lidSwitch = "suspend-then-hibernate";
     powerKey = "hibernate";
     powerKeyLongPress = "poweroff";
   };
+  */
 
-  # Why is suspend state needed?
+  # Currently doesn't work because display remains completely off
+  # (no backlight or image) on resume
+  # related? https://bbs.archlinux.org/viewtopic.php?id=297215
+
   # Relevant docs: https://docs.kernel.org/admin-guide/pm/sleep-states.html
   # Not sure about HibernateMode=Platform.
   systemd.sleep.extraConfig = ''
     HibernateDelaySec=5m
     SuspendState=mem
+    HibernateMode=Platform
   '';
-
-
-  
 
   # LUKS unlock 
   boot.initrd.luks.devices = {
