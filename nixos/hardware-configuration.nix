@@ -99,6 +99,7 @@ in
 
   # More GPU setup
   hardware.graphics.enable = true;
+  hardware.video.displaylink.enable = true;
   /*hardware.amdgpu.amdvlk = {
     enable = true;
     support32Bit.enable = true;
