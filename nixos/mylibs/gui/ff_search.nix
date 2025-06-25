@@ -49,7 +49,7 @@ in
       URLTemplate = "https://github.com/search?type=code&q=repo:NixOS/nixpkgs+lang:nix+{searchTerms}"; 
       Method = "GET"; 
 IconURL = "https://github.com/favicon.ico";
-      Alias = "@gitpkgs"; 
+      Alias = "@nixpkgs"; 
     }
 
     { 
@@ -79,6 +79,13 @@ IconURL = "https://github.com/favicon.ico";
       URLTemplate = "https://search.nixos.org/packages?channel=${ver}&query={searchTerms}";
       Method = "GET";
       Alias = "@npkg";
+    }
+
+    {
+      Name = "Presearch";
+      URLTemplate = "https://presearch.com/search?q={searchTerms}";
+      Method = "GET";
+      Alias = "@pre";
     }
   ];
 }

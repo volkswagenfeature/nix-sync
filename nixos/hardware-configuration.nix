@@ -98,8 +98,8 @@ in
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
   # More GPU setup
+  services.xserver.videoDrivers = [ "displaylink" "modesetting" ];
   hardware.graphics.enable = true;
-  hardware.video.displaylink.enable = true;
   /*hardware.amdgpu.amdvlk = {
     enable = true;
     support32Bit.enable = true;

@@ -19,5 +19,7 @@
 
     ratarmount
     dig
+
+    libxkbcommon  #Keycode and keyboard debugging.
   ];
 }
