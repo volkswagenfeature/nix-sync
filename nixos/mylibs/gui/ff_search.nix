@@ -13,6 +13,13 @@ in
   ];
   Add = [
     {
+      Name = "Presearch";
+      URLTemplate = "https://presearch.com/search?q={searchTerms}";
+      Method = "GET";
+      IconURL = "https://presearch.com/favicon.ico";
+      Alias = "@pre";
+    }
+    {
       Name = "DuckDuckSearch";
       URLTemplate = "https://duckduckgo.com/?q={searchTerms}";
       Method = "GET";
