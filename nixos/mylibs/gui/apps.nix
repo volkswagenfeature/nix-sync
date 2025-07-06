@@ -13,6 +13,7 @@ with lib;
 let
   secrets = (import ../../secrets.nix {});
   system = inputs.defaults.system;
+  /*
   ss14_overlay = (self: super: {
     space-station-14-launcher = super.space-station-14-launcher.overrideAttrs(
       prev:{
@@ -26,7 +27,8 @@ let
         };
       }
     );
-  });
+    });
+    */
 in
 {
   imports = [
@@ -36,7 +38,7 @@ in
 
   nixpkgs.overlays = [
     #freecad_overlay
-    ss14_overlay
+    #ss14_overlay
   ];
 
   users.users."${secrets.primaryuser}".packages = with pkgs; [

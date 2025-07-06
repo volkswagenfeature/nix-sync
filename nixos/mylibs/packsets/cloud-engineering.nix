@@ -20,11 +20,11 @@ in
         enable = true;
         enableOnBoot = false;
       };
-      virtualisation.incus.enable = true;
-      systemd.services.incus.wantedBy = lib.mkForce [];
+      #virtualisation.incus.enable = true;
+      #systemd.services.incus.wantedBy = lib.mkForce [];
 
-      virtualisation.lxd.enable = true;
-      systemd.services.lxd.wantedBy = lib.mkForce [];
+      #virtualisation.lxd.enable = true;
+      #systemd.services.lxd.wantedBy = lib.mkForce [];
 
       # vpn configuration. Might belong in a different file?
 /*

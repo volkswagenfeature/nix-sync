@@ -23,7 +23,7 @@ in
   config.environment.systemPackages = with pkgs; [
     # Video and animation
     blender
-    nix-razor.unityhub
+    #nix-razor.unityhub
     obs-studio
 
     # Images

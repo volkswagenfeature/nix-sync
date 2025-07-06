@@ -77,7 +77,7 @@ in
   # Set your time zone.
   # Should be handled by timed, so has to be unset.
   #time.timeZone = "America/New_York";
-  i18n.defaultLocale = "en_US.utf8";
+  i18n.defaultLocale = "en_US.UTF-8";
 
   # Setup home-manager global options
   home-manager = {  
@@ -192,7 +192,7 @@ in
   ### Audio ###
   # Enable sound with pipewire.
   # sound.enable = true;
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   
 }
