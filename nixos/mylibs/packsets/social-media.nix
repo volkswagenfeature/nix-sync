@@ -10,7 +10,8 @@ Communications and stuff I do social media with.
     element-desktop
     telegram-desktop
     signal-desktop
-    whatsapp-for-linux
+    #whatsapp-for-linux
+    whatsie
     zulip
     zulip-term
     slack
