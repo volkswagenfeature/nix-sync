@@ -47,22 +47,30 @@ in
   fonts.fontDir.enable = true;
 
   documentation.dev.enable = true;
-  programs.fish.enable = true;
-  programs.nix-index.enable = true;
-  programs.git = {
-    enable = true;
-    config = {  
-      safe.directory = [ "/nix-sync" ];
-      user.email = "13547477+volkswagenfeature@users.noreply.github.com";
-      user.name = "volkswagenfeature";
-      core.editor = "vim";
+  programs= {
+    fish.enable = true;
+    nix-index.enable = true;
+    git = {
+      enable = true;
+      config = {  
+        safe.directory = [ "/nix-sync" ];
+        user.email = "13547477+volkswagenfeature@users.noreply.github.com";
+        user.name = "volkswagenfeature";
+        core.editor = "vim";
+      };
     };
+    nh = {
+      enable = true;
+      clean.enable = true;
+      clean.extraArgs = "--keep-since 14d --keep 7";
+      flake = "/nix-sync/nixos";
+    };
+    direnv.enableFishIntegration = true;
   };
-  programs.nh = {
-    enable = true;
-    clean.enable = true;
-    clean.extraArgs = "--keep-since 14d --keep 7";
-    flake = "/nix-sync/nixos";
+
+  services = {
+    lorri.enable = true;
+
   };
 
 
