@@ -68,6 +68,7 @@ rec {
     ../mylibs/utilities/cloudsync.nix
     ../mylibs/utilities/downloadmount.nix
     ../mylibs/utilities/git-script-reqs.nix
+    ../mylibs/utilities/neovim/nixcats.nix
     # ../mylibs/utilities/hydraCI.nix
     inputs.home-manager.nixosModules.home-manager
     inputs.nixvim.nixosModules.nixvim 

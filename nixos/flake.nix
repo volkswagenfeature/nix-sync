@@ -26,6 +26,11 @@
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nixCats-nvim = {
+      url = "github:BirdeeHub/nixCats-nvim";
+    };
+
   };
   outputs = { ... } @ inputs: 
   with inputs;
