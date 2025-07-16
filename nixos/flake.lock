@@ -126,11 +126,11 @@
     },
     "nix-razor-raw": {
       "locked": {
-        "lastModified": 1752616849,
-        "narHash": "sha256-Y4Oi/IhlqokL9HvCvG46PPTaB4WNaOdw/rLH5BVunKI=",
+        "lastModified": 1752626266,
+        "narHash": "sha256-PaXPwfiU8Sp2KiavIXLCRd75Dz+hANDhvPvw5OlSFVA=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "e179397aa16844813f14e85c0a9c41eadff268d0",
+        "rev": "f23e0d855a4f6f055724f539a57dd95f57147778",
         "type": "github"
       },
       "original": {
@@ -156,7 +156,7 @@
         "type": "github"
       }
     },
-    "nixCats-nvim": {
+    "nixCats": {
       "locked": {
         "lastModified": 1751874031,
         "narHash": "sha256-Bj8RGeMMNT4MThQJaKjML123kTXiKtTPsXWC2ieaiDc=",
@@ -256,7 +256,7 @@
         "nix-index-database": "nix-index-database",
         "nix-razor-raw": "nix-razor-raw",
         "nix-unstable-raw": "nix-unstable-raw",
-        "nixCats-nvim": "nixCats-nvim",
+        "nixCats": "nixCats",
         "nixpkgs": "nixpkgs",
         "nixvim": "nixvim",
         "ss14": "ss14"
