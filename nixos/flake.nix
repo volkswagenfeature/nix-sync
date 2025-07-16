@@ -27,7 +27,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixCats-nvim = {
+    nixCats = {
       url = "github:BirdeeHub/nixCats-nvim";
     };
 
@@ -63,6 +63,6 @@
         trap "rm $confnix" EXIT
         nix repl $confnix
       '';
-      */
+    */
   };
 }
