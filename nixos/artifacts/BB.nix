@@ -58,7 +58,7 @@ rec {
     })
     ../hardware-configuration.nix
     ../mylibs/hibernation.nix
-    ../mylibs/editor.nix
+    #../mylibs/editor.nix
     ../mylibs/terminal.nix
     ../mylibs/system.nix
     ../mylibs/gui/apps.nix
