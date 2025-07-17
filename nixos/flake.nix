@@ -31,6 +31,11 @@
       url = "github:BirdeeHub/nixCats-nvim";
     };
 
+    stylix = {
+      url = "github:nix-community/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
   };
   outputs = { ... } @ inputs: 
   with inputs;

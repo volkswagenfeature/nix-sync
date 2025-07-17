@@ -48,6 +48,7 @@ return {
         -- See :h blink-cmp-config-keymap for configuring keymaps
         keymap =  {
           preset = 'default',
+          ['<C-space>'] = {'accept','fallback'}
         },
         cmdline = {
           enabled = true,
