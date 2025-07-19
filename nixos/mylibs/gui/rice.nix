@@ -22,6 +22,17 @@ in
     pkgs.dracula-theme
     pkgs.adwaita-icon-theme
   ];
+
+
+  stylix = {
+    enable = true;
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/onedark-dark.yaml";
+    autoEnable = true;
+    #homeManagerIntegration.autoImport = false;
+    targets = {
+      gnome.enable = false;
+    };
+  };
   home-manager.users."${secrets.primaryuser}" = {pkgs, ...}:{
     programs = {
       kitty.settings.background_opacity = "0.3";
