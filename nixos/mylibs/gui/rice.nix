@@ -35,18 +35,8 @@ in
   };
   home-manager.users."${secrets.primaryuser}" = {pkgs, ...}:{
     programs = {
-      kitty.settings.background_opacity = "0.3";
+      #kitty.settings.background_opacity = "0.3";
       fish.plugins = [
-        /*{
-        name = "shellder-theme";
-          src = pkgs.fetchFromGitHub {
-            owner = "simnalamburt";
-            repo = "shellder";
-            rev = "fcfef62c86fe2857ddac30d8ac36e99e8d765fae";
-            sha256 = "sha256-wCtM4D3GEK8pTepzs0YBznSgSOmV+VqdAS7yifosICQ=";
-          };
-        }*/
-
         {
           name = "tidetheme";
           src = pkgs.fetchFromGitHub {
@@ -56,8 +46,26 @@ in
             sha256 = "x0wwXjKCDwtoUUJaiixeRRt5J6+EFD4Qev6kuOhd9Zw=";
           };
         }
+        /* Themes to try:
+         https://github.com/oh-my-fish/theme-budspencer
+         https://github.com/oh-my-fish/theme-dangerous 
+         https://github.com/oh-my-fish/theme-edan
+         https://github.com/oh-my-fish/theme-clearance
+         https://github.com/aneveux/theme-harleen
+         https://github.com/hastinbe/theme-kawasaki
+         https://github.com/meverss/barracuda 
+         https://github.com/oh-my-fish/theme-bobthefish
+         https://github.com/joelwanner/theme-boxfish
+         https://github.com/yeseni-today/ays-fish-theme
+         https://github.com/hasanozgan/theme-lambda
+         https://github.com/chgu82837/theme-PastFish
+         https://github.com/rafaelrinaldi/theme-pure
+         https://github.com/starship/starship
+
+         */
         ];
     };
+    /*
     wayland.windowManager.sway = {
       config.colors.focused = rec {
         border = "#ffffff";
@@ -81,6 +89,7 @@ in
       '';
 
     };
+    */
 
   };
 
