@@ -263,11 +263,11 @@
     },
     "nix-razor-raw": {
       "locked": {
-        "lastModified": 1752889334,
-        "narHash": "sha256-aAN0PEtnt6rF9ZFPiqCrDrVlzmmxRjpEi0ufZps70yk=",
+        "lastModified": 1752931216,
+        "narHash": "sha256-a6WtOb3aC3eV3rcX/zf0H6p2uXlZMxQvDw3ruoyKvWo=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "aa030ff8678c65967b09472893bab8f35c643d15",
+        "rev": "a0b153c14854fb58ca22d9f287930344ffcd49f9",
         "type": "github"
       },
       "original": {
@@ -432,11 +432,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1752384731,
-        "narHash": "sha256-+uP7AgiUUksNFX29VP+5lUTLN4nS+vYcBlhxlacoCNY=",
+        "lastModified": 1752919586,
+        "narHash": "sha256-3Mfh/owUB6MaH45XGoIKU485kWFpCAfX+zR+GyGwK2Q=",
         "owner": "space-wizards",
         "repo": "SS14.Launcher",
-        "rev": "a135465f82b773a5c40124b284086921ef07f300",
+        "rev": "57ec9aa40e233a62f5da33e5e9636a16c8b7ba10",
         "type": "github"
       },
       "original": {
