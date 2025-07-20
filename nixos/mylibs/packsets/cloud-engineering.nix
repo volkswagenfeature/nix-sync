@@ -2,7 +2,7 @@
 let
   secrets = (import ../../secrets.nix {});
   
-  wg = pkgs.callPackage ../../wireguard.nix {} ;
+  #wg = pkgs.callPackage ../../wireguard.nix {} ;
   # whatever is in hello.nix
 
 in
