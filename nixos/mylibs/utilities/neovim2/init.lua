@@ -1,4 +1,5 @@
 require('lze').load {
+    { import = "diwhyModule.plugins.treesitter" },
     {
         -- stolen from: https://github.com/dliberalesso/nix-config/blob/e89c29e5d37cdcbba29334ec04d693c9af81b1f9/modules/nvim/init.lua
         "blink.cmp",
@@ -29,22 +30,6 @@ require('lze').load {
             },
           })
         end
-    },
-    {
-        "nvim-treesitter",
-        enabled = nixCats("highlighting.treesitter") or false,
-        event = "DeferredUIEnter",
-        on_require = "nvim-treesitter",
-        build = ':TSUpdate',
-        after = function(plugin)
-            require("nvim-treesitter").setup({
-                ensure_installed = "all"
-                auto_install = false,
-                highlight = {
-                    enable = true
-                }
-
-            })
     },
     {
         "rainbow-delimiters"

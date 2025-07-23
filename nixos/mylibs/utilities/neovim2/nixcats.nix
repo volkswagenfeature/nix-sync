@@ -60,8 +60,8 @@ in {
           settings = {
             suffix-path = true;
             suffix-LD = true;
-            wrapRc = false;
-            aliases = [];
+            #wrapRc = false;
+            aliases = ["vim" "nvim"];
           };
 
           categories = {
