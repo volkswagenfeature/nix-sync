@@ -48,6 +48,8 @@ rec {
 
       #nix.package = nixVersions.stable;
       nix.settings.experimental-features = "nix-command flakes ";
+      nix.settings.connect-timeout = 1;
+
       nix.settings.allow-dirty = true;
       nixpkgs.config = defaults.pkgscon.config;
 
