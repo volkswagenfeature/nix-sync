@@ -7,59 +7,36 @@ require('lze').load {
         event = "DeferredUIEnter",
         on_require = "blink",
         load = function(plugin)
-            vim.cmd.packadd(name)
+            vim.cmd.packadd(plugin)
         end,
         after = function(plugin)
-          require("blink.cmp").setup({
-            keymap = { preset = "enter" },
-            appearance = { nerd_font_variant = "mono" },
-            signature = { enabled = true },
-            sources = {
-              default = { "lsp", "path", "snippets", "buffer" },
-              per_filetype = {
-                lua = { inherit_defaults = true, "lazydev" },
-              },
-              providers = {
-                lazydev = {
-                  name = "LazyDev",
-                  module = "lazydev.integrations.blink",
-                  -- make lazydev completions top priority (see `:h blink.cmp`)
-                  score_offset = 100,
+            require("blink.cmp").setup({
+                keymap = { preset = "enter" },
+                appearance = { nerd_font_variant = "mono" },
+                signature = { enabled = true },
+                sources = {
+                    default = { "lsp", "path", "snippets", "buffer" },
+                    per_filetype = {
+                        lua = { inherit_defaults = true, "lazydev" },
+                    },
+                    providers = {
+                        lazydev = {
+                            name = "LazyDev",
+                            module = "lazydev.integrations.blink",
+                            -- make lazydev completions top priority (see `:h blink.cmp`)
+                            score_offset = 100,
+                        }
+                    },
                 },
-              },
-            },
-          })
+            })
         end
     },
     {
-        "rainbow-delimiters"
-        enabled = nixCats("highlighting.extras") or false,
-        event = "DeferredUIEnter",
-        on_require = "rainbow-delimiters",
-        after = function(plugin)
-            require("rainbow-delimiters").setup({
-                strategy = {
-                    [''] = 'rainbow-delimiters.strategy.global',
-                    vim = 'rainbow-delimiters.strategy.local',
-                },
-                query = {
-                    [''] = 'rainbow-delimiters',
-                    lua = 'rainbow-blocks',
-                },
-                priority = {
-                    [''] = 110,
-                    lua = 210,
-                },
-                highlight = {
-                    'RainbowDelimiterRed',
-                    'RainbowDelimiterYellow',
-                    'RainbowDelimiterBlue',
-                    'RainbowDelimiterOrange',
-                    'RainbowDelimiterGreen',
-                    'RainbowDelimiterViolet',
-                    'RainbowDelimiterCyan',
-                },
-            })
-    }
-
+      "rainbow-delimiters.nvim",
+      lazy = false,
+      after = function(plugin)
+        require("rainbow-delimiters.setup").setup({})
+      end,
+    },
 }
+

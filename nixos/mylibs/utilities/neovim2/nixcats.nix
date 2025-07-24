@@ -17,8 +17,6 @@ in {
       categoryDefinitions.replace = ({ pkgs, settings, categories, extra, name, mkPlugin, ... }@packageDef: {
         lspsAndRuntimeDeps = {
           completionEngines = [];
-            
-          general = [];
           
         };
 
@@ -66,6 +64,8 @@ in {
 
           categories = {
             general = true;
+	    loaders = true;
+	    highlighting = true;
           };
         };
       };

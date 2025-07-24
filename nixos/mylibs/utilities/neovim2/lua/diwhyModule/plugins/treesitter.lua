@@ -9,8 +9,8 @@ return {
     -- ft = "",
     -- keys = "",
     -- colorscheme = "",
-    load = function (name)
-        vim.cmd.packadd(name)
+    load = function (plugin)
+        vim.cmd.packadd(plugin)
         vim.cmd.packadd("nvim-treesitter-textobjects")
     end,
     after = function (plugin)
