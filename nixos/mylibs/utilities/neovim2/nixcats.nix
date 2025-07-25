@@ -15,14 +15,18 @@ in {
       luaPath = ./.;
 
       categoryDefinitions.replace = ({ pkgs, settings, categories, extra, name, mkPlugin, ... }@packageDef: {
-        lspsAndRuntimeDeps = {
-          completionEngines = [];
+        lspsAndRuntimeDeps = with pkgs; {
+	  general = [ripgrep universal-ctags]; # vim.health requests ripgrep.
+          completion = [ ];
+	  highlighting = [gcc clang zig tree-sitter nodejs ];
+	  
           
         };
 
         optionalPlugins = with pkgs.vimPlugins; {
-          completionEngines = [
+          completion = [
             blink-cmp
+	    lazydev-nvim
           ];
 	  highlighting = {
 	    treesitter = [
@@ -66,6 +70,7 @@ in {
             general = true;
 	    loaders = true;
 	    highlighting = true;
+	    completion = true;
           };
         };
       };
