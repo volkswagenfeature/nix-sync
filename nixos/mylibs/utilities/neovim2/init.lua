@@ -1,6 +1,8 @@
 require('lze').load {
     { import = "diwhyModule.plugins.treesitter" },
     { import = "diwhyModule.plugins.blink-cmp"  },
+    { import = "diwhyModule.plugins.gitsigns"   },
+    { import = "diwhyModule.plugins.which-key"  },
     {
         -- lazydev makes your lsp way better in your config without needing extra lsp configuration.
         "lazydev.nvim",
@@ -22,5 +24,6 @@ require('lze').load {
         require("rainbow-delimiters.setup").setup({})
       end,
     },
+    { "hawtkeys.nvim" }
 }
 
