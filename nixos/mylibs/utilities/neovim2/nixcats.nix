@@ -7,27 +7,7 @@
 }: let
 
 nvimplug-overlay = final: prev : builtins.trace "???" {foo="bar";}; 
-/*
-{
-  plugins-hawtkeys = 
-    {
-      buildLuarocksPackage,
-      fetchFromGitHub,
-      lua,
-    }:
-    buildLuarocksPackage {
-      pname = "plugins-hawtkeys";
-      version = "scm-1";
-      src = fetchFromGitHub {
-        owner = "tris203";
-        repo = "hawtkeys.nvim";
-        rev = "main";
-        hash = "";
-      }; 
-    };
-};
-*/
-
+traceValShort = v : (builtins.trace (toString v) v );
 in {
   imports = [
     inputs.nixCats.nixosModules.default
@@ -51,8 +31,8 @@ in {
 	        ];
           completion = [
             blink-cmp
-	          lazydev-nvim
-	          nvim-surround # Not set up
+	    lazydev-nvim
+	    nvim-surround # Not set up
           ];
 	  highlighting = {
 	    treesitter = [
@@ -63,16 +43,15 @@ in {
 	      rainbow-delimiters-nvim
 	    ];
 	  };
-	  userExperience ={ 
+	  userExperience = { 
 	    uiAdditions = [
 	      gitsigns-nvim 
 	      # lualine-nvim # To set up later.
 	      which-key-nvim
-        ( mkPlugin "hawtkeys" (builtins.fetchGit {
-          url = "https://github.com/tris203/hawtkeys.nvim";
-          rev = "261cc311d4abdc88decceca6dc1013faa14c56ea";
-        }))
-
+              (mkPlugin "hawtkeys.nvim" (builtins.fetchGit {
+                url = "https://github.com/tris203/hawtkeys.nvim";
+                rev = "261cc311d4abdc88decceca6dc1013faa14c56ea";
+              }))
 	    ];
 	    misc = [
 	      undotree

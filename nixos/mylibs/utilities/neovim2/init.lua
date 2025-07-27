@@ -24,6 +24,11 @@ require('lze').load {
         require("rainbow-delimiters.setup").setup({})
       end,
     },
-    { "hawtkeys.nvim" }
+    { 
+      "hawtkeys.nvim",
+      load = function (plugin)
+        vim.cmd.packadd(plugin)
+      end,
+    }
 }
 
