@@ -26,9 +26,7 @@ in {
 	  highlighting = [gcc clang zig tree-sitter nodejs ];
         };
         optionalPlugins = with pkgs.vimPlugins; {
-	        general = [
-	          plenary-nvim
-	        ];
+	  general = [ ];
           completion = [
             blink-cmp
 	    lazydev-nvim
@@ -48,6 +46,7 @@ in {
 	      gitsigns-nvim 
 	      # lualine-nvim # To set up later.
 	      which-key-nvim
+	      plenary-nvim
               (mkPlugin "hawtkeys.nvim" (builtins.fetchGit {
                 url = "https://github.com/tris203/hawtkeys.nvim";
                 rev = "261cc311d4abdc88decceca6dc1013faa14c56ea";
@@ -61,6 +60,7 @@ in {
         };
 
         startupPlugins = with pkgs.vimPlugins; {
+	  general = [ ];
           loaders = [
             lze
             lzextras
@@ -91,7 +91,7 @@ in {
 	    loaders = true;
 	    highlighting = true;
 	    completion = true;
-	    userExperience = true;
+            userExperience = true;
           };
         };
       };

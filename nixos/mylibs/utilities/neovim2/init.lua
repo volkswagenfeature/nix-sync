@@ -1,3 +1,6 @@
+require("diwhyModule.tabsettings")
+require("diwhyModule.LSPs")
+
 require('lze').load {
     { import = "diwhyModule.plugins.treesitter" },
     { import = "diwhyModule.plugins.blink-cmp"  },
@@ -8,8 +11,8 @@ require('lze').load {
         "lazydev.nvim",
         for_cat = "neonixdev",
         cmd = { "LazyDev" },
-        ft = "lua",
-        after = function(_)
+        ft = "lua", 
+	after = function(_)
           require('lazydev').setup({
             library = {
               { words = { "nixCats" }, path = (nixCats.nixCatsPath or "") .. '/lua' },
@@ -26,8 +29,13 @@ require('lze').load {
     },
     { 
       "hawtkeys.nvim",
+      cmd = {"Hawtkeys","HawtkeysAll","HawtkeysDupes"},
       load = function (plugin)
-        vim.cmd.packadd(plugin)
+	vim.cmd.packadd("plenary.nvim")
+	vim.cmd.packadd(plugin)
+      end,
+      after = function (plugin)
+        require("hawtkeys").setup({})
       end,
     }
 }
