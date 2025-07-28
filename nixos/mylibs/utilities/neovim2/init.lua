@@ -12,7 +12,7 @@ require('lze').load {
         for_cat = "neonixdev",
         cmd = { "LazyDev" },
         ft = "lua", 
-	after = function(_)
+    after = function(_)
           require('lazydev').setup({
             library = {
               { words = { "nixCats" }, path = (nixCats.nixCatsPath or "") .. '/lua' },
@@ -31,8 +31,8 @@ require('lze').load {
       "hawtkeys.nvim",
       cmd = {"Hawtkeys","HawtkeysAll","HawtkeysDupes"},
       load = function (plugin)
-	vim.cmd.packadd("plenary.nvim")
-	vim.cmd.packadd(plugin)
+        vim.cmd.packadd("plenary.nvim")
+        vim.cmd.packadd(plugin)
       end,
       after = function (plugin)
         require("hawtkeys").setup({})

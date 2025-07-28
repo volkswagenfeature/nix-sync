@@ -22,16 +22,21 @@ in {
       categoryDefinitions.replace = ({ pkgs, settings, categories, extra, name, mkPlugin, ... }@packageDef: {
         lspsAndRuntimeDeps = with pkgs; {
 	  general = [ripgrep universal-ctags]; # vim.health requests ripgrep.
-          completion = [ ];
+          completion = {
+            nixdev = [ nix-doc nixd nil ];
+            luadev = [ lua-language-server ];
+          };
 	  highlighting = [gcc clang zig tree-sitter nodejs ];
         };
         optionalPlugins = with pkgs.vimPlugins; {
-	  general = [ ];
-          completion = [
-            blink-cmp
-	    lazydev-nvim
-	    nvim-surround # Not set up
-          ];
+	        general = [ ];
+          completion = { 
+            general = [
+              blink-cmp
+	            nvim-surround # Not set up
+            ];
+            luadev = [ lazydev-nvim ];
+          };
 	  highlighting = {
 	    treesitter = [
 	      nvim-treesitter-textobjects
@@ -60,7 +65,10 @@ in {
         };
 
         startupPlugins = with pkgs.vimPlugins; {
-	  general = [ ];
+	        general = [ ];
+          completion = {
+            general = [ nvim-lspconfig ];
+          };
           loaders = [
             lze
             lzextras
