@@ -1,6 +1,9 @@
+-- Additional modules
 require("diwhyModule.tabsettings")
 require("diwhyModule.LSPs")
+require("diwhyModule.general")
 
+-- Plugin Loading
 require('lze').load {
     { import = "diwhyModule.plugins.treesitter" },
     { import = "diwhyModule.plugins.blink-cmp"  },
@@ -23,6 +26,8 @@ require('lze').load {
       after = function (plugin)
         require("hawtkeys").setup({})
       end,
-    }
+    },
 }
+
+-- General configuration
 

@@ -21,51 +21,51 @@ in {
 
       categoryDefinitions.replace = ({ pkgs, settings, categories, extra, name, mkPlugin, ... }@packageDef: {
         lspsAndRuntimeDeps = with pkgs; {
-	  general = [ripgrep universal-ctags]; # vim.health requests ripgrep.
+          general = [ripgrep universal-ctags]; # vim.health requests ripgrep.
           completion = {
             nixdev = [ nix-doc nixd nil ];
             luadev = [ lua-language-server ];
+            pydev  = [ basedpyright];
           };
-	  highlighting = [gcc clang zig tree-sitter nodejs ];
+          highlighting = [gcc clang zig tree-sitter nodejs ];
         };
         optionalPlugins = with pkgs.vimPlugins; {
-	        general = [ ];
+          general = [ ];
           completion = { 
             general = [
               blink-cmp
-	            nvim-surround # Not set up
+              nvim-surround # Not set up
             ];
             luadev = [ lazydev-nvim ];
           };
-	  highlighting = {
-	    treesitter = [
-	      nvim-treesitter-textobjects
-	      nvim-treesitter.withAllGrammars
-	    ];
-	    extras = [
-	      rainbow-delimiters-nvim
-	    ];
-	  };
-	  userExperience = { 
-	    uiAdditions = [
-	      gitsigns-nvim 
-	      # lualine-nvim # To set up later.
-	      which-key-nvim
-	      plenary-nvim
-              (mkPlugin "hawtkeys.nvim" (builtins.fetchGit {
-                url = "https://github.com/tris203/hawtkeys.nvim";
-                rev = "261cc311d4abdc88decceca6dc1013faa14c56ea";
-              }))
-	    ];
-	    misc = [
-	      undotree
-	    ];
-	  };
-
+          highlighting = {
+            treesitter = [
+              nvim-treesitter-textobjects
+              nvim-treesitter.withAllGrammars
+            ];
+            extras = [
+              rainbow-delimiters-nvim
+            ];
+          };
+          userExperience = { 
+            uiAdditions = [
+              gitsigns-nvim 
+              # lualine-nvim # To set up later.
+              which-key-nvim
+              plenary-nvim
+                    (mkPlugin "hawtkeys.nvim" (builtins.fetchGit {
+                      url = "https://github.com/tris203/hawtkeys.nvim";
+                      rev = "261cc311d4abdc88decceca6dc1013faa14c56ea";
+                    }))
+            ];
+            misc = [
+              undotree
+            ];
+          };
         };
 
         startupPlugins = with pkgs.vimPlugins; {
-	        general = [ ];
+          general = [ fugitive statuscol-nvim ];
           completion = {
             general = [ nvim-lspconfig ];
           };
@@ -96,9 +96,9 @@ in {
 
           categories = {
             general = true;
-	    loaders = true;
-	    highlighting = true;
-	    completion = true;
+      loaders = true;
+      highlighting = true;
+      completion = true;
             userExperience = true;
           };
         };
