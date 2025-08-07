@@ -5,18 +5,12 @@ require("diwhyModule.general")
 
 -- Plugin Loading
 require('lze').load {
-    { import = "diwhyModule.plugins.treesitter" },
-    { import = "diwhyModule.plugins.blink-cmp"  },
-    { import = "diwhyModule.plugins.gitsigns"   },
-    { import = "diwhyModule.plugins.which-key"  },
+    { import = "diwhyModule.plugins.treesitter"  },
+    { import = "diwhyModule.plugins.blink-cmp"   },
+    { import = "diwhyModule.plugins.gitsigns"    },
+    { import = "diwhyModule.plugins.which-key"   },
+    { import = "diwhyModule.plugins.indentation" },
     {
-      "rainbow-delimiters.nvim",
-      lazy = false,
-      after = function(plugin)
-        require("rainbow-delimiters.setup").setup({})
-      end,
-    },
-    { 
       "hawtkeys.nvim",
       cmd = {"Hawtkeys","HawtkeysAll","HawtkeysDupes"},
       load = function (plugin)

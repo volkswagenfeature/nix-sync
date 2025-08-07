@@ -34,7 +34,6 @@ in {
           completion = { 
             general = [
               blink-cmp
-              nvim-surround # Not set up
             ];
             luadev = [ lazydev-nvim ];
           };
@@ -43,8 +42,11 @@ in {
               nvim-treesitter-textobjects
               nvim-treesitter.withAllGrammars
             ];
-            extras = [
+            delimiters = [
               rainbow-delimiters-nvim
+              indent-blankline-nvim
+              nvim-autopairs
+              nvim-surround
             ];
           };
           userExperience = { 
@@ -73,6 +75,7 @@ in {
             lze
             lzextras
             vim-repeat
+            vim-startuptime
           ];
         };
 
