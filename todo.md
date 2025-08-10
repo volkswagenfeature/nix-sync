@@ -20,3 +20,5 @@
 - VIM:
     - Add auto mark, so whenever I search, jump to top or bottom, or otherwise move, vim adds a mark where I was before so I can go back.
 - Set enviroment variables: Prioritize coreutils over toybox/busybox. Set $EDITOR, others.
+- Editor:
+    - Change the color scheme so args aren't incandescent red. The contents of sets and lists in nix count under that category, so it makes package lists look like they're on fire.

@@ -25,7 +25,7 @@ in
   stylix = {
     enable = true;
     # polarity = "dark"; # Should only be used for the algo.
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/brewer.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/onedark-dark.yaml";
     autoEnable = true;
     #homeManagerIntegration.autoImport = false;
     targets = {

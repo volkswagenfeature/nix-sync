@@ -74,7 +74,9 @@ rec {
     ../mylibs/utilities/git-script-reqs.nix
     #../mylibs/utilities/neovim/nixcats.nix
     ../mylibs/utilities/neovim2/nixcats.nix
+    ../mylibs/utilities/security/pw_mini.nix
     # ../mylibs/utilities/hydraCI.nix
+
     inputs.home-manager.nixosModules.home-manager
     inputs.nixvim.nixosModules.nixvim 
     inputs.stylix.nixosModules.stylix
