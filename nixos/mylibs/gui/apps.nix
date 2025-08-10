@@ -57,7 +57,7 @@ in
 
     # Utilities
     kitty
-    nix-razor.obsidian
+    (nix-razor.obsidian.override { inherit (nix-unstable) electron;})
     vlc
     # TODO: write function to autodetect the version of electron obsidian wants
     # and allow it even if it's insecure.

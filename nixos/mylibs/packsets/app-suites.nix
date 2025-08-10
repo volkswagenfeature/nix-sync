@@ -16,6 +16,7 @@ let
       }
     );
   });
+  
 in
 {
   config.nixpkgs.overlays = [ printrun_over ];
@@ -42,5 +43,20 @@ in
     libreoffice-qt
     hunspell
     hunspellDicts.en_US
+
+    # vscode
+    (
+      vscode-with-extensions.override {
+        vscode = vscodium;
+        vscodeExtensions = pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+          {
+            name = "roo-cline";
+            publisher = "RooVeterinaryInc";
+            version = "3.25.10";
+            sha256 = "sha256-j9ydB6hR+Qx4HvBDMrYGev2K/vsG6ASeOQHhhYheEuw=";
+          }
+        ];
+      }
+    )
   ];
 }
