@@ -19,14 +19,13 @@ in
 {
   environment.systemPackages = [
     backgroundScript
-    pkgs.dracula-theme
-    pkgs.adwaita-icon-theme
   ];
 
 
   stylix = {
     enable = true;
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/onedark-dark.yaml";
+    # polarity = "dark"; # Should only be used for the algo.
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/brewer.yaml";
     autoEnable = true;
     #homeManagerIntegration.autoImport = false;
     targets = {

@@ -4,7 +4,8 @@ return {
         enabled = nixCats("completion.delimiters"),
         after = function (plugin)
            require("nvim-autopairs").setup({
-               check_ts = nixCats("highlighting.treesitter")
+               check_ts = nixCats("highlighting.treesitter"),
+               disable_filetype = {"text"}
            })
         end
     },
@@ -26,12 +27,15 @@ return {
         end
     },
     {
-       "rainbow-delimiters",
-        lazy = false,
-        enabled = nixCats("completion.delimiters"),
-        after = function (plugin)
-           require("rainbow-delimiters.setup").setup({
-           })
-        end
+       "rainbow-delimiters.nvim",
+       lazy = false,
+       enabled = nixCats("completion.delimiters"),
+       after = function (plugin)
+          require("rainbow-delimiters.setup").setup({
+              highlight = {
+
+              }
+          })
+       end
     }
 }

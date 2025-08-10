@@ -14,12 +14,18 @@ in {
   ];
   config = {
     nixCats = {
-
       enable = true;
       packageNames = [ "diwhyModule" ];
       luaPath = ./.;
 
       categoryDefinitions.replace = ({ pkgs, settings, categories, extra, name, mkPlugin, ... }@packageDef: {
+
+        extraLuaPackages = {
+          general = [ 
+            (lp: [lp.lyaml])
+          ];
+        };
+
         lspsAndRuntimeDeps = with pkgs; {
           general = [ripgrep universal-ctags]; # vim.health requests ripgrep.
           completion = {
@@ -67,7 +73,7 @@ in {
         };
 
         startupPlugins = with pkgs.vimPlugins; {
-          general = [ fugitive statuscol-nvim ];
+          general = [ fugitive statuscol-nvim mini-base16];
           completion = {
             general = [ nvim-lspconfig ];
           };
@@ -96,14 +102,16 @@ in {
             #wrapRc = false;
             aliases = ["vim" "nvim"];
           };
-
           categories = {
             general = true;
-      loaders = true;
-      highlighting = true;
-      completion = true;
+            loaders = true;
+            highlighting = true;
+            completion = true;
             userExperience = true;
+            colors = config.lib.stylix.colors;
+
           };
+
         };
       };
     };
