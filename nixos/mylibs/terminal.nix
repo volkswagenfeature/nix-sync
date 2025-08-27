@@ -29,8 +29,9 @@ in
     # big terminal font
     figlet
 
-    # TUI file browser
+    # TUI file browsers
     ranger
+    nnn
 
     # Network utilities
     nmap
@@ -94,6 +95,8 @@ in
           preview_images = true;
           preview_images_method = "kitty";
         };
+
+
       };
       
      
