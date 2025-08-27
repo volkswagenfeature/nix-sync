@@ -47,13 +47,21 @@ in
     # vscode
     (
       vscode-with-extensions.override {
-        vscode = vscodium;
+        vscode = vscodium.override {
+          commandLineArgs = "--password-store='gnome-libsecret'";
+        };
         vscodeExtensions = pkgs.vscode-utils.extensionsFromVscodeMarketplace [
           {
             name = "roo-cline";
             publisher = "RooVeterinaryInc";
             version = "3.25.10";
             sha256 = "sha256-j9ydB6hR+Qx4HvBDMrYGev2K/vsG6ASeOQHhhYheEuw=";
+          }
+          {
+            name = "nix-extension-pack";
+            publisher = "pinage404";
+            version = "3.0.0";
+            sha256 = "";
           }
         ];
       }

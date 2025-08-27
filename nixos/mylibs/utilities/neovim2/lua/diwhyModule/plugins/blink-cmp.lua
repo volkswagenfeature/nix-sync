@@ -10,7 +10,7 @@ return {
         end,
         after = function(plugin)
             require("blink.cmp").setup({
-                keymap = { preset = "enter" },
+                keymap = { preset = "default" },
                 appearance = { nerd_font_variant = "mono" },
                 signature = { enabled = true },
                 sources = {

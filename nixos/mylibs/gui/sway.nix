@@ -140,7 +140,7 @@ in
 
         };
 
-        input."2821:6078:ASUS_Computer_Inc._ASUS_GAMING_MOUSE_GX950" = { # Config for mouse has to be fixed before going to do art.
+        input."2821:6078:ASUS_Computer_Inc._ASUS_GAMING_MOUSE_GX950" = { 
           pointer_accel = "-0.5"; # seems to do nothing
         };
         output."eDP-1" = {
@@ -149,7 +149,6 @@ in
         };
         terminal = "kitty";
         modifier = "Mod4";
-        #keybindings = {"XF86MonBrightnessUp"="echo testval";};
       }; 
     };
     # Gammastep conifgs 

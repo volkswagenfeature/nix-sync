@@ -1,8 +1,12 @@
 {
   pkgs,
+  config,
   ...
 }:
 {
-  services.passSecretService.enable = true;
+  config.environment.systemPackages = with pkgs; [
+    pass
+  ];
+  config.services.passSecretService.enable = true;
 
 }
