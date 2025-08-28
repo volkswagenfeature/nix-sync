@@ -36,6 +36,7 @@ in {
     nmap
 
     # neovim as pager
+    #(pkgs.nvimpager.overrideAttrs ())
     nvimpager
     
   ];

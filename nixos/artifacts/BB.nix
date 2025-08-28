@@ -61,7 +61,6 @@ rec {
     })
     ../hardware-configuration.nix
     ../mylibs/utilities/hibernation.nix
-    #../mylibs/editor.nix
     ../mylibs/terminal.nix
     ../mylibs/system.nix
     ../mylibs/gui/apps.nix
@@ -72,8 +71,7 @@ rec {
     ../mylibs/utilities/downloadmount.nix
     ../mylibs/utilities/netconfig.nix
     ../mylibs/utilities/git-script-reqs.nix
-    #../mylibs/utilities/neovim/nixcats.nix
-    ../mylibs/utilities/neovim2/nixcats.nix
+    ../mylibs/utilities/neovim/nixcats.nix
     ../mylibs/utilities/security/pw_mini.nix
     # ../mylibs/utilities/hydraCI.nix
 
