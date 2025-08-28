@@ -2,8 +2,7 @@
 with lib;
 let
   secrets = (import ../secrets.nix {});
-in
-{
+in {
   environment.systemPackages = with pkgs; [
     oh-my-fish
     fish
@@ -35,6 +34,9 @@ in
 
     # Network utilities
     nmap
+
+    # neovim as pager
+    nvimpager
     
   ];
 
@@ -85,9 +87,9 @@ in
           icat = ''kitty +kitten icat $argv'';
           ssh = ''kitty +kitten ssh $argv'';
         };
-        shellInit = [
+        shellInit = strings.concatStringsSep "\n" [
           "set -gx EDITOR vim"
-          "set -gx PAGER  vim -R -"
+          "set -gx PAGER  nvimpager"
         ];
       }; 
       
