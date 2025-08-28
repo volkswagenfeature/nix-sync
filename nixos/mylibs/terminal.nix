@@ -2,6 +2,16 @@
 with lib;
 let
   secrets = (import ../secrets.nix {});
+  my-nvimpager = let  
+    my-nvim = lib.getExe config.nixCats.out.packages.diwhyModule;
+  in pkgs.nvimpager.overrideAttrs (_:{
+    preBuild = ''
+      patchShebangs nvimpager
+      substituteInPlace nvimpager --replace-fail ':-nvim' ':-${my-nvim}'
+    '';
+    doCheck = false;
+  });
+ 
 in {
   environment.systemPackages = with pkgs; [
     oh-my-fish
@@ -37,7 +47,7 @@ in {
 
     # neovim as pager
     #(pkgs.nvimpager.overrideAttrs ())
-    nvimpager
+    my-nvimpager
     
   ];
 

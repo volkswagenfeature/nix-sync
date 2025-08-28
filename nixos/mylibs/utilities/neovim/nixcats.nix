@@ -61,10 +61,10 @@ in {
               # lualine-nvim # To set up later.
               which-key-nvim
               plenary-nvim
-                    (mkPlugin "hawtkeys.nvim" (builtins.fetchGit {
-                      url = "https://github.com/tris203/hawtkeys.nvim";
-                      rev = "261cc311d4abdc88decceca6dc1013faa14c56ea";
-                    }))
+              (mkPlugin "hawtkeys.nvim" (builtins.fetchGit {
+                url = "https://github.com/tris203/hawtkeys.nvim";
+                rev = "261cc311d4abdc88decceca6dc1013faa14c56ea";
+              }))
             ];
             misc = [
               undotree
