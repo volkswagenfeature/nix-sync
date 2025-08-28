@@ -85,6 +85,10 @@ in
           icat = ''kitty +kitten icat $argv'';
           ssh = ''kitty +kitten ssh $argv'';
         };
+        shellInit = [
+          "set -gx EDITOR vim"
+          "set -gx PAGER  vim -R -"
+        ];
       }; 
       
       
