@@ -56,7 +56,7 @@ in
 
     # Android
     android-tools
-    # android-studio-full
+    android-studio-full
     android-udev-rules
   ];
 }
