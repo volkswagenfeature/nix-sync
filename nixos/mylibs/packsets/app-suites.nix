@@ -53,5 +53,10 @@ in
         vscodeExtensions = callPackage ./codium-plugins.nix {};
       }
     )
+
+    # Android
+    android-tools
+    # android-studio-full
+    android-udev-rules
   ];
 }

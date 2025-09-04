@@ -51,6 +51,7 @@
            "electron-32.3.3"
             #"electron-31.7.7"
           ];
+          config.android_sdk.accept_license = true;
         };
       };
     };
@@ -61,6 +62,7 @@
   in 
   {
     nixosConfigurations."${secrets.hostname}"= nixpkgs.lib.nixosSystem BB-image;
+
     /*repl = flake-utils.lib.mkApp {
       drv = pkgs.writeShellScriptBin "repl" ''
         confnix=$(mktemp)
