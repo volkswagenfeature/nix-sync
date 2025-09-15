@@ -5,7 +5,7 @@
 {
   fileToStore = filepath : name : (derivation {
     inherit name;
-    system = builtins.currentSystem;
+    system = "x86_64-linux";
     builder = pkgs.writeScript "simpleBuilder.sh" "cp $src $out";
     src = filepath;
   });
