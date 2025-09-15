@@ -43,12 +43,10 @@ in
 
   users.users."${secrets.primaryuser}".packages = with pkgs; [
     # Networking
-    chromium
+    # chromium
     deluge
     tor-browser
-    
-    
-    #ungoogled-chromium #for later
+    ungoogled-chromium 
 
 
     # Design

@@ -55,8 +55,8 @@ in
       */
 
         
-
-      services.tailscale.enable = true;
+      # Temporarily disabled, due to build issues.
+      # services.tailscale.enable = true;
     };
   }
 

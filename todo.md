@@ -22,3 +22,4 @@
 - Set enviroment variables: Prioritize coreutils over toybox/busybox. Set $EDITOR, others.
 - Editor:
     - Change the color scheme so args aren't incandescent red. The contents of sets and lists in nix count under that category, so it makes package lists look like they're on fire.
+    - add ANSI escape code support to treesitter: https://git.sr.ht/~rockorager/tree-sitter-ansi

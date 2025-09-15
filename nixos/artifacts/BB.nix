@@ -47,7 +47,7 @@ rec {
       ] ;
 
       #nix.package = nixVersions.stable;
-      nix.settings.experimental-features = "nix-command flakes ";
+      nix.settings.experimental-features = "nix-command flakes ca-derivations";
       nix.settings.connect-timeout = 1;
       nix.settings.stalled-download-timeout = 1;
 
