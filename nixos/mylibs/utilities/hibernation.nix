@@ -1,18 +1,27 @@
 # Stolen from https://gist.github.com/mattdenner/befcf099f5cfcc06ea04dcdd4969a221 
 {lib, pkgs, config, ...}:
 let
+  utility = pkgs.callPackage ../../utility/misc.nix {inherit pkgs;};
+  hiberOnWake = utility.fileToStore ../../assets/hiber-on-wake.wav;
+  hiberScriptRun = utility.fileToStore ../../assets/hiber-on-wake.wav;
+
+  
   hibernateEnvironment = {
-    HIBERNATE_SECONDS = "600";
+    HIBERNATE_SECONDS = "60";
     HIBERNATE_LOCK = "/var/run/autohibernate.lock";
   };
+  swapPartition = "/dev/disk/by-uuid/54d8eb27-9f0e-42b1-8457-2ec7f3577085";
 in {
-  /*
+  config.boot.kernelParams = ["resume=${swapPartition}"];
+  config.boot.resumeDevice = swapPartition; 
+
   systemd.services."awake-after-suspend-for-a-time" = {
     description = "Sets up the suspend so that it'll wake for hibernation";
     wantedBy = [ "suspend.target" ];
     before = [ "systemd-suspend.service" ];
     environment = hibernateEnvironment;
     script = ''
+      ${pkgs.pipewire}/bin/pw-play ${hiberOnWake}
       curtime=$(date +%s)
       echo "$curtime $1" >> /tmp/autohibernate.log
       echo "$curtime" > $HIBERNATE_LOCK
@@ -26,6 +35,7 @@ in {
     after = [ "systemd-suspend.service" ];
     environment = hibernateEnvironment;
     script = ''
+      ${pkgs.pipewire}/bin/pw-play ${hiberScriptRun}
       curtime=$(date +%s)
       sustime=$(cat $HIBERNATE_LOCK)
       rm $HIBERNATE_LOCK
@@ -37,5 +47,4 @@ in {
     '';
     serviceConfig.Type = "simple";
   };
-  */
 }

@@ -11,7 +11,6 @@
 - Add a system that sets envars for the hook scripts in Nix, ensures they have the dependencies they need, and then copies them to the nix store and symlinks them to the right spot in the .git folder
 
 - Re-factor my modules to use CallPackage
-- Move vim over to new Lua-based config.
 
 - Firefox
     - Add keyboard shortcut using the [firefox autoconfig](https://support.mozilla.org/en-US/kb/customizing-firefox-using-autoconfig) feature to open ai chat sidebar.
@@ -23,3 +22,7 @@
 - Editor:
     - Change the color scheme so args aren't incandescent red. The contents of sets and lists in nix count under that category, so it makes package lists look like they're on fire.
     - add ANSI escape code support to treesitter: https://git.sr.ht/~rockorager/tree-sitter-ansi
+
+- System bugs:
+    - Firefox is slow on making some requests (AJAX???). Might be due to something related to Adblock Origin.
+    - Devtools is missing everything except HTML 
