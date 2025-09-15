@@ -2,8 +2,8 @@
 {lib, pkgs, config, ...}:
 let
   utility = pkgs.callPackage ../../utility/misc.nix {inherit pkgs;};
-  hiberOnWake = utility.fileToStore ../../assets/hiber-on-wake.wav;
-  hiberScriptRun = utility.fileToStore ../../assets/hiber-on-wake.wav;
+  hiberOnWake = utility.fileToStore ../../assets/hiber-on-wake.wav "hiberOnWake.wav";
+  hiberScriptRun = utility.fileToStore ../../assets/hiber-on-wake.wav "hiberScriptRun.wav";
 
   
   hibernateEnvironment = {
