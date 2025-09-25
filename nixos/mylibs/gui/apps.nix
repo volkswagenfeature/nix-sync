@@ -44,7 +44,7 @@ in
   users.users."${secrets.primaryuser}".packages = with pkgs; [
     # Networking
     # chromium
-    deluge
+    # deluge # Disabled, because I got nailed 
     tor-browser
     ungoogled-chromium 
 

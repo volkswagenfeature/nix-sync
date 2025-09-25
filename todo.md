@@ -22,6 +22,7 @@
 - Editor:
     - Change the color scheme so args aren't incandescent red. The contents of sets and lists in nix count under that category, so it makes package lists look like they're on fire.
     - add ANSI escape code support to treesitter: https://git.sr.ht/~rockorager/tree-sitter-ansi
+    - figure out what "snippets" are as compared to standard completion in my completion setup, and why they get to use "tab". I sel-next and sel-prev more than I use snippets. 
 
 - System bugs:
     - Firefox is slow on making some requests (AJAX???). Might be due to something related to Adblock Origin.
