@@ -14,5 +14,11 @@ vscode-utils.extensionsFromVscodeMarketplace [
     version = "2.2.0";
     sha256 = "sha256-MmmRKq/7uTCywnEceKukJW/jIc0oIx0GIz55ugh4gQg=";
   }
+  {
+    name = "chatgpt";
+    publisher = "OpenAI";
+    version = "0.5.15";
+    sha256 = "sha256-NwkWKf86C56G9InKDEdZAKCW8wfmvXjnoqU8GD/mFEI=";
+  }
 ]
 
