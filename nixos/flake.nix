@@ -36,6 +36,15 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nix-snapshotter = {
+      url = "github:pdtpartners/nix-snapshotter";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nix2container = {
+      url = "github:nlewo/nix2container";
+    };
+
   };
   outputs = { ... } @ inputs: 
   with inputs;
@@ -58,10 +67,12 @@
     secrets = ( import ./secrets.nix {} );
     live-image = (import ./artifacts/live-image.nix (inputs//extra-args));
     BB-image =(import ./artifacts/BB.nix (inputs//extra-args));
+    TesseractBuilder = (import ./artifacts/BB.nix (inputs//extra-args));
 
   in 
   {
     nixosConfigurations."${secrets.hostname}"= nixpkgs.lib.nixosSystem BB-image;
+    nixosConfigurations."TesseractBuilder" = nixpkgs.lib.nixosSystem TesseractBuilder;
 
     /*repl = flake-utils.lib.mkApp {
       drv = pkgs.writeShellScriptBin "repl" ''
