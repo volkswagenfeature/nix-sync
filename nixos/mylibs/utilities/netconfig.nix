@@ -8,7 +8,7 @@
 }:{
   networking =  {
     hosts = { "127.0.0.1" = [];};
-    nameservers = ["9.9.9.9"];
+    nameservers = ["9.9.9.9" "8.8.8.8"];
     nftables.enable = true;
     networkmanager = {
       enable = true;

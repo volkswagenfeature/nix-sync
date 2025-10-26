@@ -71,6 +71,14 @@ in {
         user.email = "13547477+volkswagenfeature@users.noreply.github.com";
         user.name = "volkswagenfeature";
         core.editor = "vim";
+        url = {
+          "ssh://git@ssh.github.com:443/" = {
+            insteadOf = [
+              "ssh://git@github.com/"
+              "git@github.com:"
+            ];
+          };
+        };
       };
     };
     nh = {
