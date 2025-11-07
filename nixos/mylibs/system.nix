@@ -34,6 +34,9 @@ in
      geoclue2-with-demo-agent # Same thing as the override???
      #geoclue2#.override {withDemoAgent = config.services.geoclue2.enableDemoAgent;}
      avahi
+
+     # Networking
+     openssl
     ]; 
   # Nix config modifications
   nix.settings.trusted-substituters = ["https://ai.cachix.org"];

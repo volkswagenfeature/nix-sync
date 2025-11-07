@@ -15,10 +15,12 @@
     btop-rocm
     nix-tree
     pv
-    neofetch
+    neofetch  # Needs replacement, no longer maintained
 
-    ratarmount
+    # Networking
+    ratarmount 
     dig
+    nmap
 
     libxkbcommon  #Keycode and keyboard debugging.
   ];

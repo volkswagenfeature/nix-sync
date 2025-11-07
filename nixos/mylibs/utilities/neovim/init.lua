@@ -21,6 +21,7 @@ Base16Colors = parse_base_keys(nixCats("colors"))
 
 -- Plugin Loading
 require('lze').load {
+    { import = "diwhyModule.plugins.llm"},
     { import = "diwhyModule.plugins.treesitter"  },
     { import = "diwhyModule.plugins.blink-cmp"   },
     { import = "diwhyModule.plugins.gitsigns"    },
