@@ -51,4 +51,6 @@ require('lze').load {
 }
 
 -- General configuration
-require("diwhyModule.libs").setup();
+--
+
+require("diwhyModule.libs.writeFail").setup()
