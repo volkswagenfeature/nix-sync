@@ -55,8 +55,8 @@ in
     )
 
     # Android
-     android-tools
-     android-studio-full
+    android-tools
+    #android-studio-full
     android-udev-rules
   ];
 }
