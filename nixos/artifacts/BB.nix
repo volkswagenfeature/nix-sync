@@ -73,6 +73,7 @@ rec {
     ../mylibs/utilities/git-script-reqs.nix
     ../mylibs/utilities/neovim/nixcats.nix
     ../mylibs/utilities/security/pw_mini.nix
+    ../mylibs/utilities/activityWatch.nix
     # ../mylibs/utilities/hydraCI.nix
 
     inputs.home-manager.nixosModules.home-manager
