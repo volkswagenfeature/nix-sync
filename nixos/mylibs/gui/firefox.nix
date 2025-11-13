@@ -13,7 +13,7 @@ let
 in
   {
     programs.firefox = {
-      package = pkgs.firefox-esr;
+      package = pkgs.firefox-bin;
       enable = true;
       languagePacks = ["en-US"];
       # Check about:policies#documentation for options.
