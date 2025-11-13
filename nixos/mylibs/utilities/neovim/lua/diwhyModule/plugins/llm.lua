@@ -1,6 +1,6 @@
 return {
     {
-        "sllm.nvim",
+        "sllm",
         after = function (plugin)
             require("sllm").setup({})
         end

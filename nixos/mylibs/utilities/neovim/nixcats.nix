@@ -34,7 +34,7 @@ in {
             pydev  = [ basedpyright];
           };
           highlighting = [gcc clang zig tree-sitter nodejs ];
-          llm-inter = [llm];
+          llmInter = [llm];
         };
         optionalPlugins = with pkgs.vimPlugins; {
           general = [ ];
@@ -71,7 +71,7 @@ in {
               undotree
             ];
           };
-          llm-inter = [
+          llmInter = [
             ( mkPlugin "sllm.nvim" ( builtins.fetchGit {
               url = "https://github.com/mozanunal/sllm.nvim";
               rev = "f327578f9c866b5e9c4301716370359479e7d159";
@@ -115,6 +115,7 @@ in {
             highlighting = true;
             completion = true;
             userExperience = true;
+            llmInter = true;
             colors = config.lib.stylix.colors;
 
           };
