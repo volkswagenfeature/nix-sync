@@ -61,6 +61,10 @@ in {
   fonts.fontDir.enable = true;
 
   documentation.dev.enable = true;
+
+  # Disable constant man re-building
+  documentation.man.generateCaches = false;
+
   programs= {
     fish.enable = true;
     nix-index.enable = true;

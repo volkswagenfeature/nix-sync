@@ -82,7 +82,7 @@ in {
         startupPlugins = with pkgs.vimPlugins; {
           general = [ fugitive statuscol-nvim mini-base16];
           completion = {
-            general = [ nvim-lspconfig ];
+            general = [ nvim-lspconfig vim-suda]; # suda is here cause im lazy
           };
           loaders = [
             lze
