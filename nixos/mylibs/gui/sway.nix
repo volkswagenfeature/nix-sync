@@ -49,6 +49,8 @@ let
   swaystart= "${pkgs.swayfx}/bin/sway";
   swaydebug= "${swaystart} -d > /home/${secrets.primaryuser}/swaylog3 2>&1";
 
+#  security.pam.services.swaylock = {};
+
 
 
 in
@@ -125,6 +127,7 @@ in
 
   ### HomeManager section
   home-manager.users."${secrets.primaryuser}"= {pkgs, ...}:{
+    programs.swaylock.enable = true;
     wayland.windowManager.sway = {
       enable = true;
       checkConfig = false;
