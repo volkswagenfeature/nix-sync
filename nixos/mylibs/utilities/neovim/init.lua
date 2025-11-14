@@ -51,6 +51,26 @@ require('lze').load {
 }
 
 -- General configuration
---
 
--- require("diwhyModule.libs.writeFail").setup()
+-- Enable use of :sw :sr and :sx to sudo write to files.
+local function suda_forward(user_cmd, cmds)
+  vim.api.nvim_create_user_command(user_cmd, 
+  function(opts)
+    for i, cmd in ipairs(cmds) do
+      -- Only the first command receives the user args
+      if i == 1 and opts.args ~= '' then
+        cmd = cmd .. ' ' .. opts.args
+      end
+      vim.cmd(cmd)
+    end
+  end,
+  {
+    nargs = '*',
+    complete = 'file',
+  })
+end
+
+suda_forward('Sw', { 'SudaWrite' })
+suda_forward('Sr', { 'SudaRead' })
+suda_forward('Sx', { 'SudaWrite', 'quit' })
+

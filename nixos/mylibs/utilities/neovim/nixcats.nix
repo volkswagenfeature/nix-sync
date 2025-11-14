@@ -6,6 +6,7 @@
  ...
 }: let
 
+
 nvimplug-overlay = final: prev : builtins.trace "???" {foo="bar";}; 
 traceValShort = v : (builtins.trace (toString v) v );
 in {
