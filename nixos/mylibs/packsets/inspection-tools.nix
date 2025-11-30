@@ -23,5 +23,8 @@
     nmap
 
     libxkbcommon  #Keycode and keyboard debugging.
+
+    cloc # count lines of code.
+    nix-init # Help with writing nix definitions
   ];
 }

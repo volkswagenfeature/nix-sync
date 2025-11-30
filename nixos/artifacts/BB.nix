@@ -48,8 +48,8 @@ rec {
 
       #nix.package = nixVersions.stable;
       nix.settings.experimental-features = "nix-command flakes";
-      nix.settings.connect-timeout = 1;
-      nix.settings.stalled-download-timeout = 1;
+      nix.settings.connect-timeout = 5;
+      nix.settings.stalled-download-timeout = 15;
 
       nix.settings.allow-dirty = true;
       nixpkgs.config = defaults.pkgscon.config;
@@ -75,6 +75,25 @@ rec {
     ../mylibs/utilities/security/pw_mini.nix
     ../mylibs/utilities/activityWatch.nix
     # ../mylibs/utilities/hydraCI.nix
+    ({ pkgs, ... }: {
+      # (1) Import nixos module.
+      imports = [ inputs.nix-snapshotter.nixosModules.default ];
+
+      # (2) Add overlay.
+      nixpkgs.overlays = [ inputs.nix-snapshotter.overlays.default ];
+
+      # (3) Enable service.
+      virtualisation.containerd = {
+        enable = true;
+        nixSnapshotterIntegration = true;
+      };
+      services.nix-snapshotter = {
+        enable = true;
+      };
+
+      # (4) Add a containerd CLI like nerdctl.
+      environment.systemPackages = [ pkgs.nerdctl ];
+    })
 
     inputs.home-manager.nixosModules.home-manager
     inputs.nixvim.nixosModules.nixvim 

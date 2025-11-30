@@ -38,20 +38,6 @@ require('lze').load {
     end,
   },
   {
-    -- lazydev makes your lsp way better in your config without needing extra lsp configuration.
-    "lazydev.nvim",
-    for_cat = "completion.luadev",
-    cmd = { "LazyDev" },
-    ft = "lua",
-    after = function(_)
-      require('lazydev').setup({
-        library = {
-          { words = { "nixCats" }, path = (nixCats.nixCatsPath or "") .. '/lua' },
-        },
-      })
-    end,
-  },
-  {
     -- name of the lsp
     "lua_ls",
     enabled = nixCats('completion.luadev') or false,

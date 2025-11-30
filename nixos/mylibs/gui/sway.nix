@@ -150,6 +150,10 @@ in
           scale = "1.5";
           #bg = "/home/${secrets.primaryuser}/Straight-flat-inconsolata3.png center";
         };
+        output."DP-3" = {
+          mode = "3840x2160@29.970Hz";
+
+        };
         terminal = "kitty";
         modifier = "Mod4";
       }; 

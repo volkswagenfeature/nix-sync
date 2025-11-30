@@ -48,25 +48,62 @@ let
           mainProgram = "pass-secret-service";
         };
       };
+
+    rustPass = let
+      inherit (pkgs) lib rustPlatform fetchFromGitHub;
+    in
+      rustPlatform.buildRustPackage rec {
+        pname = "pass-secret-service";
+        version = "0.5.1";
+
+        src = fetchFromGitHub {
+          owner = "grimsteel";
+          repo = "pass-secret-service";
+          rev = "v${version}";
+          hash = "sha256-Sjq8ABIoT2Sz8ZRx/TPUoUeXU3qOHD/KJQtcGIm7O74=";
+        };
+
+        cargoHash = "sha256-lGRdMsBG0IWScDVWRfXtJ/njt5M21CXOCnybw82PwaM=";
+
+        meta = {
+          description = "Implementation of org.freedesktop.secrets using `pass";
+          homepage = "https://github.com/grimsteel/pass-secret-service/tree/main";
+          license = lib.licenses.gpl3Only;
+          maintainers = with lib.maintainers; [ ];
+          mainProgram = "pass-secret-service";
+        };
+      };
 in
 {
   environment.systemPackages = with pkgs; [
     (pass.withExtensions (ext: []))
-    pass-secret-service
+    #pass-secret-service
+    libsecret
     pinentry-bemenu
     pinentry-tty
   ];
-  services.gnome.gnome-keyring.enable = true;
   programs.gnupg = {
     agent = {
       enable = true;
       pinentryPackage = pkgs.pinentry-bemenu;
     };
-
   };
+  /*
+  systemd.user.services."dbus-org.freedesktop.secrets.service" = {
+    enable = true;
+    description = "grimsteel's secret service implementation";
+    partOf = ["graphical-session.target"];
+    serviceConfig = {
+      Type = "dbus";
+      BusName = "org.freedesktop.secrets";
+      ExecStart = "${rustPass}/bin/pass-secret-service";
+    };
+  };
+  */
+
+  services.gnome.gnome-keyring.enable = true;
   services.passSecretService = { 
     enable = false; 
-    # package = pkgs.libsecret;
-    package = newPass;
+    # package = newPass;
   };
 }

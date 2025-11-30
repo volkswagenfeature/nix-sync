@@ -10,7 +10,7 @@ in
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "thunderbolt" "usb_storage" "sd_mod" ];
+  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "thunderbolt" "usb_storage" "sd_mod" "ath9k" "ath9k_htc"];
   boot.initrd.kernelModules = [ "dm-snapshot" "amdgpu"  ];
   boot.kernelModules = [ "kvm-amd" "mt7921e" ];
   # boot.kernelParams = [ "amd_iommu=off" "iommu=soft" ]; # Doesn't fix resume.
