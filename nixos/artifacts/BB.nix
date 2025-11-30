@@ -96,7 +96,7 @@ rec {
     })
 
     inputs.home-manager.nixosModules.home-manager
-    inputs.nixvim.nixosModules.nixvim 
+    #inputs.nixvim.nixosModules.nixvim 
     inputs.stylix.nixosModules.stylix
     nix-index-database.nixosModules.nix-index
   ];

@@ -29,7 +29,7 @@ in
     autoEnable = true;
     #homeManagerIntegration.autoImport = false;
     targets = {
-      gnome.enable = false;
+      #gnome.enable = false;
     };
   };
   home-manager.users."${secrets.primaryuser}" = {pkgs, ...}:{

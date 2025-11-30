@@ -4,7 +4,6 @@
   config, 
   nix-unstable, 
   nixpkgs, 
-  nix-razor, 
   inputs, 
   extra-args,
   ...
@@ -34,6 +33,7 @@ in
   imports = [
     ../packsets/app-suites.nix 
     ../packsets/social-media.nix
+    ../packsets/mechanical-engineering.nix
   ];
 
   nixpkgs.overlays = [
@@ -55,7 +55,7 @@ in
 
     # Utilities
     kitty
-    (nix-razor.obsidian.override { inherit (nix-unstable) electron;})
+    (nix-unstable.obsidian.override { inherit (nix-unstable) electron;})
     vlc
     # TODO: write function to autodetect the version of electron obsidian wants
     # and allow it even if it's insecure.

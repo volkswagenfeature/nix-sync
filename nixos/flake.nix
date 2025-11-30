@@ -1,11 +1,11 @@
 {
   inputs = {  
-    nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/*";
+    nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0";
     nix-unstable-raw.url = "github:NixOS/nixpkgs/nixos-unstable";
     nix-razor-raw.url = "github:NixOS/nixpkgs/master";
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
+      url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -26,7 +26,7 @@
     };
 
     stylix = {
-      url = "github:nix-community/stylix/release-25.11";
+      url = "github:nix-community/stylix/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -46,7 +46,7 @@
     extra-args = { 
       defaults = rec {
         system = "x86_64-linux";
-        sysversion = "25.11";
+        sysversion = "25.05";
         pkgscon = {
           inherit system;
           config.allowUnfree = true;
