@@ -92,6 +92,7 @@ in {
       flake = "/nix-sync/nixos";
     };
     direnv.enableFishIntegration = true;
+    direnv.silent = true;
   };
 
   services = {

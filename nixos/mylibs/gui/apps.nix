@@ -46,7 +46,7 @@ in
     # chromium
     # deluge # Disabled, because I got nailed 
     tor-browser
-    ungoogled-chromium 
+    ungoogled-chromium #FUCKING overrides firefox as default app
 
 
     # Design
@@ -95,7 +95,21 @@ in
     dedicatedServer.openFirewall = true; 
   };
 
+  xdg.mime = {
+    enable = true;
+    defaultApplications = {
+      "text/html" = "firefox.desktop";
+      "x-scheme-handler/http" = "firefox.desktop";
+      "x-scheme-handler/https" = "firefox.desktop";
+      "x-scheme-handler/about" = "firefox.desktop";
+      "x-scheme-handler/unknown" = "firefox.desktop";
+    };
+
+  };
+
+
   home-manager.users."${secrets.primaryuser}"= {pkgs,...}:{ 
+    /*
     xdg.mimeApps = {
       enable = true;
       defaultApplications = {
@@ -106,6 +120,7 @@ in
         "x-scheme-handler/unknown" = "firefox.desktop";
       };
     };
+    */
   };
 
 }
