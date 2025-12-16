@@ -12,9 +12,9 @@ let
   });
 in
 {
-  config.nixpkgs.overlays = [printrun_over];
+  config.nixpkgs.overlays = [];
   config.environment.systemPackages = with pkgs; [
-    kicad
+    #kicad
     freecad-wayland
     meshlab
     prusa-slicer

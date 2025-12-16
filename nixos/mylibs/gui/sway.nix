@@ -45,7 +45,7 @@ let
 
   
   #TUIgreet script and values
-  tuigreet = "${pkgs.greetd.tuigreet}/bin/tuigreet";
+  tuigreet = "${pkgs.tuigreet}/bin/tuigreet";
   swaystart= "${pkgs.swayfx}/bin/sway";
   swaydebug= "${swaystart} -d > /home/${secrets.primaryuser}/swaylog3 2>&1";
 
@@ -87,7 +87,7 @@ in
   ## Display manager
   services.greetd = {
     enable = true;
-    package = pkgs.greetd.tuigreet;
+    package = pkgs.tuigreet;
     settings = {
       default_session = {
         command = "${tuigreet} --time --remember --cmd '${swaystart}'";

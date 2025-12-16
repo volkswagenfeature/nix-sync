@@ -13,9 +13,11 @@ Large apps, suites, and multifunctional enviroments.
     # Images
     krita
     gimp-with-plugins
+    libwacom
+    libwacom-surface
+
 
     # Libreoffice plus support packages
-    libreoffice-qt
     hunspell
     hunspellDicts.en_US
 
@@ -33,6 +35,5 @@ Large apps, suites, and multifunctional enviroments.
     android-tools
     android-studio-tools
     #android-studio-full
-    android-udev-rules
   ];
 }

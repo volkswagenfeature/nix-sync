@@ -18,7 +18,7 @@
     neofetch  # Needs replacement, no longer maintained
 
     # Networking
-    ratarmount 
+    # ratarmount 
     dig
     nmap
 

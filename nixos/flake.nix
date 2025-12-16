@@ -5,7 +5,7 @@
     nix-razor-raw.url = "github:NixOS/nixpkgs/master";
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";
+      url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -26,7 +26,7 @@
     };
 
     stylix = {
-      url = "github:nix-community/stylix/release-25.05";
+      url = "github:nix-community/stylix/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -46,11 +46,12 @@
     extra-args = { 
       defaults = rec {
         system = "x86_64-linux";
-        sysversion = "25.05";
+        sysversion = "25.11";
         pkgscon = {
           inherit system;
           config.allowUnfree = true;
           config.permittedInsecurePackages = [
+           #"qtwebengine-5.15.19"
            "electron-32.3.3"
             #"electron-31.7.7"
           ];

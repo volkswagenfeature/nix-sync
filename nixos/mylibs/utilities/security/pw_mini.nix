@@ -101,7 +101,7 @@ in
   };
   */
 
-  services.gnome.gnome-keyring.enable = true;
+#services.gnome.gnome-keyring.enable = true;
   services.passSecretService = { 
     enable = false; 
     # package = newPass;

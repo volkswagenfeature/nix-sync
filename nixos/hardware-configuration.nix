@@ -97,7 +97,7 @@ in
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
   # More GPU setup
-  services.xserver.videoDrivers = [ "displaylink" "modesetting" ];
+  # services.xserver.videoDrivers = [ "displaylink" "modesetting" ];
   hardware.graphics.enable = true;
   /*hardware.amdgpu.amdvlk = {
     enable = true;
@@ -107,11 +107,9 @@ in
 
 
   hardware.graphics.extraPackages = with pkgs; [
-    amdvlk
     rocmPackages.clr.icd
   ];
   # For 32 bit applications 
   hardware.graphics.extraPackages32 = with pkgs; [
-    driversi686Linux.amdvlk
   ];
 }

@@ -73,7 +73,6 @@ in
     # Password managment
     keepassxc
     # Office
-    #libreoffice-qt
     #hunspell
     #hunspellDicts.en_US
     webcord-vencord
