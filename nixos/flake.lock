@@ -241,11 +241,11 @@
     },
     "nix-razor-raw": {
       "locked": {
-        "lastModified": 1766341834,
-        "narHash": "sha256-hI5y0QzxlYjZhNWtllDnzmT71JeGkuGWIFocFZPgcTc=",
+        "lastModified": 1766342581,
+        "narHash": "sha256-bm/OS4MJHode/91K39/ltrTi5jBrI3hsXT6E5eaiss0=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "f3cb2bba8eed8e63686b2f8f38f44c6b8cb42ebb",
+        "rev": "c9fa7df3a4e76e0e925083b1fdd0af3bc13fb65f",
         "type": "github"
       },
       "original": {
