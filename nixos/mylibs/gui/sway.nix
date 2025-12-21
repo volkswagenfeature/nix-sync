@@ -45,8 +45,7 @@ let
 
   
   #TUIgreet script and values
-  tuigreet = "${pkgs.tuigreet}/bin/tuigreet";
-  swaystart= "${pkgs.swayfx}/bin/sway";
+  swaystart= "${lib.getExe pkgs.swayfx}";
   swaydebug= "${swaystart} -d > /home/${secrets.primaryuser}/swaylog3 2>&1";
 
 #  security.pam.services.swaylock = {};
@@ -87,10 +86,11 @@ in
   ## Display manager
   services.greetd = {
     enable = true;
-    package = pkgs.tuigreet;
+    useTextGreeter = true;
+    #package = pkgs.tuigreet;
     settings = {
       default_session = {
-        command = "${tuigreet} --time --remember --cmd '${swaystart}'";
+        command = "${lib.getExe pkgs.tuigreet} --time --remember --cmd '${swaystart}'";
       };
     };
   };
