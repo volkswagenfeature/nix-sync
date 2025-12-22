@@ -64,7 +64,7 @@ in
   # Enable bluetooth.(on by default as of 25.11)
   # hardware.bluetooth.enable = true;
   programs.dconf.enable = true; # May be needed by blueman-manager to work.
-  #hardware.bluetooth.powerOnBoot = true;
+  hardware.bluetooth.powerOnBoot = true;
 
 
   ### Internationilization/Input ###

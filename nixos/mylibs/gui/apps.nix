@@ -34,6 +34,7 @@ in
     ../packsets/app-suites.nix 
     ../packsets/social-media.nix
     ../packsets/mechanical-engineering.nix
+    ../packsets/privacy-crypto.nix
   ];
 
   nixpkgs.overlays = [
