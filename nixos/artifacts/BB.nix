@@ -74,6 +74,7 @@ rec {
     ../mylibs/utilities/neovim/nixcats.nix
     ../mylibs/utilities/security/pw_mini.nix
     ../mylibs/utilities/activityWatch.nix
+    ../mylibs/utilities/llmConfig.nix
     # ../mylibs/utilities/hydraCI.nix
     ({ pkgs, ... }: {
       # (1) Import nixos module.
