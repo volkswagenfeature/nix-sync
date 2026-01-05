@@ -62,7 +62,7 @@ in
   programs.nm-applet.enable = true;
 
   # Enable bluetooth.(on by default as of 25.11)
-  # hardware.bluetooth.enable = true;
+  hardware.bluetooth.enable = true;
   programs.dconf.enable = true; # May be needed by blueman-manager to work.
   hardware.bluetooth.powerOnBoot = true;
 
@@ -185,7 +185,6 @@ in
 
   ### Audio ###
   # Enable sound with pipewire.
-  # sound.enable = true;
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   
