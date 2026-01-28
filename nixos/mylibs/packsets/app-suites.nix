@@ -20,6 +20,7 @@ Large apps, suites, and multifunctional enviroments.
     # Libreoffice plus support packages
     hunspell
     hunspellDicts.en_US
+    libreoffice
 
     # vscode
     (
