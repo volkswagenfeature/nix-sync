@@ -10,6 +10,7 @@ return {
     after = function (plugin)
       require('gitsigns').setup({
         -- See `:help gitsigns.txt`
+        sign_priority = 7,
         signs = {
           add = { text = '+' },
           change = { text = '~' },

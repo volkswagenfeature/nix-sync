@@ -31,7 +31,6 @@ require('lze').load {
         "mini.base16",
         lazy = false,
         after = function (plugin)
-
             require("mini.base16").setup({
                 palette = Base16Colors
             })
@@ -48,6 +47,17 @@ require('lze').load {
         require("hawtkeys").setup({})
       end,
     },
+    {
+      "marks.nvim",
+      load = function (plugin)
+          vim.cmd.packadd(plugin)
+      end,
+      after = function (plugin)
+          require("marks").setup({
+              sign_priority = 6
+          })
+      end,
+    }
 }
 
 -- General configuration

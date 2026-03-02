@@ -61,6 +61,7 @@ in {
             uiAdditions = [
               gitsigns-nvim 
               # lualine-nvim # To set up later.
+              marks-nvim
               which-key-nvim
               plenary-nvim
               (mkPlugin "hawtkeys.nvim" (builtins.fetchGit {

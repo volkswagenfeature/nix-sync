@@ -81,7 +81,10 @@ rec {
       imports = [ inputs.nix-snapshotter.nixosModules.default ];
 
       # (2) Add overlay.
-      nixpkgs.overlays = [ inputs.nix-snapshotter.overlays.default ];
+      nixpkgs.overlays = [ 
+        inputs.nix-snapshotter.overlays.default 
+        (import ../utility/git-daemon.nix)
+      ];
 
       # (3) Enable service.
       virtualisation.containerd = {
