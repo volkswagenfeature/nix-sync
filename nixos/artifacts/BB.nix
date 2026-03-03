@@ -76,6 +76,7 @@ rec {
     ../mylibs/utilities/activityWatch.nix
     ../mylibs/utilities/llmConfig.nix
     # ../mylibs/utilities/hydraCI.nix
+    ../mylibs/utilities/git-daemon
     ({ pkgs, ... }: {
       # (1) Import nixos module.
       imports = [ inputs.nix-snapshotter.nixosModules.default ];
@@ -83,7 +84,6 @@ rec {
       # (2) Add overlay.
       nixpkgs.overlays = [ 
         inputs.nix-snapshotter.overlays.default 
-        (import ../utility/git-daemon.nix)
       ];
 
       # (3) Enable service.
