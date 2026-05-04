@@ -15,7 +15,7 @@ in
   config.nixpkgs.overlays = [];
   config.environment.systemPackages = with pkgs; [
     #kicad
-    freecad-wayland
+    #freecad-wayland
     meshlab
     prusa-slicer
     printrun

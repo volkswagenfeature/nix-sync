@@ -23,14 +23,16 @@ Large apps, suites, and multifunctional enviroments.
     libreoffice
 
     # vscode
-    (
-      vscode-with-extensions.override {
-        vscode = vscodium.override {
-          commandLineArgs = "--password-store='gnome-libsecret'";
-        };
-        vscodeExtensions = callPackage ./codium-plugins.nix {};
-      }
-    )
+    
+      (
+        vscode-with-extensions.override {
+          vscode = vscodium.override {
+            commandLineArgs = "--password-store='gnome-libsecret'";
+          };
+          vscodeExtensions = callPackage ./codium-plugins.nix {};
+        }
+      )
+    
 
     # Android
     android-tools

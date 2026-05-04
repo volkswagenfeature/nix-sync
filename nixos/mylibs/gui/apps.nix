@@ -45,7 +45,7 @@ in
   users.users."${secrets.primaryuser}".packages = with pkgs; [
     # Networking
     # chromium
-    # deluge # Disabled, because I got nailed 
+    deluge # Disabled, because I got nailed 
     tor-browser
     ungoogled-chromium #FUCKING overrides firefox as default app
 
@@ -56,7 +56,8 @@ in
 
     # Utilities
     kitty
-    (nix-unstable.obsidian.override { inherit (nix-unstable) electron;})
+     #(nix-unstable.obsidian.override { inherit (nix-unstable) electron;})
+    obsidian
     vlc
     # TODO: write function to autodetect the version of electron obsidian wants
     # and allow it even if it's insecure.

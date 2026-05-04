@@ -8,12 +8,11 @@
 }:{
   networking =  {
     hosts = { "127.0.0.1" = [];};
-    nameservers = ["9.9.9.9" "8.8.8.8"];
+#    nameservers = ["9.9.9.9" "8.8.8.8"]; # Breaks cafe wifi
     nftables.enable = true;
     networkmanager = {
       enable = true;
-      # useDnsmasq = true;  # Reccomended to fix the lookup errors
-      dns = "default";
+      dns =  lib.mkForce "default";
     };
     wireless.enable = lib.mkForce false;
   };

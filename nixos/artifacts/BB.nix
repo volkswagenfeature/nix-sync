@@ -84,6 +84,8 @@ rec {
       # (2) Add overlay.
       nixpkgs.overlays = [ 
         inputs.nix-snapshotter.overlays.default 
+        inputs.llm-agents.overlays.default
+
       ];
 
       # (3) Enable service.
@@ -109,6 +111,6 @@ rec {
     inherit inputs;
     #nix-unstable = inputs.nix-unstable-raw.legacyPackages.${system};
     nix-unstable = import inputs.nix-unstable-raw defaults.pkgscon ;
-    nix-razor = import inputs.nix-razor-raw defaults.pkgscon ;
+    #nix-razor = import inputs.nix-razor-raw defaults.pkgscon ;
   };
 }

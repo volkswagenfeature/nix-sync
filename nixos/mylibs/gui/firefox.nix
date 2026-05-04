@@ -67,7 +67,7 @@ in
           "browser.send_pings" = lock-false; # http://kb.mozillazine.org/Browser.send_pings
           "browser.urlbar.speculativeConnect.enabled" = lock-true; # pre-loads pages. Seems like a solid improvment to me.
 
-          "webgl.disabled" = lock-true; # As a stateful API it allows tracking via GPU fingerprinting. 
+          "webgl.disabled" = lock-false; # As a stateful API it allows tracking via GPU fingerprinting. 
           "dom.webgpu.enabled" = lock-true; # Supposed to be better.
           # Forward-looking privacy and security functionality
           #"browser.sessionstore.privacy_level" = {Value = 2; Status = "locked"} ; # Disables session restoration. I don't actually want this. 

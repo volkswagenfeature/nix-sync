@@ -2,7 +2,7 @@
   inputs = {  
     nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0";
     nix-unstable-raw.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nix-razor-raw.url = "github:NixOS/nixpkgs/master";
+    #nix-razor-raw.url = "github:NixOS/nixpkgs/master";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
@@ -38,6 +38,8 @@
     nix2container = {
       url = "github:nlewo/nix2container";
     };
+
+    llm-agents.url = "github:numtide/llm-agents.nix";
 
   };
   outputs = { ... } @ inputs: 

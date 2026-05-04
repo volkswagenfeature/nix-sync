@@ -15,6 +15,7 @@ in
      # Runtime packages
      python314
      poetry
+     uv
 
      # Clipboard utility
      wl-clipboard-x11
