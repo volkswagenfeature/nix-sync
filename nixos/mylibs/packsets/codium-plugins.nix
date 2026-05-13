@@ -28,5 +28,14 @@ vscode-utils.extensionsFromVscodeMarketplace [
     version = "109.15.0";
     sha256 = "sha256-/1we+6X3l7MCx96ELz7wg6oDDAcYCJBt7XJ4X0ihwx0=";
   }
+ # 
+
+  {
+    name = "claude-code";
+    publisher = "anthropic";
+    version = "2.1.140";
+    sha256 = "";
+
+  }
  ]
 

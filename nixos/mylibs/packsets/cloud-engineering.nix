@@ -14,6 +14,11 @@ in
         opentofu
         # App for working with dockertools
         nix-prefetch-docker
+
+        # Emulator program
+        quickemu
+
+
       ];
 
       virtualisation.docker = {
@@ -35,6 +40,8 @@ in
         peers = secrets.wireguard.peers;
       };
 */
+      # This was just for Ethan's network, and it didn't work right.
+      /*
       networking.wg-quick.interfaces.wg0 = {
         autostart = false;
         configFile = "/home/${secrets.primaryuser}/.ssh/wireguard.conf";
@@ -45,6 +52,7 @@ in
         after = [ "network-online.target" ];
         #requires = ["wireguard.service"];
       };
+      */
 
       /*
       systemd.services.wireguard = {
