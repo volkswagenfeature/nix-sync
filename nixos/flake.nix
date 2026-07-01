@@ -41,6 +41,10 @@
 
     llm-agents.url = "github:numtide/llm-agents.nix";
 
+    pidev2 = {
+      url = "git://localhost/pidev2";
+    };
+
   };
   outputs = { ... } @ inputs: 
   with inputs;
@@ -55,6 +59,8 @@
           config.permittedInsecurePackages = [
            #"qtwebengine-5.15.19"
            "electron-32.3.3"
+           "electron-39.8.10"
+           "pnpm-10.29.2"
             #"electron-31.7.7"
           ];
           config.android_sdk.accept_license = true;

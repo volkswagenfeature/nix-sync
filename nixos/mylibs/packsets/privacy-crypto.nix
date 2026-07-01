@@ -7,7 +7,7 @@
 
     #ipfs
     gx
-    iroh
+    #iroh
     ipget
     kubo 
   ];

@@ -2,7 +2,7 @@
 A graphical package set
 Large apps, suites, and multifunctional enviroments.
 */
-{pkgs, nix-razor,...}:
+{pkgs, nix-razor, nix-unstable, ...}:
 {
   config.environment.systemPackages = with pkgs; [
     # Video and animation

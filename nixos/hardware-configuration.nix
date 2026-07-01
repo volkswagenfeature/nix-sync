@@ -80,6 +80,7 @@ in
   fileSystems."/nix-sync/nixos" = 
     { device = "/etc/nixos";
       options = [ "bind" ];
+      fsType = "none";
     };
   swapDevices = [ { device = "/dev/disk/by-uuid/54d8eb27-9f0e-42b1-8457-2ec7f3577085"; } ]; 
 

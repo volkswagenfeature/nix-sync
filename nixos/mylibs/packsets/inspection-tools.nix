@@ -15,7 +15,7 @@
     btop-rocm
     nix-tree
     pv
-    neofetch  # Needs replacement, no longer maintained
+    # neofetch  # Needs replacement, no longer maintained
 
     # Networking
     # ratarmount 

@@ -34,8 +34,36 @@ vscode-utils.extensionsFromVscodeMarketplace [
     name = "claude-code";
     publisher = "anthropic";
     version = "2.1.140";
-    sha256 = "";
+    sha256 = "sha256-cDdyZOmuCm+OOkLiD3WyQZ/rlNaOa56klTXW/t/wdEA=";
 
   }
+
+  {
+    name = "vscode-containers";
+    publisher = "ms-azuretools";
+    version = "2.4.4";
+    sha256 = "sha256-vyWHlQri73b/NRDAhTf3vcwbO3r9qqp1JMzcF41SK58=";
+  }
+
+# Redundant: A pack with one plugin, the vscode-containers.ms-azuretools
+# extension you can see above.
+/*
+  {
+    name = "vscode-docker";
+    publisher = "ms-azuretools";
+    version = "2.0.0";
+    sha256 = "sha256-Yxysekp9nC91g7M5oXppOF+Rf4Jf/PD+X3inmdVfVmo=";
+  }
+*/
+ 
+# Couldn't find.
+
+  {
+    name = "remote-containers";
+    publisher = "ms-vscode-remote";
+    version = "0.459.0";
+    sha256 = "sha256-9k58TR1J1b4EJwQDNHJAR5HO6AljHfsLoyg4Xyyu5EM=";
+  }
+
  ]
 

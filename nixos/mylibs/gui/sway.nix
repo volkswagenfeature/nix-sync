@@ -79,7 +79,6 @@ in
 
     # Brightness utilities
     gammastep
-    light
 
   ];
 

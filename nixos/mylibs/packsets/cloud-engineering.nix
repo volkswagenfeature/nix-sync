@@ -15,6 +15,8 @@ in
         # App for working with dockertools
         nix-prefetch-docker
 
+        docker-compose
+
         # Emulator program
         quickemu
 

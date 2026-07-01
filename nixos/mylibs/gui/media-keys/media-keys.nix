@@ -60,7 +60,7 @@ let
       ${pkgs.pamixer}/bin/pamixer --get-volume > ${wobfifo}
     fi
   '';
-
+/*
   bright-control = pkgs.writeShellApplication {
     name = "brightness.sh";
     runtimeInputs = [pkgs.light pkgs.toybox];
@@ -73,12 +73,12 @@ let
       ${pkgs.light}/bin/light -G | ${pkgs.toybox}/bin/cut -d '.' -f 1 > ${wobfifo}
     '';
   };
-
+*/
 
 in
 {
 
-  environment.systemPackages = [pkgs.wob bright-control vol-control pkgs.light];
+  environment.systemPackages = [pkgs.wob vol-control];
 
   services.udev.extraRules = ''
   ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="amdgpu_bl*", MODE="0666", RUN{program}+="/${pkgs.coreutils}/bin/chmod a+w /sys/class/backlight/%k/brightness"
@@ -100,8 +100,10 @@ in
       # breaking my DE
       
       keybindings = lib.mkOptionDefault {
+        /*
         "XF86MonBrightnessUp"   = "exec ${bright-control}/bin/brightness.sh 1";
         "XF86MonBrightnessDown" = "exec ${bright-control}/bin/brightness.sh -1";
+        */
         "XF86AudioRaiseVolume" = "exec ${vol-control}/bin/vol-control i";
         "XF86AudioLowerVolume" = "exec ${vol-control}/bin/vol-control d";
         "XF86AudioMute"        = "exec ${vol-control}/bin/vol-control t";
