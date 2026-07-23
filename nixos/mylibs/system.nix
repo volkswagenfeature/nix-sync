@@ -38,6 +38,7 @@ in
 
      # Networking
      openssl
+     wpa_supplicant
     ]; 
   # Nix config modifications
   nix.settings.trusted-substituters = ["https://ai.cachix.org"];
