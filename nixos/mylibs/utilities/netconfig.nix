@@ -40,7 +40,7 @@
       enable = true;
       dns =  lib.mkForce "default";
     };
-    wireless.enable = lib.mkForce false;
+   #wireless.enable = lib.mkForce false;
   };
 
 }

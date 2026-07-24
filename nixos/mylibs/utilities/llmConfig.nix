@@ -11,6 +11,8 @@
 in {
   environment.systemPackages = with pkgs; [
     llm 
-    inputs.pidev2.packages.${inputs.defaults.system}.pi 
+    pi-coding-agent
+
+    #inputs.pidev2.packages.${inputs.defaults.system}.pi 
   ];
 }

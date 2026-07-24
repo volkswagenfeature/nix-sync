@@ -13,6 +13,13 @@ in
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "thunderbolt" "usb_storage" "sd_mod" "ath9k" "ath9k_htc"];
   boot.initrd.kernelModules = [ "dm-snapshot" "amdgpu"  ];
   boot.kernelModules = [ "kvm-amd" "mt7921e" ];
+  # Pin to 6.12 LTS. The 26.05 nixpkgs default is 6.18.x, which regressed on
+  # this Framework 13 AMD: UI lag spikes (the kernel switched the preemption
+  # model from PREEMPT_VOLUNTARY to the new PREEMPT_LAZY default, and enabled
+  # AMD_HFI), and amdgpu gained a "panel backlight quirk"/"custom brightness
+  # curve" that changed the backlight scale (breaking the old brightness
+  # script). 6.12 LTS is the kernel 25.11 shipped and is known-good here.
+  boot.kernelPackages = pkgs.linuxPackages_6_12;
   # boot.kernelParams = [ "amd_iommu=off" "iommu=soft" ]; # Doesn't fix resume.
   boot.extraModulePackages = [ ];
   boot.loader.systemd-boot.enable = true;

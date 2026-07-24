@@ -41,9 +41,11 @@
 
     llm-agents.url = "github:numtide/llm-agents.nix";
 
+    /*
     pidev2 = {
       url = "git://localhost/pidev2";
     };
+    */
 
   };
   outputs = { ... } @ inputs: 

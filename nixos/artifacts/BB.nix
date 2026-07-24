@@ -84,7 +84,7 @@ rec {
       # (2) Add overlay.
       nixpkgs.overlays = [ 
         inputs.nix-snapshotter.overlays.default 
-        inputs.llm-agents.overlays.default
+        #inputs.llm-agents.overlays.default
 
       ];
 
