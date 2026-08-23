@@ -27,5 +27,7 @@
     cloc # count lines of code.
     nix-init # Help with writing nix definitions
     smartmontools # SSD utils
+
+    hexyl # Neat binary inspection tool
   ];
 }

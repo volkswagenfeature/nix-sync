@@ -47,11 +47,20 @@ rec {
       ] ;
 
       #nix.package = nixVersions.stable;
-      nix.settings.experimental-features = "nix-command flakes";
-      nix.settings.connect-timeout = 5;
-      nix.settings.stalled-download-timeout = 15;
+      nix.settings = {
+        extra-substituters = [
+          "https://microvm.cachix.org"
+        ];
+        extra-trusted-public-keys = [
+          "microvm.cachix.org-1:oXnBc6hRE3eX5rSYdRyMYXnfzcCxC7yKPTbZXALsqys="
+        ];
 
-      nix.settings.allow-dirty = true;
+        experimental-features = "nix-command flakes";
+        connect-timeout = 5;
+        stalled-download-timeout = 15;
+        allow-dirty = true;
+      };
+
       nixpkgs.config = defaults.pkgscon.config;
 
       # Enable Homemanager

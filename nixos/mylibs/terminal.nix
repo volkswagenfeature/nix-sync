@@ -115,6 +115,9 @@ in {
           "set -gx EDITOR vim"
           "set -gx PAGER  nvimpager"
         ];
+        interactiveShellInit = strings.concatStringsSep "\n" [
+          "lorri hook fish | source"
+        ];
       }; 
       
       
