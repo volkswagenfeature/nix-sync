@@ -94,6 +94,9 @@ rec {
       nixpkgs.overlays = [ 
         inputs.nix-snapshotter.overlays.default 
         #inputs.llm-agents.overlays.default
+        (final: prev: {
+          lorri = inputs.lorri.packages.${prev.stdenv.hostPlatform.system}.default;
+        })
 
       ];
 

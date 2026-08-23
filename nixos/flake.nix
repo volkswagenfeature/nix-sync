@@ -41,6 +41,10 @@
 
     llm-agents.url = "github:numtide/llm-agents.nix";
 
+    lorri = {
+      url = "github:nix-community/lorri";
+    };
+
     /*
     pidev2 = {
       url = "git://localhost/pidev2";

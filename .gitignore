@@ -3,6 +3,7 @@
 /**/.gitignore
 *.swp
 /**/result
+/ai-workspace
 
 #.lastcommit.json
 #/**/secrets.nix

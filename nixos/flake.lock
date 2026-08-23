@@ -295,6 +295,24 @@
         "type": "github"
       }
     },
+    "lorri": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_2"
+      },
+      "locked": {
+        "lastModified": 1777504604,
+        "narHash": "sha256-T09zJO11gDAQvIeWzJDGREueyOeGZA3YHjUlMNoWpEk=",
+        "owner": "nix-community",
+        "repo": "lorri",
+        "rev": "5b4211adce95ad3ac4a165181889e865c23d577c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "lorri",
+        "type": "github"
+      }
+    },
     "nix-index-database": {
       "inputs": {
         "nixpkgs": [
@@ -356,7 +374,7 @@
     },
     "nix2container": {
       "inputs": {
-        "nixpkgs": "nixpkgs_2"
+        "nixpkgs": "nixpkgs_3"
       },
       "locked": {
         "lastModified": 1775487831,
@@ -405,6 +423,22 @@
     },
     "nixpkgs_2": {
       "locked": {
+        "lastModified": 1775811116,
+        "narHash": "sha256-t+HZK42pB6N+i5RGbuy7Xluez/VvWbembBdvzsc23Ss=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "54170c54449ea4d6725efd30d719c5e505f1c10e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-25.11",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_3": {
+      "locked": {
         "lastModified": 1767028467,
         "narHash": "sha256-7G+2aXClSMaTY1ogpX14CAxjRsvyVzpE0GRwL71WO7g=",
         "owner": "NixOS",
@@ -418,7 +452,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_3": {
+    "nixpkgs_4": {
       "locked": {
         "lastModified": 1787204541,
         "narHash": "sha256-OURZPknrTjQrlNyxPdqzyqmU/81Wes1CUP/Ft1Rv/YI=",
@@ -432,7 +466,7 @@
         "url": "https://flakehub.com/f/NixOS/nixpkgs/0"
       }
     },
-    "nixpkgs_4": {
+    "nixpkgs_5": {
       "locked": {
         "lastModified": 1783791668,
         "narHash": "sha256-zbcZ1dmBTPfJ7Mlqh/yLEPGpgJnwuv4Xr1xucy2WqMA=",
@@ -477,19 +511,20 @@
       "inputs": {
         "home-manager": "home-manager",
         "llm-agents": "llm-agents",
+        "lorri": "lorri",
         "nix-index-database": "nix-index-database",
         "nix-snapshotter": "nix-snapshotter",
         "nix-unstable-raw": "nix-unstable-raw",
         "nix2container": "nix2container",
         "nixCats": "nixCats",
-        "nixpkgs": "nixpkgs_3",
+        "nixpkgs": "nixpkgs_4",
         "ss14": "ss14",
         "stylix": "stylix"
       }
     },
     "ss14": {
       "inputs": {
-        "nixpkgs": "nixpkgs_4"
+        "nixpkgs": "nixpkgs_5"
       },
       "locked": {
         "lastModified": 1785769324,
