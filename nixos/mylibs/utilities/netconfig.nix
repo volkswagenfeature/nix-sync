@@ -5,7 +5,11 @@
   lib,
   inputs,
   ...
-}:{
+}:
+let
+secrets = (import ../../secrets.nix {});
+
+in {
   networking =  {
     hosts = { "127.0.0.1" = [];};
 #    nameservers = ["9.9.9.9" "8.8.8.8"]; # Breaks cafe wifi
@@ -40,7 +44,17 @@
       enable = true;
       dns =  lib.mkForce "default";
     };
-   #wireless.enable = lib.mkForce false;
-  };
+    #wireless.enable = lib.mkForce false;
+    # Config for E's VPN
+    wireguard = {
+         enable = true;
+         interfaces.wg1 = {
+           # Our own VPN address inside the remote network. 
+           ips = secrets.wireguard.myIp;
 
+           privateKeyFile = builtins.elemAt secrets.wireguard.private_paths 0;
+           peers = secrets.wireguard.peers;
+         };
+    };
+  };
 }
