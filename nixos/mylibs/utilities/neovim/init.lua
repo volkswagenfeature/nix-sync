@@ -27,6 +27,7 @@ require('lze').load {
     { import = "diwhyModule.plugins.gitsigns"    },
     { import = "diwhyModule.plugins.which-key"   },
     { import = "diwhyModule.plugins.indentation" },
+    { import = "diwhyModule.plugins.molten" },
     {
         "mini.base16",
         lazy = false,

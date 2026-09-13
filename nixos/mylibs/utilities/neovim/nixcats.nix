@@ -36,6 +36,16 @@ in {
           };
           highlighting = [gcc clang zig tree-sitter nodejs ];
           llmInter = [llm];
+          notebooks = [
+            imagemagick               # image.nvim "magick_cli" processor
+            python3Packages.jupytext  # optional: ipynb <-> text conversion
+            poppler-utils             # pdftoppm, used by pnglatex (TeX output -> PNG)
+            netpbm                    # pnmtopng, used by pnglatex
+            (texlive.combine {        # pdflatex + pdfcrop, used by pnglatex
+              inherit (texlive) scheme-basic;
+              inherit (texlive.pkgs) pdfcrop;
+            })
+          ];
         };
         optionalPlugins = with pkgs.vimPlugins; {
           general = [ ];
@@ -79,6 +89,9 @@ in {
               rev = "f327578f9c866b5e9c4301716370359479e7d159";
             }))
           ];
+          notebooks = [
+            image-nvim
+          ];
         };
 
         startupPlugins = with pkgs.vimPlugins; {
@@ -92,6 +105,10 @@ in {
             vim-repeat
             vim-startuptime
           ];
+          # molten-nvim is a *remote* python plugin; it must be a start plugin
+          # so that `UpdateRemotePlugins` (run at build time by nixCats) can see
+          # its rplugin/ directory and generate the remote plugin manifest.
+          notebooks = [ molten-nvim ];
         };
 
         sharedLibraries = {
@@ -100,6 +117,25 @@ in {
 
         environmentVariables = {
           CATTESTVAR = "kekekeke";
+        };
+
+        # Python remote-plugin host. Enable per-package with
+        # settings.hosts.python3.enable = true. This also creates a
+        # `diwhyModule-python3` wrapper on PATH and auto-adds pynvim.
+        # Deps in `libraries` are installed into the python3 host env that
+        # molten-nvim's remote plugin (rplugin/python3/molten) runs in.
+        python3 = {
+          libraries = {
+            notebooks = ps: with ps; [
+              jupyter-client  # required: talk to the Jupyter kernel
+              cairosvg        # optional: transparent SVG images
+              pyperclip       # optional: molten_copy_output
+              nbformat        # optional: ipynb import/export
+              pillow          # optional: :MoltenImagePopup
+              pnglatex      # optional: TeX formulas (needs TeX dist + pdftopnm/pnmtopng/pdfcrop)
+              plotly kaleido # optional: plotly figures
+            ];
+          };
         };
       });
 
@@ -110,6 +146,7 @@ in {
             suffix-LD = true;
             #wrapRc = false;
             aliases = ["vim" "nvim"];
+            hosts.python3.enable = true; # required for molten-nvim's remote plugin
           };
           categories = {
             general = true;
@@ -118,6 +155,7 @@ in {
             completion = true;
             userExperience = true;
             llmInter = true;
+            notebooks = true;
             colors = config.lib.stylix.colors;
 
           };
