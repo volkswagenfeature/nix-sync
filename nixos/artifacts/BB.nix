@@ -61,7 +61,7 @@ rec {
         allow-dirty = true;
       };
 
-      nixpkgs.config = defaults.pkgscon.config;
+      nixpkgs.config =  defaults.pkgscon.config;
 
       # Enable Homemanager
       home-manager.users."${secrets.primaryuser}" = {pkgs, ...}:{
@@ -84,6 +84,7 @@ rec {
     ../mylibs/utilities/security/pw_mini.nix
     ../mylibs/utilities/activityWatch.nix
     ../mylibs/utilities/llmConfig.nix
+    ../mylibs/utilities/plover.nix
     # ../mylibs/utilities/hydraCI.nix
     ../mylibs/utilities/git-daemon
     ({ pkgs, ... }: {
